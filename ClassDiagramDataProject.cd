@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="- Classe pour le data qui sera édité">
+    <Position X="16.15" Y="0.864" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="- Classe pour le data qui sera joué">
+    <Position X="1.994" Y="1.028" Height="0.564" Width="2.114" />
+  </Comment>
+  <Comment CommentText="- propriété Type permet de savoir le type de round : QCM, BT, IMAGES, Etc..">
+    <Position X="10.965" Y="1.972" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="- propriété Rounds : liste de rounds qui seront lancés du First au dernier.">
+    <Position X="7.121" Y="0.579" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="- propriété Themes : tableau de 6 themes, un theme sera séléctionné dans une scène et celle ci deviendra indisponible ensuite.">
+    <Position X="4.707" Y="4.45" Height="1.379" Width="1.7" />
+  </Comment>
+  <Comment CommentText="- propriété Questions : liste des questions du theme courant.">
+    <Position X="8.628" Y="4.207" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="- propriété Answers : tableau qui donne le texte correspondant à la bonne reponse dans les questions">
+    <Position X="12.971" Y="3.95" Height="1.022" Width="1.7" />
+  </Comment>
+  <Class Name="DataController">
+    <Position X="4.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAIAACAEAAAAAAABAAAAAAAAQAAAAAAABAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game Scripts\DataController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Rounds" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RoundData">
+    <Position X="9.5" Y="0.75" Width="1.25" />
+    <AssociationLine Name="Themes" Type="ThemeData" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.125" Y="2.69" />
+        <Point X="10.125" Y="3.065" />
+        <Point X="7.188" Y="3.065" />
+        <Point X="7.188" Y="4.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAQAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game Scripts\RoundData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Themes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EdDataController">
+    <Position X="14.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAQACAAAEAAAACAAAAAAAAAQAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Editor Scripts\EdDataController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Rounds" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ThemeData">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game Scripts\ThemeData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Questions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="QuestionData">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAgABAAAAAAAAABIAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game Scripts\QuestionData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Answers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="AnswerData">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game Scripts\AnswerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
