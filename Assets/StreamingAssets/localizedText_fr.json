@@ -19,6 +19,7 @@
 		{"key":"menu_quit","value":"Quitter"},
 		{"key":"menu_remove","value":"Supprimer"},
 		{"key":"menu_input","value":"Scene de test des touches"},
+		{"key":"placeholder_input","value":"Ecrivez le nombre d'equipes qui jouent et appuyez sur entrer pour passer a la scene d'attente"},
 		{"key":"menu_validate","value":"Valider"},
 		{"key":"menu_blindtest","value":"Edition des musiques"},
 		{"key":"menu_images","value":"Edition des images"},

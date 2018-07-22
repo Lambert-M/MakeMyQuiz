@@ -19,6 +19,7 @@
 		{"key":"menu_quit","value":"Quit"},
 		{"key":"menu_remove","value":"Delete"},
 		{"key":"menu_input","value":"Scene Test Input"},
+		{"key":"placeholder_input","value":"Enter the number of teams playing and press enter to go to the waiting scene"},
 		{"key":"menu_validate","value":"Validate"},
 		{"key":"menu_blindtest","value":"Music Editor"},
 		{"key":"menu_images","value":"Images Editor"},

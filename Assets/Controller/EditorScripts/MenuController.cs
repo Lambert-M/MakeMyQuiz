@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,7 +17,7 @@ using GracesGames.SimpleFileBrowser.Scripts;
 public class MenuController : MonoBehaviour {
 
     //VARIABLES
-    public RectTransform buttonPrefab;
+    private RectTransform buttonPrefab;
     private string path;
     
     // Use this for initialization
@@ -165,19 +166,6 @@ public class MenuController : MonoBehaviour {
         DataModel.CurrentFilename = filename;
         GameObject.Find("DataModel").GetComponent<DataModel>().Load(DataModel.CurrentFilename);
         DataModel.QuizName = filename.Split('/').Last().Split('.').First();
-        SceneManager.LoadScene("Introduction");
-    }
-
-    public void GoToInputScene()
-    {
-        if (EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_InputField>().text != "")
-        {
-            int x = int.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_InputField>().text);
-            if (x > 0 && x < 9)
-            {
-                DataModel.NumberOfTeams = x;
-                SceneManager.LoadScene("InputScene");
-            }
-        }
+        SceneManager.LoadScene("InputScene");
     }
 }
