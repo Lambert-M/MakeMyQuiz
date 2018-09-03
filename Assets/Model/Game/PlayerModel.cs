@@ -96,6 +96,7 @@ public class PlayerModel : MonoBehaviour
                 else if (Input.GetButtonDown("team" + teamnumber + "buzz"))
                 {
                     buzzed = true;
+                    hasAnswered = true;
                 }
             }
         }

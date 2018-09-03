@@ -57,6 +57,7 @@ public class QuestionController : MonoBehaviour
         }
         localpath = pathsrc + "/Sounds";
 
+        gfini = false;
         grepondu = false;
         goingToNextQuestion = false;
         pauseActivated = false;
@@ -139,14 +140,13 @@ public class QuestionController : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.Y))
                         {
                             DataModel.Scores[i] += 5;
+                            grepondu = true;
                             GoToNextQuestion();
                         }
                         else if (Input.GetKeyDown(KeyCode.N))
                         {
                             grepondu = true;
                             Pause();
-                            teamsctrl[i].enabled = false;
-
                         }
                     }
                 }
@@ -446,6 +446,7 @@ public class QuestionController : MonoBehaviour
     public void GoToNextQuestion()
     {
         goingToNextQuestion = true;
+        grepondu = false;
         if (isNextAvailable)
         {
             musicSource.Stop();
