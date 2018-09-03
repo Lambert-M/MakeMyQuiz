@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class PlayerModel : MonoBehaviour
 {
     protected string answer;
+    public bool buzzed;
     private bool hasAnswered;
     private int ans = -1;
     public int teamnumber;
@@ -29,6 +30,7 @@ public class PlayerModel : MonoBehaviour
         roundPoint = 0;
         answer = "";
         hasAnswered = false;
+        buzzed = false;
     }
 
     // Update is called once per frame
@@ -62,39 +64,38 @@ public class PlayerModel : MonoBehaviour
                     roundPoint = 1;
                 }
 
-            if (Input.GetButtonDown("team"+teamnumber+"A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1) 
-            {
-              ans = 1;
-              img.color = new Color(0,0,0,1);
-              answer = answer1.text;
-              hasAnswered = true;
-            }
-            else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
-            {
-              ans = 2;
-              img.color = new Color(0,0,0,1);
-              answer = answer2.text;
-              hasAnswered = true;
-            }
-            else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1)
-            {
-              ans = 3;
-              img.color = new Color(0,0,0,1);
-              hasAnswered = true;
-              answer = answer3.text;
+                if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
+                {
+                    ans = 1;
+                    img.color = new Color(0, 0, 0, 1);
+                    answer = answer1.text;
+                    hasAnswered = true;
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
+                {
+                    ans = 2;
+                    img.color = new Color(0, 0, 0, 1);
+                    answer = answer2.text;
+                    hasAnswered = true;
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1)
+                {
+                    ans = 3;
+                    img.color = new Color(0, 0, 0, 1);
+                    hasAnswered = true;
+                    answer = answer3.text;
 
-            }
-            else if (Input.GetButtonDown("team" + teamnumber + "D") && GameObject.Find("Answer Panel 4").GetComponent<CanvasGroup>().alpha == 1)
-            {
-              ans = 4;
-              img.color = new Color(0,0,0,1);
-              hasAnswered = true;
-              answer = answer4.text; ;
-            }
-
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "D") && GameObject.Find("Answer Panel 4").GetComponent<CanvasGroup>().alpha == 1)
+                {
+                    ans = 4;
+                    img.color = new Color(0, 0, 0, 1);
+                    hasAnswered = true;
+                    answer = answer4.text; ;
+                }
                 else if (Input.GetButtonDown("team" + teamnumber + "buzz"))
                 {
-
+                    buzzed = true;
                 }
             }
         }
@@ -131,7 +132,6 @@ public class PlayerModel : MonoBehaviour
  
     public int GetCurrentRoundPoints()
     {
-      
       return roundPoint;
     }
     

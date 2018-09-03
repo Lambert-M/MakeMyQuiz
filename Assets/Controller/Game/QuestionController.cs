@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class QuestionController : MonoBehaviour
 {
     //Variables
+    private bool gfini;
+    private bool grepondu;
     private bool isAnyThemeLeftInCurRound;
     private bool pauseActivated;
     private bool isNextAvailable;
@@ -55,6 +57,7 @@ public class QuestionController : MonoBehaviour
         }
         localpath = pathsrc + "/Sounds";
 
+        grepondu = false;
         goingToNextQuestion = false;
         pauseActivated = false;
         actualQuestion = 1;
@@ -124,43 +127,36 @@ public class QuestionController : MonoBehaviour
     
     void Update()
     {
-        
+        if (!gfini)
+        {
+            for (int i = 0; i < teamsctrl.Count; i++)
+            {
+                if (teamsctrl[i].buzzed)
+                {
+                    Pause();
+                    while (!grepondu)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Y))
+                        {
+                            DataModel.Scores[i] += 5;
+                            GoToNextQuestion();
+                        }
+                        else if (Input.GetKeyDown(KeyCode.N))
+                        {
+                            grepondu = true;
+                            Pause();
+                            teamsctrl[i].enabled = false;
+
+                        }
+                    }
+                }
+            }
+        }
 
         // Pause/Resume the game
         if (Input.GetKeyUp(DataModel.Pause))
         {
-            if (!pauseActivated)
-            {
-                //game paused
-                Time.timeScale = 0f;
-                if (DataModel.CurQuestion() is MusicQuestion)
-                {
-                    musicSource.Pause();
-                }
-                //disable every controller
-                foreach (PlayerModel e in teamsctrl)
-                {
-                    e.enabled = false;
-                }
-                //dispay "pause activated" message
-                pauseActivated = true;
-            }
-            else
-            {
-                //game already in pause i.e. resume game
-                Time.timeScale = 1f;
-                if (DataModel.CurQuestion() is MusicQuestion)
-                {
-                    musicSource.Play();
-                }
-                //enable every controller
-                foreach (PlayerModel e in teamsctrl)
-                {
-                    e.enabled = true;
-                }
-                //display "resume game" message
-                pauseActivated = false;
-            }
+            Pause();
         }
 
         //go to next question
@@ -384,6 +380,7 @@ public class QuestionController : MonoBehaviour
         visibleCharacterCount = 0;
         while (!goingToNextQuestion)
         {
+            gfini = false;
             if (DataModel.CurQuestion() is TextQuestion)
             {
                 TextQuestion texteQ = (TextQuestion)DataModel.CurQuestion();
@@ -401,6 +398,7 @@ public class QuestionController : MonoBehaviour
                 questionText.maxVisibleCharacters = visibleCharacterCount;
                 yield return new WaitForSeconds(0.05f);
             }
+            gfini = true;
             answers = questions.First().Answers;
             GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
             GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
@@ -410,7 +408,41 @@ public class QuestionController : MonoBehaviour
         }
 
     }
-
+    public void Pause()
+    {
+        if (!pauseActivated)
+        {
+            //game paused
+            Time.timeScale = 0f;
+            if (DataModel.CurQuestion() is MusicQuestion)
+            {
+                musicSource.Pause();
+            }
+            //disable every controller
+            foreach (PlayerModel e in teamsctrl)
+            {
+                e.enabled = false;
+            }
+            //dispay "pause activated" message
+            pauseActivated = true;
+        }
+        else
+        {
+            //game already in pause i.e. resume game
+            Time.timeScale = 1f;
+            if (DataModel.CurQuestion() is MusicQuestion)
+            {
+                musicSource.Play();
+            }
+            //enable every controller
+            foreach (PlayerModel e in teamsctrl)
+            {
+                e.enabled = true;
+            }
+            //display "resume game" message
+            pauseActivated = false;
+        }
+    }
     public void GoToNextQuestion()
     {
         goingToNextQuestion = true;
