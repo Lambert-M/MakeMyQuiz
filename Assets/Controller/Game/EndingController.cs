@@ -45,7 +45,7 @@ public class EndingController : MonoBehaviour {
             }
             else
             {
-                teamsButton[i].gameObject.SetActive(false);
+                teamsButton[i].GetComponent<CanvasGroup>().alpha = 0;
             }
         }
 
@@ -91,9 +91,13 @@ public class EndingController : MonoBehaviour {
         counter = 0;
         foreach (Button b in teamsButton)
         {
-            coroutine = DisplayScore(counter);
-            StartCoroutine(coroutine);
+            if (b.GetComponent<CanvasGroup>().alpha == 1)
+            {
+                coroutine = DisplayScore(counter);
+                StartCoroutine(coroutine);
+            }
             counter++;
+
         }
 
         /*

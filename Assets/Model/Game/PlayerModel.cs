@@ -23,6 +23,7 @@ public class PlayerModel : MonoBehaviour
     public TextMeshProUGUI answer3;
     public TextMeshProUGUI answer4;
     public GameObject answerPanel;
+    public QuestionController questioncontoller;
 
     // Use this for initialization
     void Start()
@@ -31,6 +32,7 @@ public class PlayerModel : MonoBehaviour
         answer = "";
         hasAnswered = false;
         buzzed = false;
+        questioncontoller = GameObject.Find("Canvas").GetComponent<QuestionController>();
     }
 
     // Update is called once per frame
@@ -44,26 +46,26 @@ public class PlayerModel : MonoBehaviour
 
                 ans = -1;
 
-            if (t.GetCurrentTimeValue() >= 12 && t.GetCurrentTimeValue() < 15)
+                if (t.GetCurrentTimeValue() >= 12 && t.GetCurrentTimeValue() < 15)
                 {
                     roundPoint = 4;
                 }
 
-            else if (t.GetCurrentTimeValue() >= 8 && t.GetCurrentTimeValue() < 12)
+                else if (t.GetCurrentTimeValue() >= 8 && t.GetCurrentTimeValue() < 12)
                 {
                     roundPoint = 3;
                 }
 
-            else if (t.GetCurrentTimeValue() >= 4 && t.GetCurrentTimeValue() < 8)
+                else if (t.GetCurrentTimeValue() >= 4 && t.GetCurrentTimeValue() < 8)
                 {
                     roundPoint = 2;
                 }
 
-            else if (t.GetCurrentTimeValue() >= 0 && t.GetCurrentTimeValue() < 4)
+                else if (t.GetCurrentTimeValue() >= 0 && t.GetCurrentTimeValue() < 4)
                 {
                     roundPoint = 1;
                 }
-
+                
                 if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
                 {
                     ans = 1;
@@ -84,7 +86,6 @@ public class PlayerModel : MonoBehaviour
                     img.color = new Color(0, 0, 0, 1);
                     hasAnswered = true;
                     answer = answer3.text;
-
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "D") && GameObject.Find("Answer Panel 4").GetComponent<CanvasGroup>().alpha == 1)
                 {
@@ -95,7 +96,9 @@ public class PlayerModel : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "buzz"))
                 {
-                    buzzed = true;
+                    Debug.Log("bonjour");
+                    questioncontoller.buzzevent = true;
+                    questioncontoller.numberteambuzzed = teamnumber;
                     hasAnswered = true;
                 }
             }

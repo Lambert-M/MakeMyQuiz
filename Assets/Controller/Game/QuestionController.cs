@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class QuestionController : MonoBehaviour
 {
+    //test
+    public bool buzzevent;
+    public int numberteambuzzed;
     //Variables
     private bool gfini;
     private bool grepondu;
@@ -65,6 +68,7 @@ public class QuestionController : MonoBehaviour
         questions = DataModel.CurTopic().Questions;
         numberOfQuestions = questions.Count;
 
+        StartCoroutine(AnswerWithBuzzer());
         arrow = GameObject.Find("ArrowButton");
         questionText = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         musicSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
@@ -128,67 +132,69 @@ public class QuestionController : MonoBehaviour
     
     void Update()
     {
-        if (!gfini)
+        if (!gfini && buzzevent)
         {
-            for (int i = 0; i < teamsctrl.Count; i++)
+            if(!pauseActivated)
             {
-                if (teamsctrl[i].buzzed)
+                Pause();
+            }
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Pause();
+                grepondu = true;
+                DataModel.Scores[numberteambuzzed - 1] += 5;
+                buzzevent = false;
+                isNextAvailable = true;
+                GoToNextQuestion();
+                
+            }
+            else if (Input.GetKeyDown(KeyCode.N))
+            {
+                Pause();
+                grepondu = true;
+                teamsctrl[numberteambuzzed - 1].SetHasAnswered(true);
+                buzzevent = false;
+            }
+        }
+        else 
+        {
+            // Pause/Resume the game
+            if (Input.GetKeyUp(DataModel.Pause))
+            {
+                Pause();
+            }
+
+            //go to next question
+            if (Input.GetKeyDown(DataModel.Next))
+            {
+                GoToNextQuestion();
+            }
+
+            if (musicQuestionIsPlaying)
+            {
+                // Make the sound fade in
+                MusicQuestion musicQ = (MusicQuestion)DataModel.CurQuestion();
+                if (!resetvol && musicQ.Fade)
                 {
-                    Pause();
-                    while (!grepondu)
+                    musicSource.volume = 0;
+                    resetvol = true;
+                }
+
+                if (musicQ.Fade && musicQuestionIsPlaying)
+                {
+                    if (musicSource.volume < musicQ.Volume)
                     {
-                        if (Input.GetKeyDown(KeyCode.Y))
-                        {
-                            DataModel.Scores[i] += 5;
-                            grepondu = true;
-                            GoToNextQuestion();
-                        }
-                        else if (Input.GetKeyDown(KeyCode.N))
-                        {
-                            grepondu = true;
-                            Pause();
-                        }
+                        Debug.Log(musicSource.volume);
+                        musicSource.volume = musicSource.volume + (Time.deltaTime / 8);
                     }
                 }
-            }
-        }
 
-        // Pause/Resume the game
-        if (Input.GetKeyUp(DataModel.Pause))
-        {
-            Pause();
-        }
-
-        //go to next question
-        if (Input.GetKeyDown(DataModel.Next))
-        {
-            GoToNextQuestion();
-        }
-       
-        if (musicQuestionIsPlaying)
-        {
-            // Make the sound fade in
-            MusicQuestion musicQ = (MusicQuestion)DataModel.CurQuestion();
-            if (!resetvol && musicQ.Fade)
-            {
-                musicSource.volume = 0;
-                resetvol = true;
-            }
-
-            if (musicQ.Fade && musicQuestionIsPlaying)
-            {
-                if (musicSource.volume < musicQ.Volume)
+                if (timerctrl.GetCurrentTimeValue() < 2f)
                 {
-                    Debug.Log(musicSource.volume);
-                    musicSource.volume = musicSource.volume + (Time.deltaTime / 8);
-                }
-            }
-          
-            if(timerctrl.GetCurrentTimeValue() < 2f)
-            {
-                if(musicSource.volume > 0)
-                {
-                    musicSource.volume -= musicQ.Volume * Time.deltaTime / 2f;
+                    if (musicSource.volume > 0)
+                    {
+                        musicSource.volume -= musicQ.Volume * Time.deltaTime / 2f;
+                    }
                 }
             }
         }
@@ -236,8 +242,6 @@ public class QuestionController : MonoBehaviour
             musicSource.clip = music;
           
         }
-
-        DisableTeam();
 
         StartCoroutine(DisplayText());
 
@@ -406,23 +410,47 @@ public class QuestionController : MonoBehaviour
             GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
             yield return null;
         }
-
     }
+
+    private IEnumerator AnswerWithBuzzer()
+    {
+        if (!gfini)
+        {
+            foreach (PlayerModel p in teamsctrl)
+            {
+                if (p.buzzed)
+                {
+                    Pause();
+                    while (!grepondu)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Y))
+                        {
+                            Pause();
+                            grepondu = true;
+                            DataModel.Scores[p.teamnumber - 1] += 5;
+                            GoToNextQuestion();
+                        }
+                        else if (Input.GetKeyDown(KeyCode.N))
+                        {
+                            Pause();
+                            grepondu = true;
+                            p.SetHasAnswered(true);
+                        }
+                    }
+                }
+            }
+        }
+        yield return new WaitForSeconds(0.05f);
+    }
+
     public void Pause()
     {
         if (!pauseActivated)
         {
             //game paused
+            musicSource.Pause();
             Time.timeScale = 0f;
-            if (DataModel.CurQuestion() is MusicQuestion)
-            {
-                musicSource.Pause();
-            }
             //disable every controller
-            foreach (PlayerModel e in teamsctrl)
-            {
-                e.enabled = false;
-            }
             //dispay "pause activated" message
             pauseActivated = true;
         }
@@ -430,15 +458,8 @@ public class QuestionController : MonoBehaviour
         {
             //game already in pause i.e. resume game
             Time.timeScale = 1f;
-            if (DataModel.CurQuestion() is MusicQuestion)
-            {
-                musicSource.Play();
-            }
+            musicSource.Play();
             //enable every controller
-            foreach (PlayerModel e in teamsctrl)
-            {
-                e.enabled = true;
-            }
             //display "resume game" message
             pauseActivated = false;
         }
@@ -453,7 +474,6 @@ public class QuestionController : MonoBehaviour
             musicQuestionIsPlaying = false;
             questions.Remove(DataModel.CurQuestion());
             actualQuestion++;
-
             if (!questions.Any())
             {
                 isAnyThemeLeftInCurRound = false;

@@ -477,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.30673084, y: 0.0873231}
   m_AnchorMax: {x: 0.661, y: 0.469}
-  m_AnchoredPosition: {x: 0.27680206, y: -0.023880005}
+  m_AnchoredPosition: {x: 0.27679443, y: -0.023880005}
   m_SizeDelta: {x: 0.5999985, y: -0.40000153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &464376642
@@ -896,7 +896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.30673084, y: 0.0873231}
   m_AnchorMax: {x: 0.661, y: 0.469}
-  m_AnchoredPosition: {x: 0.27680206, y: -0.023880005}
+  m_AnchoredPosition: {x: 0.27679443, y: -0.023880005}
   m_SizeDelta: {x: 0.5999985, y: -0.40000153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &534829123
@@ -1220,6 +1220,7 @@ GameObject:
   - component: {fileID: 859972477}
   - component: {fileID: 859972476}
   - component: {fileID: 859972475}
+  - component: {fileID: 859972480}
   m_Layer: 5
   m_Name: Team3
   m_TagString: team
@@ -1272,12 +1273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 3
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 1131970700}
+  questioncontoller: {fileID: 0}
 --- !u!114 &859972477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,6 +1355,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 859972473}
+--- !u!225 &859972480
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 859972473}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &914088569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,6 +1534,7 @@ GameObject:
   - component: {fileID: 1000220964}
   - component: {fileID: 1000220963}
   - component: {fileID: 1000220962}
+  - component: {fileID: 1000220967}
   m_Layer: 5
   m_Name: Team8
   m_TagString: team
@@ -1572,12 +1587,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 8
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 404980217}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1000220964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,6 +1669,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1000220960}
+--- !u!225 &1000220967
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1000220960}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1078158699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,7 +2414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.91800004, y: 0.19354902}
   m_AnchorMax: {x: 0.9782395, y: 0.2958684}
-  m_AnchoredPosition: {x: -0.18170166, y: -0.66101074}
+  m_AnchoredPosition: {x: -0.1817627, y: -0.66101074}
   m_SizeDelta: {x: -3.199997, y: -1}
   m_Pivot: {x: 0.20550461, y: 0.5}
 --- !u!225 &1328141869
@@ -2715,6 +2743,7 @@ GameObject:
   - component: {fileID: 1569170767}
   - component: {fileID: 1569170766}
   - component: {fileID: 1569170765}
+  - component: {fileID: 1569170770}
   m_Layer: 5
   m_Name: Team2
   m_TagString: team
@@ -2767,12 +2796,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 2
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 464376640}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1569170767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,6 +2878,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569170763}
+--- !u!225 &1569170770
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1569170763}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1680710984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,6 +2902,7 @@ GameObject:
   - component: {fileID: 1680710988}
   - component: {fileID: 1680710987}
   - component: {fileID: 1680710986}
+  - component: {fileID: 1680710991}
   m_Layer: 5
   m_Name: Team1
   m_TagString: team
@@ -2912,12 +2955,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 1
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 2035030309}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1680710988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2992,6 +3037,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1680710984}
+--- !u!225 &1680710991
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1680710984}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1701025393
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,6 +3061,7 @@ GameObject:
   - component: {fileID: 1701025397}
   - component: {fileID: 1701025396}
   - component: {fileID: 1701025395}
+  - component: {fileID: 1701025400}
   m_Layer: 5
   m_Name: Team6
   m_TagString: team
@@ -3057,12 +3114,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 6
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 576030351}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1701025397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3137,6 +3196,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1701025393}
+--- !u!225 &1701025400
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1701025393}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1716062951
 GameObject:
   m_ObjectHideFlags: 0
@@ -3150,6 +3220,7 @@ GameObject:
   - component: {fileID: 1716062955}
   - component: {fileID: 1716062954}
   - component: {fileID: 1716062953}
+  - component: {fileID: 1716062958}
   m_Layer: 5
   m_Name: Team5
   m_TagString: team
@@ -3202,12 +3273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 5
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 1311564767}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1716062955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3282,6 +3355,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1716062951}
+--- !u!225 &1716062958
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1716062951}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1757963679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3295,6 +3379,7 @@ GameObject:
   - component: {fileID: 1757963683}
   - component: {fileID: 1757963682}
   - component: {fileID: 1757963681}
+  - component: {fileID: 1757963686}
   m_Layer: 5
   m_Name: Team7
   m_TagString: team
@@ -3347,12 +3432,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 7
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 1946988381}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1757963683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3427,6 +3514,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1757963679}
+--- !u!225 &1757963686
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1757963679}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1841869280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,6 +3538,7 @@ GameObject:
   - component: {fileID: 1841869284}
   - component: {fileID: 1841869283}
   - component: {fileID: 1841869282}
+  - component: {fileID: 1841869287}
   m_Layer: 5
   m_Name: Team4
   m_TagString: team
@@ -3492,12 +3591,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ea597fc0ad8394ebcce488b6f8a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buzzed: 0
   teamnumber: 4
   answer1: {fileID: 0}
   answer2: {fileID: 0}
   answer3: {fileID: 0}
   answer4: {fileID: 0}
   answerPanel: {fileID: 534829121}
+  questioncontoller: {fileID: 0}
 --- !u!114 &1841869284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3572,6 +3673,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1841869280}
+--- !u!225 &1841869287
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1841869280}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1889846380
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,6 +4222,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.048758507, y: 0.019630333}
   m_AnchorMax: {x: 0.9473793, y: 0.19354902}
-  m_AnchoredPosition: {x: 0.0024414, y: -0.085339}
+  m_AnchoredPosition: {x: 0.0024414062, y: -0.08532715}
   m_SizeDelta: {x: 4151.3, y: 451.28}
   m_Pivot: {x: 0.5, y: 0.5}
