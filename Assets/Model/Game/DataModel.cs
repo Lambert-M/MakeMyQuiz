@@ -52,7 +52,7 @@ public class DataModel : MonoBehaviour
         IroundCur = 0;
         ItopicCur = 0;
         IquestionCur = 0;
-
+        
         Rounds = new List<RoundData>();
         
         NumberOfTeams = 8;
@@ -72,6 +72,17 @@ public class DataModel : MonoBehaviour
         SceneManager.LoadScene("Language");
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(Speed))
+        {
+            if (Time.timeScale == 10f)
+            {
+                Time.timeScale = 1f;
+            }
+            Time.timeScale = 10f;
+        }
+    }
     public static RoundData CurRound()
     {
         return Rounds.First();

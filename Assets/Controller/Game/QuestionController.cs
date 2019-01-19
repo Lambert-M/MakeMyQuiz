@@ -8,12 +8,11 @@ using UnityEngine.UI;
 
 public class QuestionController : MonoBehaviour
 {
-    //test
-    public bool buzzevent;
-    public int numberteambuzzed;
+
     //Variables
-    private bool gfini;
-    private bool grepondu;
+    public int number_team_buzz;
+    public bool buzz_event;
+    private bool buzz_answer_confirm;
     private bool isAnyThemeLeftInCurRound;
     private bool pauseActivated;
     private bool isNextAvailable;
@@ -25,6 +24,7 @@ public class QuestionController : MonoBehaviour
     private int numberOfQuestions;
     private int actualQuestion;
     private string localpath;
+    private float question_length_to_time; // A AJOUTER DANS LE DATA MODEL POUR AJUSTER LES PLAYER MODEL ENSUITE
     //Objects
     private AnswerData currAnswer;
     private Timer timerctrl;
@@ -60,15 +60,14 @@ public class QuestionController : MonoBehaviour
         }
         localpath = pathsrc + "/Sounds";
 
-        gfini = false;
-        grepondu = false;
+        buzz_event = false;
+        buzz_answer_confirm = false;
         goingToNextQuestion = false;
         pauseActivated = false;
         actualQuestion = 1;
         questions = DataModel.CurTopic().Questions;
         numberOfQuestions = questions.Count;
 
-        StartCoroutine(AnswerWithBuzzer());
         arrow = GameObject.Find("ArrowButton");
         questionText = GameObject.Find("Question").GetComponent<TextMeshProUGUI>();
         musicSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
@@ -132,8 +131,8 @@ public class QuestionController : MonoBehaviour
     
     void Update()
     {
-        if (!gfini && buzzevent)
-        {
+      if (buzz_event && !teamsctrl[number_team_buzz-1].buzzed)
+      {
             if(!pauseActivated)
             {
                 Pause();
@@ -141,9 +140,9 @@ public class QuestionController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 Pause();
-                grepondu = true;
-                DataModel.Scores[numberteambuzzed - 1] += 5;
-                buzzevent = false;
+                buzz_answer_confirm = true;
+                DataModel.Scores[number_team_buzz - 1] += 5;
+                buzz_event = false;
                 isNextAvailable = true;
                 GoToNextQuestion();
                 
@@ -151,9 +150,10 @@ public class QuestionController : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.N))
             {
                 Pause();
-                grepondu = true;
-                teamsctrl[numberteambuzzed - 1].SetHasAnswered(true);
-                buzzevent = false;
+                buzz_answer_confirm = true;
+                teamsctrl[number_team_buzz - 1].SetHasAnswered(true);
+                teamsctrl[number_team_buzz - 1].buzzed = true;
+                buzz_event = false;
             }
         }
         else 
@@ -169,7 +169,7 @@ public class QuestionController : MonoBehaviour
             {
                 GoToNextQuestion();
             }
-
+    
             if (musicQuestionIsPlaying)
             {
                 // Make the sound fade in
@@ -242,12 +242,12 @@ public class QuestionController : MonoBehaviour
             musicSource.clip = music;
           
         }
-
         StartCoroutine(DisplayText());
 
         foreach (PlayerModel e in teamsctrl)
         {
             ChangeTeamColor(0, e);
+            e.buzzed = false;
         }
 
         if (DataModel.CurQuestion() is MusicQuestion)
@@ -258,11 +258,11 @@ public class QuestionController : MonoBehaviour
         
         // After 10 seconds, the timer and answers appears, 7 seconds after that a false answer disappears, again 4 seconds after and at 25 sec teams can'musicQ answer
         // anymore. Finally at 28 seconds, the true answer is revealed and points are given
-        Invoke("RevealAnswers", 10);
-        Invoke("EliminateFalseAnswer", 17);
-        Invoke("EliminateFalseAnswer", 21);
-        Invoke("DisableTeam", 25);
-        Invoke("FinalAnswerPhase", 28);
+        Invoke("RevealAnswers", 10 + question_length_to_time);
+        Invoke("EliminateFalseAnswer", 17+ question_length_to_time);
+        Invoke("EliminateFalseAnswer", 21+ question_length_to_time);
+        Invoke("DisableTeam", 25+ question_length_to_time);
+        Invoke("FinalAnswerPhase", 28+ question_length_to_time);
     }
 
     /**
@@ -384,11 +384,17 @@ public class QuestionController : MonoBehaviour
         visibleCharacterCount = 0;
         while (!goingToNextQuestion)
         {
-            gfini = false;
+           
             if (DataModel.CurQuestion() is TextQuestion)
             {
+                
                 TextQuestion texteQ = (TextQuestion)DataModel.CurQuestion();
                 questionText.text = texteQ.Question;
+
+                //formule de merde a changer
+                question_length_to_time = (questionText.text.Length * 0.1f);
+                
+                Debug.Log(question_length_to_time);
             }
             else
             {
@@ -396,13 +402,15 @@ public class QuestionController : MonoBehaviour
             }
             questionText.maxVisibleCharacters = visibleCharacterCount;
             numberOfCharacters = questionText.textInfo.characterCount;
+            
             while (visibleCharacterCount <= numberOfCharacters)
             {
                 visibleCharacterCount++;
                 questionText.maxVisibleCharacters = visibleCharacterCount;
                 yield return new WaitForSeconds(0.05f);
             }
-            gfini = true;
+           
+
             answers = questions.First().Answers;
             GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
             GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
@@ -412,36 +420,7 @@ public class QuestionController : MonoBehaviour
         }
     }
 
-    private IEnumerator AnswerWithBuzzer()
-    {
-        if (!gfini)
-        {
-            foreach (PlayerModel p in teamsctrl)
-            {
-                if (p.buzzed)
-                {
-                    Pause();
-                    while (!grepondu)
-                    {
-                        if (Input.GetKeyDown(KeyCode.Y))
-                        {
-                            Pause();
-                            grepondu = true;
-                            DataModel.Scores[p.teamnumber - 1] += 5;
-                            GoToNextQuestion();
-                        }
-                        else if (Input.GetKeyDown(KeyCode.N))
-                        {
-                            Pause();
-                            grepondu = true;
-                            p.SetHasAnswered(true);
-                        }
-                    }
-                }
-            }
-        }
-        yield return new WaitForSeconds(0.05f);
-    }
+   
 
     public void Pause()
     {
@@ -467,7 +446,6 @@ public class QuestionController : MonoBehaviour
     public void GoToNextQuestion()
     {
         goingToNextQuestion = true;
-        grepondu = false;
         if (isNextAvailable)
         {
             musicSource.Stop();

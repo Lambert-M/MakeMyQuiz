@@ -25,6 +25,7 @@ public class PlayerModel : MonoBehaviour
     public GameObject answerPanel;
     public QuestionController questioncontoller;
 
+
     // Use this for initialization
     void Start()
     {
@@ -97,8 +98,8 @@ public class PlayerModel : MonoBehaviour
                 else if (Input.GetButtonDown("team" + teamnumber + "buzz"))
                 {
                     Debug.Log("bonjour");
-                    questioncontoller.buzzevent = true;
-                    questioncontoller.numberteambuzzed = teamnumber;
+                    questioncontoller.buzz_event = true;
+                    questioncontoller.number_team_buzz = teamnumber;
                     hasAnswered = true;
                 }
             }

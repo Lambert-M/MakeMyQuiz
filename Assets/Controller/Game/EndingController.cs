@@ -17,15 +17,16 @@ public class EndingController : MonoBehaviour {
     private List<Button> teamsButton = new List<Button>();
     private IEnumerator coroutine;
 
+
     // Use this for initialization
     void Start()
     {
+        
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
 
         /*
          *  Initialisation of gameobjects and variables
          */
-        timeToWait = 5f / (float)DataModel.BestScore();
         
         // vector calculated to make teams never go out of screen during DisplayScore
         float heightScale = 350f / (float)Screen.height;
@@ -78,16 +79,6 @@ public class EndingController : MonoBehaviour {
             teamsThatWon += TeamColor(i);
         }
 
-        GameObject.Find("FinalText").GetComponent<TextMeshProUGUI>().text = teamsThatWon;
-        if ( premiers.Count == 1)
-        {
-            GameObject.Find("FinalText").GetComponent<TextMeshProUGUI>().text += " "+DataModel.TextToUse["oneteam_won"];
-        }
-        else
-        {
-            GameObject.Find("FinalText").GetComponent<TextMeshProUGUI>().text += " " + DataModel.TextToUse["draw"];
-        }
-
         counter = 0;
         foreach (Button b in teamsButton)
         {
@@ -111,10 +102,11 @@ public class EndingController : MonoBehaviour {
         outroSource.Play();
 
     }
-
+   
     void Update()
     {
-
+            
+    
     }
 
     public void GoToMainMenu()
@@ -149,7 +141,7 @@ public class EndingController : MonoBehaviour {
         for (int i = 0; i < DataModel.Scores[teamNumber]; i++)
         {
             teamsButton[teamNumber].transform.position += temp;
-            yield return new WaitForSeconds(timeToWait);
+            yield return new WaitForSeconds(0.05f);
         }
         if ( teamNumber == indice)
         {
