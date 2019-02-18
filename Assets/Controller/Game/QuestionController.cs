@@ -47,11 +47,11 @@ public class QuestionController : MonoBehaviour
      * This method initialize everything.
      */
     void Start()
-    {    
+    {
         /*
          * Initialisation of gameobjects and variables
          */
-
+        ResetTeamsAnswered();
         string[] datapath = Application.dataPath.Split('/');
         string pathsrc = datapath[0] + '/';
         for (int i = 1; i < datapath.Length - 1; i++)
@@ -153,6 +153,7 @@ public class QuestionController : MonoBehaviour
                 buzz_answer_confirm = true;
                 teamsctrl[number_team_buzz - 1].SetHasAnswered(true);
                 teamsctrl[number_team_buzz - 1].buzzed = true;
+                Debug.Log("Team  : " + number_team_buzz + " "  + teamsctrl[number_team_buzz - 1].GetHasAnswered());
                 buzz_event = false;
             }
         }
@@ -279,6 +280,7 @@ public class QuestionController : MonoBehaviour
             e.GetComponent<CanvasGroup>().alpha = 1;
         }
         timerctrl.tickingDown = true;
+        DisableAllBuzzers();
         EnableTeam();
     }
     
@@ -343,8 +345,23 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsctrl)
         {
-            e.SetHasAnswered(false);
             e.enabled = true;
+        }
+    }
+
+    private void ResetTeamsAnswered()
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            e.SetHasAnswered(false);
+        }
+    }
+
+    private void DisableAllBuzzers()
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            e.SetCanBuzz(false);
         }
     }
 

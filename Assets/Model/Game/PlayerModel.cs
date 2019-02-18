@@ -14,6 +14,7 @@ public class PlayerModel : MonoBehaviour
     protected string answer;
     public bool buzzed;
     private bool hasAnswered;
+    private bool canBuzz;
     private int ans = -1;
     public int teamnumber;
     private int roundPoint;
@@ -33,6 +34,7 @@ public class PlayerModel : MonoBehaviour
         answer = "";
         hasAnswered = false;
         buzzed = false;
+        canBuzz = true;
         questioncontoller = GameObject.Find("Canvas").GetComponent<QuestionController>();
     }
 
@@ -95,7 +97,7 @@ public class PlayerModel : MonoBehaviour
                     hasAnswered = true;
                     answer = answer4.text; ;
                 }
-                else if (Input.GetButtonDown("team" + teamnumber + "buzz"))
+                else if (Input.GetButtonDown("team" + teamnumber + "buzz") && canBuzz)
                 {
                     Debug.Log("bonjour");
                     questioncontoller.buzz_event = true;
@@ -113,6 +115,16 @@ public class PlayerModel : MonoBehaviour
             return answer;
         }
         return "";
+    }
+
+    public bool GetCanBuzz()
+    {
+        return canBuzz;
+    }
+
+    public void SetCanBuzz(bool b)
+    {
+        canBuzz = b;
     }
 
     public void ActivateJoker()
