@@ -169,8 +169,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 00159d119db91fa49b1370e40d2ba4b6, type: 2}
+  m_sharedMaterial: {fileID: 21503256610572082, guid: 00159d119db91fa49b1370e40d2ba4b6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -947,8 +948,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 33b77efdcb4a89242ae1007c90c21dcc, type: 2}
-  m_sharedMaterial: {fileID: 21558972509588816, guid: 33b77efdcb4a89242ae1007c90c21dcc,
+  m_fontAsset: {fileID: 11400000, guid: 00159d119db91fa49b1370e40d2ba4b6, type: 2}
+  m_sharedMaterial: {fileID: 21503256610572082, guid: 00159d119db91fa49b1370e40d2ba4b6,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2115,8 +2116,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Enter the number of teams playing and press enter to go to the waiting scene
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 00159d119db91fa49b1370e40d2ba4b6, type: 2}
+  m_sharedMaterial: {fileID: 21503256610572082, guid: 00159d119db91fa49b1370e40d2ba4b6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2140,7 +2142,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24.45
+  m_fontSize: 26.6
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4054,7 +4056,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 00159d119db91fa49b1370e40d2ba4b6, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1

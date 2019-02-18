@@ -40,7 +40,7 @@ public class InputModel : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (Regex.IsMatch(teamNumber.text, pattern) && int.Parse(teamNumber.text) < 9 && int.Parse(teamNumber.text) > 0 && (Input.GetKeyDown(KeyCode.Return | KeyCode.KeypadEnter)))
+        if (Regex.IsMatch(teamNumber.text, pattern) && int.Parse(teamNumber.text) < 9 && int.Parse(teamNumber.text) > 0 && (Input.GetKeyDown(KeyCode.Return | KeyCode.KeypadEnter | KeyCode.F12)))
         {
             DataModel.NumberOfTeams = int.Parse(teamNumber.text);
             SceneManager.LoadScene("Introduction");
