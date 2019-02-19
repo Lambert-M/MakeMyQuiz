@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.Collections.Generic;
 
 public class IntroController : MonoBehaviour
 {
@@ -14,7 +16,10 @@ public class IntroController : MonoBehaviour
     private AudioClip introMusic;
     private Timer timer;
     private static TMP_InputField TimeField;
-    private Button[] teamsButton;
+    private List<Button> teamsButton = new List<Button>();
+    private GameObject teamContainer;
+    private GameObject team;
+    private Color c;
 
     // Use this for initialization
     void Start()
@@ -26,6 +31,39 @@ public class IntroController : MonoBehaviour
             DataModel.CurrentRunningFilename = DataModel.CurrentRunningFilename.Substring(0, DataModel.CurrentRunningFilename.Length - 12) + ".json";
         }
 
+        teamContainer = GameObject.FindWithTag("teamcontainer");
+        for (int i = 0; i < DataModel.NumberOfTeams; i++)
+        {
+            team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
+            teamsButton.Add(team.GetComponentInChildren<Button>());
+            switch (i)
+            {
+                case 0: c = Color.red; break;
+                case 1: c = Color.blue; break;
+                case 2: c = new Color(0.78f, 0f, 1f, 1f); break;
+                case 3: c = Color.green; break;
+                case 4: c = new Color(1f, 0.56f, 0f, 1f); break;
+                case 5: c = new Color(0f, 0.85f, 1f, 1f); break;
+                case 6: c = Color.magenta; break;
+                case 7: c = Color.yellow; break;
+            }
+            ColorBlock cb = team.GetComponentInChildren<Button>().colors;
+            cb.normalColor = Color.white;
+            cb.highlightedColor = Color.white;
+            cb.pressedColor = Color.white;
+            team.GetComponentInChildren<Button>().colors = cb;
+            foreach (Image x in team.GetComponentsInChildren<Image>())
+            {
+                if (x.name.Contains("Joker"))
+                {
+                    x.name = "Joker " + (i + 1);
+                }
+                if (x.name.Contains("Team"))
+                {
+                    x.color = c;
+                }
+            }
+        }
         /*
          * IntroMusic setup
          */
@@ -42,7 +80,6 @@ public class IntroController : MonoBehaviour
         Sprite sprite = Resources.Load<Sprite>("Images/" + DataModel.BackgroundName);
         GameObject.Find("Background").GetComponent<Image>().sprite = sprite;
         timeWritten = false;
-        teamsButton = GameObject.FindWithTag("teamcontainer").GetComponentsInChildren<Button>();
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         TimeField = GameObject.Find("TimerInput").GetComponent<TMP_InputField>();
         pattern = @"^(\d$|\d{2}$|(\d|\d{2}):$|(\d|\d{2}):(\d|\d{2})$)";
@@ -53,9 +90,8 @@ public class IntroController : MonoBehaviour
         GameObject.Find("WaitingTime").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["starting_time"];
         GameObject.Find("TimerInput").transform.Find("Text Area").transform.Find("Placeholder").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["write_time"];
         GameObject.Find("Introduction").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["welcome_game"] + DataModel.QuizName;
-
-
-        for (int i = 0; i < teamsButton.Length; i++)
+        
+        for (int i = 0; i < teamsButton.Count; i++)
         {
             if ( i < DataModel.NumberOfTeams)
             {

@@ -18,9 +18,6 @@ public class TopicController : MonoBehaviour {
     private GameObject selectedButton;
     private GameObject teamContainer;
     private Color c;
-    private Color purple = new Color(0.78f, 0f, 1f, 1f);
-    private Color orange = new Color(1f, 0.56f, 0f, 1f);
-    private Color cyan = new Color(0f, 0.85f, 1f, 1f);
     private AudioClip topicMusic;
     private AudioSource topicSource;
     private List<PlayerModel> teamsCtrl = new List<PlayerModel>();
@@ -45,10 +42,10 @@ public class TopicController : MonoBehaviour {
             {
                 case 0: c = Color.red; break;
                 case 1: c = Color.blue; break;
-                case 2: c = purple; break;
+                case 2: c = new Color(0.78f, 0f, 1f, 1f); break;
                 case 3: c = Color.green; break;
-                case 4: c = orange; break;
-                case 5: c = cyan; break;
+                case 4: c = new Color(1f, 0.56f, 0f, 1f); break;
+                case 5: c = new Color(0f, 0.85f, 1f, 1f); break;
                 case 6: c = Color.magenta; break;
                 case 7: c = Color.yellow; break;
             }

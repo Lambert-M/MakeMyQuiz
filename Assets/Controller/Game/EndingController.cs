@@ -114,6 +114,7 @@ public class EndingController : MonoBehaviour {
     {
         outroSource.Stop();
         File.Delete(DataModel.CurrentRunningFilename);
+        DataModel.NumberOfTeams = 8;
         SceneManager.LoadScene("EMenus");
     }
 
