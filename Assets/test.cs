@@ -8,12 +8,14 @@ public class test : MonoBehaviour {
     private Vector2 velocity;
     private bool still_animated;
     private SpriteRenderer sprite_final_explosion;
+    private SpriteRenderer sprite_aura;
     public float score;
     public float best_score;
     public int team_number;
     public Animator rocket1;
     public Animator rocket2;
     public Animator final_explosion;
+    public Animator aura;
     // Use this for initialization
     void Start () {
         rb = r.GetComponent<Rigidbody2D>();
@@ -25,6 +27,15 @@ public class test : MonoBehaviour {
         still_animated = true;
         sprite_final_explosion = final_explosion.gameObject.GetComponent<SpriteRenderer>();
         sprite_final_explosion.enabled = false;
+        if (score != best_score)
+        {
+            Destroy(aura.gameObject);
+        }
+        else
+        {
+            sprite_aura = aura.gameObject.GetComponent<SpriteRenderer>();
+            sprite_aura.enabled = false;
+        }
     }
 
     private IEnumerator KillOnAnimationEnd()
@@ -44,6 +55,7 @@ public class test : MonoBehaviour {
         final_explosion.SetBool("isBestTeam", true);
         yield return new WaitForSeconds(0.5f);
         Destroy(final_explosion.gameObject);
+        sprite_aura.enabled = true;
     }
 
 
