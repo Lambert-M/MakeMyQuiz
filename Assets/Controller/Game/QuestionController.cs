@@ -83,6 +83,7 @@ public class QuestionController : MonoBehaviour
             team.GetComponentInChildren<PlayerModel>().answer2 = ans2.GetComponent<TextMeshProUGUI>();
             team.GetComponentInChildren<PlayerModel>().answer3 = ans3.GetComponent<TextMeshProUGUI>();
             team.GetComponentInChildren<PlayerModel>().answer4 = ans4.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().sfx_answer = GameObject.Find("answer_soundeffecr").GetComponent<AudioSource>();
             foreach (Image x in team.GetComponentsInChildren<Image>())
             {
                 if (x.name.Contains("Joker"))
@@ -99,7 +100,7 @@ public class QuestionController : MonoBehaviour
         {
             go.GetComponent<CanvasGroup>().alpha = 1;
         }
-        ReappearAllTeams();
+        
         /*
          * Initialisation of gameobjects and variables
          */
@@ -168,7 +169,7 @@ public class QuestionController : MonoBehaviour
                 GameObject.Find("Joker " + (i + 1)).GetComponent<CanvasGroup>().alpha = 1;
             }
         }
-        EnableAllBuzzers();
+
         RunningQuestions();
     }
     
@@ -234,7 +235,7 @@ public class QuestionController : MonoBehaviour
                 {
                     if (musicSource.volume < musicQ.Volume)
                     {
-                        Debug.Log(musicSource.volume);
+
                         musicSource.volume = musicSource.volume + (Time.deltaTime / 8);
                     }
                 }
@@ -252,6 +253,9 @@ public class QuestionController : MonoBehaviour
 
     private void RunningQuestions()
     {
+        EnableAllBuzzers();
+        ReappearAllTeams();
+        
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
@@ -344,8 +348,15 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsCtrl)
         {
-            
-               e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            if (e.buzzed)
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+
+            }
+            else
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            }
             
         }
     }
@@ -429,7 +440,6 @@ public class QuestionController : MonoBehaviour
         foreach (PlayerModel e in teamsCtrl)
         {
 
-            e.SetHasAnswered(false);
             e.enabled = true;
         }
     }
@@ -455,6 +465,7 @@ public class QuestionController : MonoBehaviour
         foreach (PlayerModel e in teamsCtrl)
         {
             e.SetCanBuzz(true);
+            e.buzzed = false;
         }
     }
 
@@ -554,6 +565,8 @@ public class QuestionController : MonoBehaviour
     }
     public void GoToNextQuestion()
     {
+        ResetTeamsAnswered();
+        EnableAllBuzzers();
         goingToNextQuestion = true;
         if (isNextAvailable)
         {
