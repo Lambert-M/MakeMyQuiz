@@ -809,7 +809,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1678,8 +1678,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.6634001}
-  m_AnchoredPosition: {x: 1.4420166, y: 1.3250122}
-  m_SizeDelta: {x: 3.4843, y: 2.7}
+  m_AnchoredPosition: {x: 0, y: -0.012512207}
+  m_SizeDelta: {x: -0.00012207, y: 0.024963}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &546699997
 MonoBehaviour:
@@ -1700,7 +1700,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 800, y: 90}
+  m_CellSize: {x: 903, y: 90}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -3075,7 +3075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.024385044, y: 0.012450981}
   m_AnchorMax: {x: 0.9728759, y: 0.19354902}
-  m_AnchoredPosition: {x: 0.0027639866, y: -0.00009685527}
+  m_AnchoredPosition: {x: 0.0026855469, y: 0}
   m_SizeDelta: {x: -1044.0823, y: -112.07309}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1145162911

@@ -121,6 +121,7 @@ public class MenuController : MonoBehaviour {
         filename.Replace('\\', '/');
         DataModel.DestroyAllData();
         DataModel.CurrentFilename = filename;
+        DataModel.CurrentRunningFilename = filename+"running";
         GameObject.Find("DataModel").GetComponent<DataModel>().Load(DataModel.CurrentFilename);
 
         SceneManager.LoadScene("ERounds");
@@ -129,8 +130,8 @@ public class MenuController : MonoBehaviour {
     void SelectToCreate()
     {
         string filename = GameObject.Find("SaveFileText").transform.Find("Text").GetComponent<Text>().text;
-        
-        
+        DataModel.QuizName = filename.Split('/').Last().Split('.').First();
+
         string[] srcPath = Application.dataPath.Split('/');
         string finalPath = srcPath[0] + "/";
         for (int i = 1; i < srcPath.Length - 1; i++)
@@ -151,7 +152,6 @@ public class MenuController : MonoBehaviour {
         else
         {
             GameObject.Find("CloseFileBrowserButton").GetComponent<Button>().Select();
-            Debug.Log("else");
         }
         DataModel.CurrentFilename = savePath;
     }
@@ -164,8 +164,8 @@ public class MenuController : MonoBehaviour {
         filename.Replace('\\', '/');
         DataModel.DestroyAllData();
         DataModel.CurrentFilename = filename;
+        DataModel.CurrentRunningFilename = filename.Substring(0, (filename.Length - 5)) + "running.json";
         GameObject.Find("DataModel").GetComponent<DataModel>().Load(DataModel.CurrentFilename);
-        DataModel.QuizName = filename.Split('/').Last().Split('.').First();
         SceneManager.LoadScene("InputScene");
     }
 }

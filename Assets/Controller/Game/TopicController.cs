@@ -60,11 +60,11 @@ public class TopicController : MonoBehaviour {
         float width = parentTransform.rect.width;
         if ( counter%2 == 0)
         {
-            grid.cellSize = new Vector2((width / 2) - grid.spacing.y,height / (counter / 2) - grid.spacing.x);
+            grid.cellSize = new Vector2(grid.cellSize.x,Mathf.Min(height / (counter / 2) - grid.spacing.y,270));
         }
         else
         {
-            grid.cellSize = new Vector2((width / 2) - grid.spacing.y, height / ((counter+1) / 2) - grid.spacing.x);
+            grid.cellSize = new Vector2(grid.cellSize.x, Mathf.Min(height / (counter / 2) - grid.spacing.y, 270));
         }
 
         /*
@@ -235,7 +235,6 @@ public class TopicController : MonoBehaviour {
         selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         selectedButtonName = selectedButton.GetComponentInChildren<TextMeshProUGUI>().text;
         DataModel.CurTopicName = selectedButtonName;
-        DataModel.CurTopic().IsAvailable = false;
         topicSource.Stop();
         if (DataModel.CurRound().Type.StartsWith("Image"))
         {

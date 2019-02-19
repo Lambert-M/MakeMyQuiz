@@ -19,9 +19,13 @@ public class IntroController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DataModel.Scores = new int[DataModel.NumberOfTeams];
-        DataModel.Jokers = new bool[DataModel.NumberOfTeams];
-        
+
+        if (DataModel.CurrentFilename.Contains("running"))
+        {
+            DataModel.CurrentFilename = DataModel.CurrentFilename.Substring(0, DataModel.CurrentFilename.Length - 12) + ".json";
+            DataModel.CurrentRunningFilename = DataModel.CurrentRunningFilename.Substring(0, DataModel.CurrentRunningFilename.Length - 12) + ".json";
+        }
+
         /*
          * IntroMusic setup
          */

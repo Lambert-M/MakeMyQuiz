@@ -409,8 +409,7 @@ public class QuestionController : MonoBehaviour
                 questionText.text = texteQ.Question;
 
                 //formule de merde a changer
-                question_length_to_time = (questionText.text.Length * 0.1f);
-                
+                question_length_to_time = questionText.text.Length;
                 Debug.Log(question_length_to_time);
             }
             else
@@ -471,6 +470,7 @@ public class QuestionController : MonoBehaviour
             actualQuestion++;
             if (!questions.Any())
             {
+                DataModel.CurTopic().IsAvailable = false;
                 isAnyThemeLeftInCurRound = false;
                 for (int i = 0; i < DataModel.CurRound().Topics.Count; i++)
                 {
@@ -478,7 +478,7 @@ public class QuestionController : MonoBehaviour
                     {
                         isAnyThemeLeftInCurRound = true;
                     }
-                }
+                } 
                 // if there are no more questions or topics, go to next round
                 if (!isAnyThemeLeftInCurRound)
                 {
@@ -487,11 +487,13 @@ public class QuestionController : MonoBehaviour
                 }
                 if (!DataModel.Rounds.Any())
                 {
+                    DataModel.Save(DataModel.CurrentRunningFilename);
                     SceneManager.LoadScene("Ending");
                 }
                 //if it is the last question, return to Topics
                 else
                 {
+                    DataModel.Save(DataModel.CurrentRunningFilename);
                     SceneManager.LoadScene("Topics");
                 }
             }
@@ -505,6 +507,7 @@ public class QuestionController : MonoBehaviour
 
                 timerctrl.ResetTimer();
 
+                DataModel.Save(DataModel.CurrentRunningFilename);
                 RunningQuestions();
             }
         }

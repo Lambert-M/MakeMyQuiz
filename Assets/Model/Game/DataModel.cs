@@ -22,6 +22,7 @@ public class DataModel : MonoBehaviour
     public static KeyCode Speed { get; set; }
     public static List<RoundData> Rounds { get; set; }
     public static string CurrentFilename { get; set; }
+    public static string CurrentRunningFilename { get; set; }
 
     //Scores attributes
     public static int NumberOfTeams { get; set; }
@@ -58,6 +59,9 @@ public class DataModel : MonoBehaviour
         NumberOfTeams = 8;
         DontDestroyOnLoad(gameObject);
 
+        Scores = new int[NumberOfTeams];
+        Jokers = new bool[NumberOfTeams];
+
         string[] pathsrc = Application.dataPath.Split('/');
         string pathfinal = pathsrc[0] + "/";
         for(int i = 1; i< pathsrc.Length-1; i++)
@@ -76,7 +80,7 @@ public class DataModel : MonoBehaviour
     {
         if (Input.GetKeyDown(Speed))
         {
-            if (Time.timeScale == 10f)
+            if (Time.timeScale > 1f)
             {
                 Time.timeScale = 1f;
             }
@@ -105,6 +109,7 @@ public class DataModel : MonoBehaviour
  **/
     public static void Save(string filepath)
     {
+        Debug.Log(filepath);
         JSONObject dataJson = new JSONObject();
         dataJson.Add("Quizname", QuizName);
         dataJson.Add("CurTopicName", CurTopicName);
@@ -113,7 +118,13 @@ public class DataModel : MonoBehaviour
         dataJson.Add("IroundCur", IroundCur);
         dataJson.Add("ItopicCur", ItopicCur);
         dataJson.Add("IquestionCur", IquestionCur);
-        
+
+        for (int i = 0; i < Scores.Length; i++)
+        {
+            dataJson.Add("Score" + i, Scores[i]);
+            dataJson.Add("Joker" + i, Jokers[i]);
+        }
+
         JSONArray roundsJsonArray = new JSONArray();
         foreach (RoundData rd in Rounds)
         {
@@ -132,8 +143,7 @@ public class DataModel : MonoBehaviour
                 foreach (QuestionData qd in td.Questions)
                 {
                     JSONObject questionJson = new JSONObject();
-
-
+                    
                     switch (qd.GetType().ToString())
                     {
                         case "MusicQuestion":
@@ -198,6 +208,16 @@ public class DataModel : MonoBehaviour
         IroundCur = dataJson["IroundCur"].AsInt;
         ItopicCur = dataJson["ItopicCur"].AsInt;
         IquestionCur = dataJson["IquestionCur"].AsInt;
+        
+        Scores = new int[NumberOfTeams];
+        Jokers = new bool[NumberOfTeams];
+
+        for (int i = 0; i < Scores.Length; i++)
+        {
+            Scores[i] = dataJson[("Score" + i)].AsInt;
+            Jokers[i] = dataJson[("Joker" + i)].AsBool;
+        }
+
         // Rounds
         List<RoundData> rdList = new List<RoundData>();
         for(int i = 0; i < dataJson["Rounds"].AsArray.Count; i++)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -112,6 +113,7 @@ public class EndingController : MonoBehaviour {
     public void GoToMainMenu()
     {
         outroSource.Stop();
+        File.Delete(DataModel.CurrentRunningFilename);
         SceneManager.LoadScene("EMenus");
     }
 
