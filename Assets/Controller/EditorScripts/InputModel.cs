@@ -40,10 +40,16 @@ public class InputModel : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (Regex.IsMatch(teamNumber.text, pattern) && int.Parse(teamNumber.text) < 9 && int.Parse(teamNumber.text) > 0 && (Input.GetKeyDown(KeyCode.Return) | Input.GetKeyDown(KeyCode.F12) | Input.GetKeyDown(KeyCode.KeypadEnter)))
+        if (Regex.IsMatch(teamNumber.text, pattern) && int.Parse(teamNumber.text) < 9 && int.Parse(teamNumber.text) > 0 && (Input.GetKey(KeyCode.Return) | Input.GetKey(KeyCode.F12) | Input.GetKey(KeyCode.KeypadEnter)))
         {
             DataModel.NumberOfTeams = int.Parse(teamNumber.text);
             SceneManager.LoadScene("Intro");
+        }
+
+
+        if ( (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.T))
+        {
+            SceneManager.LoadScene("Topics");
         }
     }
 }
