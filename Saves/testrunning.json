@@ -1,11 +1,11 @@
 {
 "Quizname":"Test",
-"CurTopicName":"Jeux",
+"CurTopicName":"Animés",
 "RoundNumber":1,
-"IroundCur":1,
+"IroundCur":0,
 "ItopicCur":1,
 "IquestionCur":0,
-"Score0":0,
+"Score0":8,
 "Joker0":false,
 "Score1":0,
 "Joker1":false,
@@ -27,62 +27,14 @@
 "Topics":[
 {
 "Name":"Jeux",
-"IsAvailable":true,
+"IsAvailable":false,
 "Questions":[
-{
-"MusicPath":"07 - Vamo' Alla Flamenco.wav",
-"StartTrack":0,
-"Volume":1,
-"Fade":true,
-"Answers":[
-{
-"AnswerText":"Final Fantasy 6\t",
-"IsTrue":false
-},
-{
-"AnswerText":"Final Fantasy 7\t",
-"IsTrue":false
-},
-{
-"AnswerText":"Final Fantasy 8\t",
-"IsTrue":false
-},
-{
-"AnswerText":"Final Fantasy 9",
-"IsTrue":true
-}
-]
-}
 ]
 },
 {
 "Name":"Animés",
 "IsAvailable":true,
 "Questions":[
-{
-"MusicPath":"No Game No Life - OP.wav",
-"StartTrack":0,
-"Volume":1,
-"Fade":false,
-"Answers":[
-{
-"AnswerText":"Angel Beats!",
-"IsTrue":false
-},
-{
-"AnswerText":"No Game No Life",
-"IsTrue":false
-},
-{
-"AnswerText":"Pokémon",
-"IsTrue":false
-},
-{
-"AnswerText":"Digimon",
-"IsTrue":false
-}
-]
-},
 {
 "MusicPath":"Shuffle! - YOU.wav",
 "StartTrack":0,
