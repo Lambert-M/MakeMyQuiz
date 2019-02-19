@@ -84,9 +84,13 @@ public class DataModel : MonoBehaviour
             {
                 Time.timeScale = 1f;
             }
-            Time.timeScale = 10f;
+            else
+            {
+                Time.timeScale = 10f;
+            }
         }
     }
+
     public static RoundData CurRound()
     {
         return Rounds.First();

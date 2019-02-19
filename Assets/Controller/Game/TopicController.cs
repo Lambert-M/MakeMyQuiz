@@ -8,14 +8,16 @@ using System.Linq;
 public class TopicController : MonoBehaviour {
     
     private string selectedButtonName;
-    private int counter;
     private int nbTopic;
+    private int counter;
     private RectTransform parentTransform;
     private GridLayoutGroup grid;
     private GameObject topic;
+    private GameObject team;
     private GameObject parent;
     private GameObject selectedButton;
     private GameObject teamContainer;
+    private Color c = new Color();
     private AudioClip topicMusic;
     private AudioSource topicSource;
     private List<PlayerModel> teamsCtrl = new List<PlayerModel>();
@@ -29,16 +31,37 @@ public class TopicController : MonoBehaviour {
          *  Initialisation of gameobjects and variables
          */
         DisableTeam();
-        counter = 0;
 
         teamContainer = GameObject.FindWithTag("teamcontainer");
-        teamsButton = teamContainer.GetComponentsInChildren<Button>().OrderBy(go => go.name).ToList();
-        teamsCtrl = teamContainer.GetComponentsInChildren<PlayerModel>().OrderBy(go => go.name).ToList();
+        counter = 0;
+        foreach (TopicData t in DataModel.CurRound().Topics)
+        {
+            team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
+            teamsButton.Add(team.GetComponent<Button>());
+            teamsCtrl.Add(team.GetComponent<PlayerModel>());
+            switch (counter)
+            {
+                case 0: c = Color.red; break;
+                case 1: c = Color.blue; break;
+                case 2: c = new Color(127,63,191,1); break;
+                case 3: c = Color.green; break;
+                case 4: c = new Color(228, 146, 51, 1); break;
+                case 5: c = new Color(51, 222, 228, 1); break;
+                case 6: c = Color.magenta; break;
+                case 7: c = Color.yellow; break;
+            }
+            ColorBlock cb = team.GetComponentInChildren<Button>().colors;
+            cb.normalColor = c;
+            cb.highlightedColor = c;
+            cb.pressedColor = c;
+            team.GetComponent<Button>().colors = cb;
+            counter++;
+        }
 
         parent = GameObject.Find("TopicContainer");
         parentTransform = parent.transform.GetComponent<RectTransform>();
         grid = parent.transform.GetComponent<GridLayoutGroup>();
-
+        counter = 0;
         Sprite sprite = Resources.Load<Sprite>("Images/" + DataModel.BackgroundName);
         GameObject.Find("Background").GetComponent<Image>().sprite = sprite;
 
