@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 225883745582404468}
   m_Layer: 5
   m_Name: Answer
-  m_TagString: Untagged
+  m_TagString: answerimage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
   answer4: {fileID: 0}
   answerPanel: {fileID: 1721761350616658}
   questioncontoller: {fileID: 0}
+  sfx_answer: {fileID: 0}
 --- !u!114 &114388703092982276
 MonoBehaviour:
   m_ObjectHideFlags: 1

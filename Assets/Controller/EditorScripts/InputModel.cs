@@ -43,7 +43,7 @@ public class InputModel : MonoBehaviour {
         if (Regex.IsMatch(teamNumber.text, pattern) && int.Parse(teamNumber.text) < 9 && int.Parse(teamNumber.text) > 0 && (Input.GetKeyDown(KeyCode.Return) | Input.GetKeyDown(KeyCode.F12) | Input.GetKeyDown(KeyCode.KeypadEnter)))
         {
             DataModel.NumberOfTeams = int.Parse(teamNumber.text);
-            SceneManager.LoadScene("Introduction");
+            SceneManager.LoadScene("Intro");
         }
     }
 }

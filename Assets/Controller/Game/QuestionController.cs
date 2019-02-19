@@ -33,22 +33,72 @@ public class QuestionController : MonoBehaviour
     private AudioClip music;
     private GameObject ans1, ans2, ans3, ans4;
     private GameObject arrow;
-    public AudioSource[] sfx_buzzers; 
+    private GameObject team;
+    private GameObject teamContainer;
+    private Color c;
+    public AudioSource[] sfx_buzzers;
     //Arrays
-    private Button[] teamsButton;
     private AnswerData[] answers;
     //Lists
+    private List<Button> teamsButton = new List<Button>();
     private List<GameObject> teamlist = new List<GameObject>();
     private List<GameObject> answerList = new List<GameObject>();
     private List<GameObject> timerPanelList = new List<GameObject>();
     private List<QuestionData> questions = new List<QuestionData>();
-    private List<PlayerModel> teamsctrl = new List<PlayerModel>();
+    private List<PlayerModel> teamsCtrl = new List<PlayerModel>();
 
     /*
      * This method initialize everything.
      */
     void Start()
     {
+        ans1 = GameObject.Find("Answer 1");
+        ans2 = GameObject.Find("Answer 2");
+        ans3 = GameObject.Find("Answer 3");
+        ans4 = GameObject.Find("Answer 4");
+        teamContainer = GameObject.FindWithTag("teamcontainer");
+        for (int i = 0; i < DataModel.NumberOfTeams; i++)
+        {
+            team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
+            teamsButton.Add(team.GetComponentInChildren<Button>());
+            teamsCtrl.Add(team.GetComponentInChildren<PlayerModel>());
+            switch (i)
+            {
+                case 0: c = Color.red; break;
+                case 1: c = Color.blue; break;
+                case 2: c = new Color(0.78f, 0f, 1f, 1f); break;
+                case 3: c = Color.green; break;
+                case 4: c = new Color(1f, 0.56f, 0f, 1f); break;
+                case 5: c = new Color(0f, 0.85f, 1f, 1f); break;
+                case 6: c = Color.magenta; break;
+                case 7: c = Color.yellow; break;
+            }
+            ColorBlock cb = team.GetComponentInChildren<Button>().colors;
+            cb.normalColor = Color.white;
+            cb.highlightedColor = Color.white;
+            cb.pressedColor = Color.white;
+            team.GetComponentInChildren<Button>().colors = cb;
+            team.GetComponentInChildren<PlayerModel>().teamnumber = (i + 1);
+            team.GetComponentInChildren<PlayerModel>().answer1 = ans1.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().answer2 = ans2.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().answer3 = ans3.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().answer4 = ans4.GetComponent<TextMeshProUGUI>();
+            foreach (Image x in team.GetComponentsInChildren<Image>())
+            {
+                if (x.name.Contains("Joker"))
+                {
+                    x.name = "Joker " + (i + 1);
+                }
+                if (x.name.Contains("Team"))
+                {
+                    x.color = c;
+                }
+            }
+        }
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("answerimage"))
+        {
+            go.GetComponent<CanvasGroup>().alpha = 1;
+        }
         ReappearAllTeams();
         /*
          * Initialisation of gameobjects and variables
@@ -75,9 +125,8 @@ public class QuestionController : MonoBehaviour
 
         Sprite sprite = Resources.Load<Sprite>("Images/" + DataModel.BackgroundName);
         GameObject.Find("Background").GetComponent<Image>().sprite = sprite;
-        teamsButton = GameObject.FindWithTag("teamcontainer").GetComponentsInChildren<Button>();
 
-        for (int i = 0; i < teamsButton.Length; i++)
+        for (int i = 0; i < teamsButton.Count; i++)
         {
             if (i < DataModel.NumberOfTeams)
             {
@@ -89,18 +138,11 @@ public class QuestionController : MonoBehaviour
             }
         }
 
-        teamsButton = GameObject.FindWithTag("teamcontainer").GetComponentsInChildren<Button>();
-
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("team"))
         {
             teamlist.Add(go);
         }
         teamlist = teamlist.OrderBy(go => go.name).ToList();
-        
-        foreach (GameObject go in teamlist)
-        {
-            teamsctrl.Add(go.GetComponent<PlayerModel>());
-        }
         
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("answer"))
         {
@@ -132,7 +174,7 @@ public class QuestionController : MonoBehaviour
     
     void Update()
     {
-      if (buzz_event && !teamsctrl[number_team_buzz-1].buzzed)
+      if (buzz_event && !teamsCtrl[number_team_buzz-1].buzzed)
       {
             
             if(!pauseActivated)
@@ -155,12 +197,12 @@ public class QuestionController : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.N))
             {
                 ReappearAllTeams();
-                teamsctrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+                teamsCtrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
                 Pause();
                 buzz_answer_confirm = true;
-                teamsctrl[number_team_buzz - 1].SetHasAnswered(true);
-                teamsctrl[number_team_buzz - 1].buzzed = true;
-                Debug.Log("Team  : " + number_team_buzz + " "  + teamsctrl[number_team_buzz - 1].GetHasAnswered());
+                teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
+                teamsCtrl[number_team_buzz - 1].buzzed = true;
+                Debug.Log("Team  : " + number_team_buzz + " "  + teamsCtrl[number_team_buzz - 1].GetHasAnswered());
                 buzz_event = false;
             }
         }
@@ -252,7 +294,7 @@ public class QuestionController : MonoBehaviour
         }
         StartCoroutine(DisplayText());
 
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             ChangeTeamColor(0, e);
             e.buzzed = false;
@@ -287,9 +329,9 @@ public class QuestionController : MonoBehaviour
      */
     private void DisapearAllTeamsButOne(int number_team)
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
-            if (!teamsctrl[number_team - 1].Equals(e)) {
+            if (!teamsCtrl[number_team - 1].Equals(e)) {
                 e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
             }
         }
@@ -300,7 +342,7 @@ public class QuestionController : MonoBehaviour
      */
     private void ReappearAllTeams()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             
                e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
@@ -344,7 +386,7 @@ public class QuestionController : MonoBehaviour
     private void FinalAnswerPhase()
     {
         EliminateFalseAnswer();
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             //change the team's answer button to the color of the one they chose
             ChangeTeamColor(e.GetNumberAnswer(), e);
@@ -355,12 +397,12 @@ public class QuestionController : MonoBehaviour
                 //Check if PlayerControler answered and gave the good answer
                 if (e.GetAnswer().Equals(currAnswer.AnswerText) && currAnswer.IsTrue)
                 {
-                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsctrl.IndexOf(e));
+                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsCtrl.IndexOf(e));
                 }
             }
         }
         
-        for (int i = 0; i < teamsButton.Length; i++)
+        for (int i = 0; i < teamsButton.Count; i++)
         {
             teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
         }
@@ -372,7 +414,7 @@ public class QuestionController : MonoBehaviour
 
     private void DisableTeam()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.enabled = false;
         }
@@ -384,7 +426,7 @@ public class QuestionController : MonoBehaviour
 
     private void EnableTeam()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
 
             e.SetHasAnswered(false);
@@ -394,7 +436,7 @@ public class QuestionController : MonoBehaviour
 
     private void ResetTeamsAnswered()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.SetHasAnswered(false);
         }
@@ -402,7 +444,7 @@ public class QuestionController : MonoBehaviour
 
     private void DisableAllBuzzers()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.SetCanBuzz(false);
         }
@@ -410,7 +452,7 @@ public class QuestionController : MonoBehaviour
 
     private void EnableAllBuzzers()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.SetCanBuzz(true);
         }

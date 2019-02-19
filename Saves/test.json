@@ -2,7 +2,7 @@
 "Quizname":"Test",
 "CurTopicName":"",
 "RoundNumber":1,
-"IroundCur":1,
+"IroundCur":0,
 "ItopicCur":1,
 "IquestionCur":0,
 "Score0":0,
@@ -36,19 +36,19 @@
 "Fade":true,
 "Answers":[
 {
-"AnswerText":"Baten Kaitos\t",
+"AnswerText":"Baten Kaitos",
 "IsTrue":true
 },
 {
-"AnswerText":"Tales of Zestiria\t",
+"AnswerText":"Tales of Zestiria",
 "IsTrue":false
 },
 {
-"AnswerText":"Eternal Sonata\t",
+"AnswerText":"Eternal Sonata",
 "IsTrue":false
 },
 {
-"AnswerText":"Etales of the Abyss",
+"AnswerText":"Tales of the Abyss",
 "IsTrue":false
 }
 ]
@@ -60,15 +60,15 @@
 "Fade":true,
 "Answers":[
 {
-"AnswerText":"Final Fantasy 6\t",
+"AnswerText":"Final Fantasy 6",
 "IsTrue":false
 },
 {
-"AnswerText":"Final Fantasy 7\t",
+"AnswerText":"Final Fantasy 7",
 "IsTrue":false
 },
 {
-"AnswerText":"Final Fantasy 8\t",
+"AnswerText":"Final Fantasy 8",
 "IsTrue":false
 },
 {

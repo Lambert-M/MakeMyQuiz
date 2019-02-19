@@ -28,6 +28,7 @@ TagManager:
   - BTSample
   - finalobjects
   - ImgSample
+  - answerimage
   layers:
   - Default
   - TransparentFX

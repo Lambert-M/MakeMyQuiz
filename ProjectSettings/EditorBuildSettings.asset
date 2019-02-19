@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/View/Game/Persistant.unity
     guid: 29a935ccf94d3784f9e07cdaf6ed6988
   - enabled: 1
-    path: Assets/View/Game/Introduction.unity
-    guid: 84276a3eab2a3b64980939265b5bc643
-  - enabled: 1
     path: Assets/View/Game/Topics.unity
     guid: c1fbc7d8892cfc247b8db306c8899def
   - enabled: 1
@@ -50,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/View/EditorScenes/InputScene.unity
     guid: bc2d2dc181867a1428404cae3f796c5c
+  - enabled: 1
+    path: Assets/View/Game/Intro.unity
+    guid: 5052b5841e43b4444aaf532a0a3d986a
   m_configObjects: {}
