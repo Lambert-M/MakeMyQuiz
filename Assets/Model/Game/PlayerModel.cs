@@ -25,7 +25,7 @@ public class PlayerModel : MonoBehaviour
     public TextMeshProUGUI answer4;
     public GameObject answerPanel;
     public QuestionController questioncontoller;
-
+    public AudioSource sfx_answer;
 
     // Use this for initialization
     void Start()
@@ -75,6 +75,8 @@ public class PlayerModel : MonoBehaviour
                     img.color = new Color(0, 0, 0, 1);
                     answer = answer1.text;
                     hasAnswered = true;
+                    sfx_answer.Play();
+                    
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
                 {
@@ -82,6 +84,7 @@ public class PlayerModel : MonoBehaviour
                     img.color = new Color(0, 0, 0, 1);
                     answer = answer2.text;
                     hasAnswered = true;
+                    sfx_answer.Play();
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1)
                 {
@@ -89,17 +92,18 @@ public class PlayerModel : MonoBehaviour
                     img.color = new Color(0, 0, 0, 1);
                     hasAnswered = true;
                     answer = answer3.text;
+                    sfx_answer.Play();
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "D") && GameObject.Find("Answer Panel 4").GetComponent<CanvasGroup>().alpha == 1)
                 {
                     ans = 4;
                     img.color = new Color(0, 0, 0, 1);
                     hasAnswered = true;
-                    answer = answer4.text; ;
+                    answer = answer4.text;
+                    sfx_answer.Play();
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "buzz") && canBuzz)
                 {
-                    Debug.Log("bonjour");
                     questioncontoller.buzz_event = true;
                     questioncontoller.number_team_buzz = teamnumber;
                     hasAnswered = true;

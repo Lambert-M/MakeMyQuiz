@@ -33,6 +33,7 @@ public class QuestionController : MonoBehaviour
     private AudioClip music;
     private GameObject ans1, ans2, ans3, ans4;
     private GameObject arrow;
+    public AudioSource[] sfx_buzzers; 
     //Arrays
     private Button[] teamsButton;
     private AnswerData[] answers;
@@ -48,10 +49,10 @@ public class QuestionController : MonoBehaviour
      */
     void Start()
     {
+        ReappearAllTeams();
         /*
          * Initialisation of gameobjects and variables
          */
-        ResetTeamsAnswered();
         string[] datapath = Application.dataPath.Split('/');
         string pathsrc = datapath[0] + '/';
         for (int i = 1; i < datapath.Length - 1; i++)
@@ -125,7 +126,7 @@ public class QuestionController : MonoBehaviour
                 GameObject.Find("Joker " + (i + 1)).GetComponent<CanvasGroup>().alpha = 1;
             }
         }
-
+        EnableAllBuzzers();
         RunningQuestions();
     }
     
@@ -133,8 +134,11 @@ public class QuestionController : MonoBehaviour
     {
       if (buzz_event && !teamsctrl[number_team_buzz-1].buzzed)
       {
+            
             if(!pauseActivated)
             {
+                DisapearAllTeamsButOne(number_team_buzz);
+                LaunchSoundBuzzer(number_team_buzz);
                 Pause();
             }
             if (Input.GetKeyDown(KeyCode.Y))
@@ -144,11 +148,14 @@ public class QuestionController : MonoBehaviour
                 DataModel.Scores[number_team_buzz - 1] += 5;
                 buzz_event = false;
                 isNextAvailable = true;
+                ReappearAllTeams();
                 GoToNextQuestion();
                 
             }
             else if (Input.GetKeyDown(KeyCode.N))
             {
+                ReappearAllTeams();
+                teamsctrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
                 Pause();
                 buzz_answer_confirm = true;
                 teamsctrl[number_team_buzz - 1].SetHasAnswered(true);
@@ -267,6 +274,40 @@ public class QuestionController : MonoBehaviour
     }
 
     /**
+     * Launch the buzzer sound of the team in parameter 
+     */
+     
+    private void LaunchSoundBuzzer(int number_team)
+    {
+        sfx_buzzers[number_team - 1].Play();
+    }
+
+    /**
+     * Disapear all teams in the scene but the one in parameter 
+     */
+    private void DisapearAllTeamsButOne(int number_team)
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            if (!teamsctrl[number_team - 1].Equals(e)) {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            }
+        }
+    }
+
+    /**
+     * Reappear all teams in the scene
+     */
+    private void ReappearAllTeams()
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            
+               e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            
+        }
+    }
+    /**
      * When this method is called, timer and answers appears and players are able to answer
      */
     private void RevealAnswers()
@@ -345,6 +386,8 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsctrl)
         {
+
+            e.SetHasAnswered(false);
             e.enabled = true;
         }
     }
@@ -362,6 +405,14 @@ public class QuestionController : MonoBehaviour
         foreach (PlayerModel e in teamsctrl)
         {
             e.SetCanBuzz(false);
+        }
+    }
+
+    private void EnableAllBuzzers()
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            e.SetCanBuzz(true);
         }
     }
 
