@@ -81,7 +81,13 @@ public class TopicController : MonoBehaviour {
         {
             topic = Instantiate(Resources.Load<GameObject>("Prefabs/Topic"), parent.transform);
             topic.name = "Topic" + (counter+1);
-            topic.GetComponent<Button>().onClick.AddListener(() => SelectingTopic());
+            if (t.IsAvailable)
+            {
+                topic.GetComponent<Button>().onClick.AddListener(() => SelectingTopic());
+            } else
+            {
+                topic.GetComponent<CanvasGroup>().alpha = 0.5f;
+            }
             counter++;
         }
 
@@ -132,11 +138,6 @@ public class TopicController : MonoBehaviour {
 
         teamsButton = teamContainer.GetComponentsInChildren<Button>().OrderBy(go => go.name).ToList();
 
-        foreach (Button b in topicButtons)
-        {
-            b.onClick.AddListener(() => SelectingTopic());
-        }
-
         /*
          *  TopicMusic setup
          */
@@ -148,21 +149,6 @@ public class TopicController : MonoBehaviour {
         topicSource.Play();
 
         DisplayText();
-
-        // Erase topics already done
-        foreach (TopicData t in DataModel.CurRound().Topics)
-        {
-            if (!t.IsAvailable)
-            {
-                foreach (Button b in topicButtons)
-                {
-                    if (b.GetComponentInChildren<TextMeshProUGUI>().text == t.Name)
-                    {
-                        b.gameObject.SetActive(false);
-                    }
-                }
-            }
-        }
     }
 
     // Update is called once per frame

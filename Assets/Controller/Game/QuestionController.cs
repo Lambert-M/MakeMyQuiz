@@ -175,8 +175,14 @@ public class QuestionController : MonoBehaviour
     
     void Update()
     {
-      if (buzz_event && !teamsCtrl[number_team_buzz-1].buzzed)
-      {
+
+        if (EveryoneAnswered() && Time.timeScale == 1f)
+        {
+            Time.timeScale = 2f;
+        }
+
+        if (buzz_event && !teamsCtrl[number_team_buzz-1].buzzed)
+        {
             
             if(!pauseActivated)
             {
@@ -257,6 +263,10 @@ public class QuestionController : MonoBehaviour
         EnableAllBuzzers();
         ReappearAllTeams();
         ResetTeamsAnswered();
+        if(Time.timeScale == 2f)
+        {
+            Time.timeScale = 1f;
+        }
 
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
@@ -311,14 +321,14 @@ public class QuestionController : MonoBehaviour
             musicQuestionIsPlaying = true;
         }
         musicSource.Play();
-        
+
         // After 10 seconds, the timer and answers appears, 7 seconds after that a false answer disappears, again 4 seconds after and at 25 sec teams can'musicQ answer
         // anymore. Finally at 28 seconds, the true answer is revealed and points are given
-        Invoke("RevealAnswers", 10 + question_length_to_time);
-        Invoke("EliminateFalseAnswer", 17+ question_length_to_time);
-        Invoke("EliminateFalseAnswer", 21+ question_length_to_time);
-        Invoke("DisableTeam", 25+ question_length_to_time);
-        Invoke("FinalAnswerPhase", 28+ question_length_to_time);
+        Invoke("RevealAnswers", 5 + question_length_to_time);
+        Invoke("EliminateFalseAnswer", 12 + question_length_to_time);
+        Invoke("EliminateFalseAnswer", 16 + question_length_to_time);
+        Invoke("DisableTeam", 20 + question_length_to_time);
+        Invoke("FinalAnswerPhase", 23 + question_length_to_time);
     }
 
     /**
@@ -516,8 +526,7 @@ public class QuestionController : MonoBehaviour
                 questionText.text = texteQ.Question;
 
                 //formule de merde a changer
-                question_length_to_time = questionText.text.Length;
-                Debug.Log(question_length_to_time);
+                question_length_to_time = questionText.text.Length * 0.035f;
             }
             else
             {
@@ -530,7 +539,7 @@ public class QuestionController : MonoBehaviour
             {
                 visibleCharacterCount++;
                 questionText.maxVisibleCharacters = visibleCharacterCount;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.07f);
             }
            
 
@@ -543,7 +552,18 @@ public class QuestionController : MonoBehaviour
         }
     }
 
-   
+    public bool EveryoneAnswered()
+    {
+        bool res = false;
+        foreach(PlayerModel p in teamsCtrl)
+        {
+            if (p.GetHasAnswered())
+            {
+                res = true;
+            }
+        }
+        return res;
+    }
 
     public void Pause()
     {
