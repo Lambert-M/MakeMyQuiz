@@ -17,7 +17,10 @@ public class TopicController : MonoBehaviour {
     private GameObject parent;
     private GameObject selectedButton;
     private GameObject teamContainer;
-    private Color c = new Color();
+    private Color c;
+    private Color purple = new Color(0.78f, 0f, 1f, 1f);
+    private Color orange = new Color(1f, 0.56f, 0f, 1f);
+    private Color cyan = new Color(0f, 0.85f, 1f, 1f);
     private AudioClip topicMusic;
     private AudioSource topicSource;
     private List<PlayerModel> teamsCtrl = new List<PlayerModel>();
@@ -33,29 +36,38 @@ public class TopicController : MonoBehaviour {
         DisableTeam();
 
         teamContainer = GameObject.FindWithTag("teamcontainer");
-        counter = 0;
-        foreach (TopicData t in DataModel.CurRound().Topics)
+        for (int i = 0; i < DataModel.NumberOfTeams; i++)
         {
             team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
-            teamsButton.Add(team.GetComponent<Button>());
-            teamsCtrl.Add(team.GetComponent<PlayerModel>());
-            switch (counter)
+            teamsButton.Add(team.GetComponentInChildren<Button>());
+            teamsCtrl.Add(team.GetComponentInChildren<PlayerModel>());
+            switch (i)
             {
                 case 0: c = Color.red; break;
                 case 1: c = Color.blue; break;
-                case 2: c = new Color(127,63,191,1); break;
+                case 2: c = purple; break;
                 case 3: c = Color.green; break;
-                case 4: c = new Color(228, 146, 51, 1); break;
-                case 5: c = new Color(51, 222, 228, 1); break;
+                case 4: c = orange; break;
+                case 5: c = cyan; break;
                 case 6: c = Color.magenta; break;
                 case 7: c = Color.yellow; break;
             }
             ColorBlock cb = team.GetComponentInChildren<Button>().colors;
-            cb.normalColor = c;
-            cb.highlightedColor = c;
-            cb.pressedColor = c;
-            team.GetComponent<Button>().colors = cb;
-            counter++;
+            cb.normalColor = Color.white;
+            cb.highlightedColor = Color.white;
+            cb.pressedColor = Color.white;
+            team.GetComponentInChildren<Button>().colors = cb;
+            foreach(Image x in team.GetComponentsInChildren<Image>())
+            {
+                if (x.name.Contains("Joker"))
+                {
+                    x.name = "Joker " + (i + 1);
+                }
+                if (x.name.Contains("Team"))
+                {
+                    x.color = c;
+                }
+            }
         }
 
         parent = GameObject.Find("TopicContainer");
@@ -159,7 +171,7 @@ public class TopicController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        for (int i = 0; i < teamsButton.Count; i++)
+        for (int i = 0; i < DataModel.NumberOfTeams; i++)
         {
             teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
         }
@@ -237,7 +249,7 @@ public class TopicController : MonoBehaviour {
         }
 
         // Make joker appear or disappear
-        for (int i = 0; i < DataModel.Jokers.Length; i++)
+        for (int i = 0; i < DataModel.NumberOfTeams; i++)
         {
             if (DataModel.Jokers[i])
             {
