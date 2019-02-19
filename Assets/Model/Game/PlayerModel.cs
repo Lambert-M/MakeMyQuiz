@@ -18,6 +18,7 @@ public class PlayerModel : MonoBehaviour
     private int ans = -1;
     public int teamnumber;
     private int roundPoint;
+    private bool canAnswer;
     private Timer t;
     public TextMeshProUGUI answer1;
     public TextMeshProUGUI answer2;
@@ -86,7 +87,7 @@ public class PlayerModel : MonoBehaviour
                     hasAnswered = true;
                     sfx_answer.Play();
                 }
-                else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1)
+                else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1) 
                 {
                     ans = 3;
                     img.color = new Color(0, 0, 0, 1);

@@ -203,7 +203,6 @@ public class QuestionController : MonoBehaviour
                 buzz_answer_confirm = true;
                 teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
                 teamsCtrl[number_team_buzz - 1].buzzed = true;
-                Debug.Log("Team  : " + number_team_buzz + " "  + teamsCtrl[number_team_buzz - 1].GetHasAnswered());
                 buzz_event = false;
             }
         }
@@ -253,9 +252,12 @@ public class QuestionController : MonoBehaviour
 
     private void RunningQuestions()
     {
+        buzz_event = false;
+        EnableTeam();
         EnableAllBuzzers();
         ReappearAllTeams();
-        
+        ResetTeamsAnswered();
+
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
@@ -439,7 +441,6 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsCtrl)
         {
-
             e.enabled = true;
         }
     }
@@ -449,6 +450,7 @@ public class QuestionController : MonoBehaviour
         foreach (PlayerModel e in teamsCtrl)
         {
             e.SetHasAnswered(false);
+            e.buzzed = false;
         }
     }
 
@@ -464,6 +466,7 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsCtrl)
         {
+            Debug.Log("Team : " + e.name);
             e.SetCanBuzz(true);
             e.buzzed = false;
         }
@@ -565,8 +568,6 @@ public class QuestionController : MonoBehaviour
     }
     public void GoToNextQuestion()
     {
-        ResetTeamsAnswered();
-        EnableAllBuzzers();
         goingToNextQuestion = true;
         if (isNextAvailable)
         {
