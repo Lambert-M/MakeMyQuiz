@@ -37,6 +37,8 @@ public class QuestionController : MonoBehaviour
     private GameObject teamContainer;
     private Color c;
     public AudioSource[] sfx_buzzers;
+    public AudioSource sfx_buzzer_win;
+    public AudioSource sfx_buzzer_defeat;
     //Arrays
     private AnswerData[] answers;
     //Lists
@@ -187,25 +189,37 @@ public class QuestionController : MonoBehaviour
             if(!pauseActivated)
             {
                 DisapearAllTeamsButOne(number_team_buzz);
-                LaunchSoundBuzzer(number_team_buzz);
                 Pause();
+                LaunchSoundBuzzer(number_team_buzz);
             }
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 Pause();
+                CancelInvoke();
+                sfx_buzzer_win.Play();
                 buzz_answer_confirm = true;
                 DataModel.Scores[number_team_buzz - 1] += 5;
+                if (DataModel.Jokers[number_team_buzz])
+                {
+                    DataModel.Scores[number_team_buzz - 1] += 2;
+                }
                 buzz_event = false;
                 isNextAvailable = true;
                 ReappearAllTeams();
-                GoToNextQuestion();
-                
+                arrow.GetComponent<CanvasGroup>().alpha = 1;
+                GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
+                UpdateScoreTeams(number_team_buzz);
+                DisplayQuestion();
+                DisplayGoodAnswer();
+                musicSource.Stop();
+
             }
             else if (Input.GetKeyDown(KeyCode.N))
             {
+                sfx_buzzer_defeat.Play();
+                StartCoroutine(WaitForRealSeconds(1.57f));
                 ReappearAllTeams();
                 teamsCtrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
-                Pause();
                 buzz_answer_confirm = true;
                 teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
                 teamsCtrl[number_team_buzz - 1].buzzed = true;
@@ -256,7 +270,15 @@ public class QuestionController : MonoBehaviour
         }
     }
 
-    private void RunningQuestions()
+
+    public IEnumerator WaitForRealSeconds(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Pause();
+    }
+
+  
+        private void RunningQuestions()
     {
         buzz_event = false;
         EnableTeam();
@@ -479,6 +501,39 @@ public class QuestionController : MonoBehaviour
     }
 
     /**
+     * Update score in the data model of the team in parameter
+     */
+   private void UpdateScoreTeams(int number_team)
+    {
+          teamsCtrl[number_team-1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
+    }
+    /**
+     * Display the question in the scene
+     */
+    private void DisplayQuestion()
+    {
+        questionText.maxVisibleCharacters = questionText.textInfo.characterCount;
+    }
+    /**
+     * Display the good answer panel in the scene
+     */ 
+    private void DisplayGoodAnswer()
+    {
+        answers = questions.First().Answers;
+        GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
+        GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
+        GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
+        GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
+        for(int i = 0; i< answers.Length; i++)
+        {
+            if (answers[i].IsTrue)
+            {
+                answerList[i].GetComponent<CanvasGroup>().alpha = 1;
+            }
+        }
+    }
+
+    /**
      * Change the color of a PlayerControler e based on the integer i which stands for
      * the answer the team chooses. Their color change to the corresponding answer's color.
      */
@@ -581,6 +636,34 @@ public class QuestionController : MonoBehaviour
             //display "resume game" message
             pauseActivated = false;
         }
+    }
+    private void TransitionCorrectBuzz()
+    {
+        EliminateFalseAnswer();
+        foreach (PlayerModel e in teamsCtrl)
+        {
+            //change the team's answer button to the color of the one they chose
+            ChangeTeamColor(e.GetNumberAnswer(), e);
+
+            for (int i = 0; i < questions.First().Answers.Length; i++)
+            {
+                currAnswer = questions.First().Answers[i];
+                //Check if PlayerControler answered and gave the good answer
+                if (e.GetAnswer().Equals(currAnswer.AnswerText) && currAnswer.IsTrue)
+                {
+                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsCtrl.IndexOf(e));
+                }
+            }
+        }
+
+        for (int i = 0; i < teamsButton.Count; i++)
+        {
+            teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
+        }
+        GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
+
+        arrow.GetComponent<CanvasGroup>().alpha = 1;
+        isNextAvailable = true;
     }
 
     public void GoToNextQuestion()
