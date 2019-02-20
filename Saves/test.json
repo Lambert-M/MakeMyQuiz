@@ -2,7 +2,7 @@
 "Quizname":"Test",
 "CurTopicName":"",
 "RoundNumber":1,
-"IroundCur":0,
+"IroundCur":1,
 "ItopicCur":1,
 "IquestionCur":0,
 "Score0":0,
@@ -95,7 +95,7 @@
 },
 {
 "AnswerText":"No Game No Life",
-"IsTrue":false
+"IsTrue":true
 },
 {
 "AnswerText":"Pokémon",
@@ -143,7 +143,7 @@
 "IsAvailable":true,
 "Questions":[
 {
-"Question":"3+3=?\t",
+"Question":"3+3=?",
 "Answers":[
 {
 "AnswerText":"0",

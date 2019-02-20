@@ -27,7 +27,7 @@ public class test : MonoBehaviour {
         rb = r.GetComponent<Rigidbody2D>();
         best_score = DataModel.BestScore();
         score = DataModel.Scores[team_number - 1];
-        if (team_number < DataModel.NumberOfTeams)
+        if (team_number <= DataModel.NumberOfTeams)
         {
             GetComponent<Image>().GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(team_number - 1);
         }
