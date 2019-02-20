@@ -2,8 +2,8 @@
 "Quizname":"Test",
 "CurTopicName":"",
 "RoundNumber":1,
-"IroundCur":1,
-"ItopicCur":1,
+"IroundCur":2,
+"ItopicCur":0,
 "IquestionCur":0,
 "Score0":0,
 "Joker0":false,
@@ -24,6 +24,7 @@
 "Rounds":[
 {
 "Type":"Musique",
+"IsBuzzActivate":false,
 "Topics":[
 {
 "Name":"Jeux",
@@ -137,6 +138,7 @@
 },
 {
 "Type":"QCM",
+"IsBuzzActivate":false,
 "Topics":[
 {
 "Name":"Mathématiques",
@@ -232,6 +234,18 @@
 }
 ]
 }
+]
+}
+]
+},
+{
+"Type":"Image",
+"IsBuzzActivate":false,
+"Topics":[
+{
+"Name":"",
+"IsAvailable":true,
+"Questions":[
 ]
 }
 ]

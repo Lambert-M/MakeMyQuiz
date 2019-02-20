@@ -52,6 +52,7 @@ public class EditRoundController : MonoBehaviour
         GameObject.Find("NumberRound").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
         nbTopics = DataModel.Rounds[round.GetComponent<PanelModel>().PanelNumber - 1].Topics.Count;
         round.Find("NumberofContainer").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["topic_number"] + nbTopics;
+        round.Find("BuzzActivation").GetComponent<Toggle>().isOn = DataModel.Rounds[nbPanel-1].IsBuzzRound;
     }
 
     /**
@@ -78,7 +79,7 @@ public class EditRoundController : MonoBehaviour
         // add round in DataModel with one topic
         List<TopicData> topiccommon = new List<TopicData>();
         topiccommon.Add(new TopicData("", new List<QuestionData>()));
-        DataModel.Rounds.Add(new RoundData("Image", topiccommon));
+        DataModel.Rounds.Add(new RoundData("Image", topiccommon,false));
         nbTopics = DataModel.Rounds[round.GetComponent<PanelModel>().PanelNumber - 1].Topics.Count;
         round.Find("NumberofContainer").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["topic_number"] + nbTopics;
     }
@@ -127,7 +128,9 @@ public class EditRoundController : MonoBehaviour
         {
             int roundNum = r.GetComponent<PanelModel>().PanelNumber;
             TMP_Dropdown type = r.GetComponentInChildren<TMP_Dropdown>(); //get the round type
+            Toggle isBuzzActivate = r.GetComponentInChildren<Toggle>();
             DataModel.Rounds[roundNum-1].Type = type.options[type.value].text; //update round type
+            DataModel.Rounds[roundNum - 1].IsBuzzRound = isBuzzActivate.isOn;
         }
 
         DataModel.Save(DataModel.CurrentFilename);

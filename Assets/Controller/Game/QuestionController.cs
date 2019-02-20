@@ -18,6 +18,7 @@ public class QuestionController : MonoBehaviour
     private bool isNextAvailable;
     private bool musicQuestionIsPlaying;
     private bool resetvol;
+    private bool isBuzzActivate;
     private bool goingToNextQuestion;
     private int visibleCharacterCount;
     private int numberOfCharacters;
@@ -171,7 +172,7 @@ public class QuestionController : MonoBehaviour
                 GameObject.Find("Joker " + (i + 1)).GetComponent<CanvasGroup>().alpha = 1;
             }
         }
-
+        isBuzzActivate = DataModel.Rounds[DataModel.IroundCur - 1].IsBuzzRound;
         RunningQuestions();
     }
     
@@ -182,11 +183,11 @@ public class QuestionController : MonoBehaviour
         {
             Time.timeScale = 2f;
         }
-
-        if (buzz_event && !teamsCtrl[number_team_buzz-1].buzzed)
+        
+        if (isBuzzActivate && buzz_event && !teamsCtrl[number_team_buzz - 1].buzzed)
         {
-            
-            if(!pauseActivated)
+  
+            if (!pauseActivated)
             {
                 DisapearAllTeamsButOne(number_team_buzz);
                 Pause();
@@ -278,14 +279,25 @@ public class QuestionController : MonoBehaviour
     }
 
   
-        private void RunningQuestions()
+    private void RunningQuestions()
     {
-        buzz_event = false;
-        EnableTeam();
-        EnableAllBuzzers();
-        ReappearAllTeams();
-        ResetTeamsAnswered();
-
+        if (isBuzzActivate)
+        {
+           
+            buzz_event = false;
+            EnableTeam();
+            EnableAllBuzzers();
+            ReappearAllTeams();
+            ResetTeamsAnswered();
+        }
+        else
+        {
+            buzz_event = false;
+            EnableTeam();
+            ReappearAllTeams();
+            ResetTeamsAnswered();
+            DisableAllBuzzers();
+        }
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
@@ -405,8 +417,7 @@ public class QuestionController : MonoBehaviour
             e.GetComponent<CanvasGroup>().alpha = 1;
         }
         timerctrl.tickingDown = true;
-        DisableAllBuzzers();
-        EnableTeam();
+     
     }
     
     /**
@@ -488,6 +499,7 @@ public class QuestionController : MonoBehaviour
         foreach (PlayerModel e in teamsCtrl)
         {
             e.SetCanBuzz(false);
+        
         }
     }
 

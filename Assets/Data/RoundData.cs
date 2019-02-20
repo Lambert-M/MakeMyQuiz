@@ -7,10 +7,12 @@ public class RoundData {
 
     //manche 1 , blindtest ...
     public string Type { get; set; }
+    public bool IsBuzzRound { get; set; }
     public List<TopicData> Topics { get; set; }
 
-    public RoundData(string type, List<TopicData> topics)
+    public RoundData(string type, List<TopicData> topics,bool isBuzzRound)
     {
+        IsBuzzRound = isBuzzRound;
         Type = type;
         Topics = topics;
     }

@@ -133,7 +133,7 @@ public class DataModel : MonoBehaviour
         {
             JSONObject roundJson = new JSONObject();
             roundJson.Add("Type", rd.Type);
-
+            roundJson.Add("IsBuzzActivate", rd.IsBuzzRound);
             JSONArray topicsJsonArray = new JSONArray();
             foreach (TopicData td in rd.Topics)
             {
@@ -285,7 +285,8 @@ public class DataModel : MonoBehaviour
                 tdList.Add(td);
             }
 
-            RoundData rd = new RoundData(dataJson["Rounds"].AsArray[i]["Type"].Value, tdList);
+            RoundData rd = new RoundData(dataJson["Rounds"].AsArray[i]["Type"].Value, tdList, dataJson["Rounds"].AsArray[i]["IsBuzzActivate"].AsBool);
+          
 
             rdList.Add(rd);
         }

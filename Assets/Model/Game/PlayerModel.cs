@@ -18,7 +18,6 @@ public class PlayerModel : MonoBehaviour
     private int ans = -1;
     public int teamnumber;
     private int roundPoint;
-    private bool canAnswer;
     private Timer t;
     public TextMeshProUGUI answer1;
     public TextMeshProUGUI answer2;
@@ -42,12 +41,13 @@ public class PlayerModel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("can buzz dans l'update  " +canBuzz);
         if ( SceneManager.GetActiveScene().name == "Questions" || SceneManager.GetActiveScene().name == "Images"  ) {
             
             t = GameObject.Find("Timer").GetComponent<Timer>();
             Image img = answerPanel.GetComponent<Image>();
             if(!hasAnswered){
-
+                
                 ans = -1;
 
                 if (t.GetCurrentTimeValue() >= 12 && t.GetCurrentTimeValue() < 15)
@@ -72,6 +72,7 @@ public class PlayerModel : MonoBehaviour
                 
                 if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
                 {
+               
                     ans = 1;
                     img.color = new Color(0, 0, 0, 1);
                     answer = answer1.text;
@@ -81,6 +82,7 @@ public class PlayerModel : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
                 {
+                   
                     ans = 2;
                     img.color = new Color(0, 0, 0, 1);
                     answer = answer2.text;
@@ -89,6 +91,7 @@ public class PlayerModel : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1) 
                 {
+                   
                     ans = 3;
                     img.color = new Color(0, 0, 0, 1);
                     hasAnswered = true;
@@ -97,14 +100,17 @@ public class PlayerModel : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("team" + teamnumber + "D") && GameObject.Find("Answer Panel 4").GetComponent<CanvasGroup>().alpha == 1)
                 {
+                
                     ans = 4;
                     img.color = new Color(0, 0, 0, 1);
                     hasAnswered = true;
                     answer = answer4.text;
                     sfx_answer.Play();
                 }
-                else if (Input.GetButtonDown("team" + teamnumber + "buzz") && canBuzz)
+                else if (canBuzz && Input.GetButtonDown("team" + teamnumber + "buzz") )
                 {
+                   
+                    Debug.Log("canbuzz "+canBuzz);
                     questioncontoller.buzz_event = true;
                     questioncontoller.number_team_buzz = teamnumber;
                     hasAnswered = true;
@@ -129,7 +135,9 @@ public class PlayerModel : MonoBehaviour
 
     public void SetCanBuzz(bool b)
     {
+        Debug.Log("canbuzz avant" + canBuzz);
         canBuzz = b;
+        Debug.Log("canbuzz apres" + canBuzz);
     }
 
     public void ActivateJoker()
@@ -137,7 +145,7 @@ public class PlayerModel : MonoBehaviour
         DataModel.Jokers[teamnumber - 1] = !DataModel.Jokers[teamnumber - 1];
     }
 
-        public bool GetHasAnswered()
+    public bool GetHasAnswered()
     {
       return hasAnswered;
     }
