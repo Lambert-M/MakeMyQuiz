@@ -16,8 +16,11 @@ public class test : MonoBehaviour {
     public Animator rocket2;
     public Animator final_explosion;
     public Animator aura;
+    public Canvas c;
+    public Camera ca;
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         rb = r.GetComponent<Rigidbody2D>();
         //best_score = DataModel.BestScore();
         //score = DataModel.Scores[team_number - 1];
@@ -61,10 +64,9 @@ public class test : MonoBehaviour {
 
     void FixedUpdate()
     {
-      
-        if (rb.position.y < (score/best_score)*0.90f* Screen.height)
+        Vector3 screenPos = ca.WorldToScreenPoint(rb.position);
+        if (rb.position.y < (score/best_score)*220)
         {
-
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
         else if(still_animated)
