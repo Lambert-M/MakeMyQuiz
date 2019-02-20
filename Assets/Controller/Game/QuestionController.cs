@@ -263,10 +263,6 @@ public class QuestionController : MonoBehaviour
         EnableAllBuzzers();
         ReappearAllTeams();
         ResetTeamsAnswered();
-        if(Time.timeScale == 2f)
-        {
-            Time.timeScale = 1f;
-        }
 
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
@@ -301,6 +297,7 @@ public class QuestionController : MonoBehaviour
             {
                 musicSource.volume = musicQ.Volume;
             }
+            question_length_to_time += 0.5f;
         }
         else
         {
@@ -476,7 +473,6 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsCtrl)
         {
-            Debug.Log("Team : " + e.name);
             e.SetCanBuzz(true);
             e.buzzed = false;
         }
@@ -554,12 +550,12 @@ public class QuestionController : MonoBehaviour
 
     public bool EveryoneAnswered()
     {
-        bool res = false;
+        bool res = true;
         foreach(PlayerModel p in teamsCtrl)
         {
-            if (p.GetHasAnswered())
+            if (!p.GetHasAnswered())
             {
-                res = true;
+                res = false;
             }
         }
         return res;
@@ -586,8 +582,13 @@ public class QuestionController : MonoBehaviour
             pauseActivated = false;
         }
     }
+
     public void GoToNextQuestion()
     {
+        if (Time.timeScale == 2f)
+        {
+            Time.timeScale = 1f;
+        }
         goingToNextQuestion = true;
         if (isNextAvailable)
         {

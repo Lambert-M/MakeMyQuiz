@@ -38,6 +38,7 @@ public class TopicController : MonoBehaviour {
             team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
             teamsButton.Add(team.GetComponentInChildren<Button>());
             teamsCtrl.Add(team.GetComponentInChildren<PlayerModel>());
+            team.GetComponentInChildren<PlayerModel>().teamnumber = (i + 1);
             switch (i)
             {
                 case 0: c = Color.red; break;
@@ -124,6 +125,7 @@ public class TopicController : MonoBehaviour {
         {
             b.onClick.AddListener(() => b.gameObject.GetComponent<PlayerModel>().ActivateJoker());
         }
+
         for (int i = 0; i < teamsButton.Count; i++)
         {
             if (i < DataModel.NumberOfTeams)

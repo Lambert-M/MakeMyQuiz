@@ -113,7 +113,6 @@ public class DataModel : MonoBehaviour
  **/
     public static void Save(string filepath)
     {
-        Debug.Log(filepath);
         JSONObject dataJson = new JSONObject();
         dataJson.Add("Quizname", QuizName);
         dataJson.Add("CurTopicName", CurTopicName);
