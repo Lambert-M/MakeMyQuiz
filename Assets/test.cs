@@ -22,8 +22,8 @@ public class test : MonoBehaviour {
     void Start ()
     {
         rb = r.GetComponent<Rigidbody2D>();
-        //best_score = DataModel.BestScore();
-        //score = DataModel.Scores[team_number - 1];
+        best_score = DataModel.BestScore();
+        score = DataModel.Scores[team_number - 1];
         velocity = new Vector2(0f, 30f);
         rocket1.SetBool("isMoving", true);
         rocket2.SetBool("isMoving", true);
