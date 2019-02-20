@@ -17,7 +17,8 @@ public class IntroController : MonoBehaviour
     private Timer timer;
     private static TMP_InputField TimeField;
     private List<Button> teamsButton = new List<Button>();
-    private GameObject teamContainer;
+    private GameObject teamContainer1;
+    private GameObject teamContainer2;
     private GameObject team;
     private Color c;
 
@@ -31,10 +32,17 @@ public class IntroController : MonoBehaviour
             DataModel.CurrentRunningFilename = DataModel.CurrentRunningFilename.Substring(0, DataModel.CurrentRunningFilename.Length - 12) + ".json";
         }
 
-        teamContainer = GameObject.FindWithTag("teamcontainer");
+        teamContainer1 = GameObject.Find("TeamContainer1");
+        teamContainer2 = GameObject.Find("TeamContainer2");
         for (int i = 0; i < DataModel.NumberOfTeams; i++)
         {
-            team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
+            if (i % 2 == 0)
+            {
+                team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer1.transform);
+            } else
+            {
+                team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer2.transform);
+            }
             teamsButton.Add(team.GetComponentInChildren<Button>());
             switch (i)
             {

@@ -16,7 +16,8 @@ public class TopicController : MonoBehaviour {
     private GameObject team;
     private GameObject parent;
     private GameObject selectedButton;
-    private GameObject teamContainer;
+    private GameObject teamContainer1;
+    private GameObject teamContainer2;
     private Color c;
     private AudioClip topicMusic;
     private AudioSource topicSource;
@@ -31,11 +32,18 @@ public class TopicController : MonoBehaviour {
          *  Initialisation of gameobjects and variables
          */
         DisableTeam();
-
-        teamContainer = GameObject.FindWithTag("teamcontainer");
+        teamContainer1 = GameObject.Find("TeamContainer1");
+        teamContainer2 = GameObject.Find("TeamContainer2");
         for (int i = 0; i < DataModel.NumberOfTeams; i++)
         {
-            team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer.transform);
+            if (i % 2 == 0)
+            {
+                team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer1.transform);
+            }
+            else
+            {
+                team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer2.transform);
+            }
             teamsButton.Add(team.GetComponentInChildren<Button>());
             teamsCtrl.Add(team.GetComponentInChildren<PlayerModel>());
             team.GetComponentInChildren<PlayerModel>().teamnumber = (i + 1);
@@ -137,8 +145,6 @@ public class TopicController : MonoBehaviour {
                 teamsButton[i].gameObject.SetActive(false);
             }
         }
-
-        teamsButton = teamContainer.GetComponentsInChildren<Button>().OrderBy(go => go.name).ToList();
 
         /*
          *  TopicMusic setup
