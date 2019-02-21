@@ -33,7 +33,7 @@ public class test : MonoBehaviour {
         }
         else
         {
-            GetComponent<CanvasGroup>().alpha = 0;
+            Destroy(this.gameObject);
         }
         velocity = new Vector2(0f, 30f);
         rocket1.SetBool("isMoving", true);

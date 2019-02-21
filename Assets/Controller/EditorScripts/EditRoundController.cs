@@ -72,6 +72,7 @@ public class EditRoundController : MonoBehaviour
         }
         else
         {
+            round.Find("BuzzActivation").GetComponent<Toggle>().targetGraphic.color = new Color(1, 1, 1);
             round.Find("BuzzActivation").GetComponent<Toggle>().enabled = true;
         }
     }

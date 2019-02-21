@@ -9,6 +9,11 @@ using UnityEngine.UI;
 public class ImageController : MonoBehaviour
 {
     //Variables
+    public bool[] teams_can_buzz;
+    public int number_team_buzz;
+    public bool buzz_event;
+    private bool buzz_answer_confirm;
+    private bool isBuzzActivate;
     private bool isAnyThemeLeftInCurRound;
     private bool pauseActivated;
     private bool isNextAvailable;
@@ -24,6 +29,9 @@ public class ImageController : MonoBehaviour
     private AudioClip music;
     private GameObject ans1, ans2, ans3, ans4;
     private GameObject arrow;
+    public AudioSource[] sfx_buzzers;
+    public AudioSource sfx_buzzer_win;
+    public AudioSource sfx_buzzer_defeat;
     //Arrays
     private Button[] teamsButton;
     private AnswerData[] answers;
@@ -113,6 +121,11 @@ public class ImageController : MonoBehaviour
                 GameObject.Find("Joker " + (i + 1)).GetComponent<CanvasGroup>().alpha = 1;
             }
         }
+
+        teams_can_buzz = new bool[teamsctrl.Count];
+        buzz_event = false;
+        buzz_answer_confirm = false;
+        isBuzzActivate = DataModel.CurRound().IsBuzzRound;
 
         RunningQuestions();
     }
@@ -265,6 +278,64 @@ public class ImageController : MonoBehaviour
         isNextAvailable = true;
     }
 
+    /**
+  * Update score in the data model of the team in parameter
+  */
+    private void UpdateScoreTeams(int number_team)
+    {
+        teamsctrl[number_team - 1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
+    }
+
+    public IEnumerator WaitForRealSeconds(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Pause();
+    }
+
+    public void Pause()
+    {
+        if (!pauseActivated)
+        {
+            //game paused
+            musicSource.Pause();
+            Time.timeScale = 0f;
+            //disable every controller
+            //dispay "pause activated" message
+            pauseActivated = true;
+        }
+        else
+        {
+            //game already in pause i.e. resume game
+            Time.timeScale = 1f;
+            musicSource.Play();
+            //enable every controller
+            //display "resume game" message
+            pauseActivated = false;
+        }
+    }
+    /**
+   * Launch the buzzer sound of the team in parameter 
+   */
+
+    private void LaunchSoundBuzzer(int number_team)
+    {
+        sfx_buzzers[number_team - 1].Play();
+    }
+
+    /**
+     * Disapear all teams in the scene but the one in parameter 
+     */
+    private void DisapearAllTeamsButOne(int number_team)
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            if (!teamsctrl[number_team - 1].Equals(e))
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            }
+        }
+    }
+
     private void DisableTeam()
     {
         foreach (PlayerModel e in teamsctrl)
@@ -281,8 +352,56 @@ public class ImageController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsctrl)
         {
-            e.SetHasAnswered(false);
             e.enabled = true;
+        }
+    }
+
+    private void ResetTeamsAnswered()
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            e.SetHasAnswered(false);
+            e.buzzed = false;
+        }
+    }
+
+    private void DisableAllBuzzers()
+    {
+        for (int i = 0; i < teams_can_buzz.Length; i++)
+        {
+            teams_can_buzz[i] = false;
+        }
+    }
+
+    private void EnableAllBuzzers()
+    {
+
+        for (int i = 0; i < teams_can_buzz.Length; i++)
+        {
+            teams_can_buzz[i] = true;
+        }
+        foreach (PlayerModel e in teamsctrl)
+        {
+            e.buzzed = false;
+        }
+    }
+    /**
+     * Reappear all teams in the scene
+     */
+    private void ReappearAllTeams()
+    {
+        foreach (PlayerModel e in teamsctrl)
+        {
+            if (e.buzzed)
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+
+            }
+            else
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            }
+
         }
     }
 
