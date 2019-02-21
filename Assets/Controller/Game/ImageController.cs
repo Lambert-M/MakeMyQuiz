@@ -8,49 +8,113 @@ using UnityEngine.UI;
 
 public class ImageController : MonoBehaviour
 {
+
     //Variables
     public bool[] teams_can_buzz;
     public int number_team_buzz;
     public bool buzz_event;
     private bool buzz_answer_confirm;
-    private bool isBuzzActivate;
     private bool isAnyThemeLeftInCurRound;
     private bool pauseActivated;
     private bool isNextAvailable;
+    private bool musicQuestionIsPlaying;
+    private bool resetvol;
+    private bool isBuzzActivate;
     private bool goingToNextQuestion;
+    private int visibleCharacterCount;
     private int numberOfQuestions;
     private int actualQuestion;
     private string localpath;
     //Objects
     private AnswerData currAnswer;
     private Timer timerctrl;
-    private Sprite sprite;
     private AudioSource musicSource;
     private AudioClip music;
     private GameObject ans1, ans2, ans3, ans4;
     private GameObject arrow;
+    private GameObject team;
+    private GameObject teamContainer1;
+    private GameObject teamContainer2;
+    private Color c;
+    private Sprite sprite;
     public AudioSource[] sfx_buzzers;
     public AudioSource sfx_buzzer_win;
     public AudioSource sfx_buzzer_defeat;
     //Arrays
-    private Button[] teamsButton;
     private AnswerData[] answers;
     //Lists
+    private List<Button> teamsButton = new List<Button>();
     private List<GameObject> teamlist = new List<GameObject>();
     private List<GameObject> answerList = new List<GameObject>();
     private List<GameObject> timerPanelList = new List<GameObject>();
     private List<QuestionData> questions = new List<QuestionData>();
-    private List<PlayerModel> teamsctrl = new List<PlayerModel>();
+    private List<PlayerModel> teamsCtrl = new List<PlayerModel>();
 
     /*
      * This method initialize everything.
      */
     void Start()
     {
+        ans1 = GameObject.Find("Answer 1");
+        ans2 = GameObject.Find("Answer 2");
+        ans3 = GameObject.Find("Answer 3");
+        ans4 = GameObject.Find("Answer 4");
+        teamContainer1 = GameObject.Find("TeamContainer1");
+        teamContainer2 = GameObject.Find("TeamContainer2");
+        for (int i = 0; i < DataModel.NumberOfTeams; i++)
+        {
+            if (i % 2 == 0)
+            {
+                team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer1.transform);
+            }
+            else
+            {
+                team = Instantiate(Resources.Load<GameObject>("Prefabs/Team"), teamContainer2.transform);
+            }
+            teamsButton.Add(team.GetComponentInChildren<Button>());
+            teamsCtrl.Add(team.GetComponentInChildren<PlayerModel>());
+            switch (i)
+            {
+                case 0: c = Color.red; break;
+                case 1: c = Color.blue; break;
+                case 2: c = new Color(0.78f, 0f, 1f, 1f); break;
+                case 3: c = Color.green; break;
+                case 4: c = new Color(1f, 0.56f, 0f, 1f); break;
+                case 5: c = new Color(0f, 0.85f, 1f, 1f); break;
+                case 6: c = Color.magenta; break;
+                case 7: c = Color.yellow; break;
+            }
+            ColorBlock cb = team.GetComponentInChildren<Button>().colors;
+            cb.normalColor = Color.white;
+            cb.highlightedColor = Color.white;
+            cb.pressedColor = Color.white;
+            team.GetComponentInChildren<Button>().colors = cb;
+            team.GetComponentInChildren<PlayerModel>().teamnumber = (i + 1);
+            team.GetComponentInChildren<PlayerModel>().answer1 = ans1.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().answer2 = ans2.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().answer3 = ans3.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().answer4 = ans4.GetComponent<TextMeshProUGUI>();
+            team.GetComponentInChildren<PlayerModel>().sfx_answer = GameObject.Find("answer_soundeffecr").GetComponent<AudioSource>();
+            foreach (Image x in team.GetComponentsInChildren<Image>())
+            {
+                if (x.name.Contains("Joker"))
+                {
+                    x.name = "Joker " + (i + 1);
+                }
+                if (x.name.Contains("Team"))
+                {
+                    x.color = c;
+                }
+            }
+        }
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("answerimage"))
+        {
+            go.GetComponent<CanvasGroup>().alpha = 1;
+        }
+
         /*
          * Initialisation of gameobjects and variables
          */
-
         string[] datapath = Application.dataPath.Split('/');
         string pathsrc = datapath[0] + '/';
         for (int i = 1; i < datapath.Length - 1; i++)
@@ -59,6 +123,9 @@ public class ImageController : MonoBehaviour
         }
         localpath = pathsrc + "/Images";
 
+        teams_can_buzz = new bool[teamsCtrl.Count];
+        buzz_event = false;
+        buzz_answer_confirm = false;
         goingToNextQuestion = false;
         pauseActivated = false;
         actualQuestion = 1;
@@ -66,13 +133,12 @@ public class ImageController : MonoBehaviour
         numberOfQuestions = questions.Count;
 
         arrow = GameObject.Find("ArrowButton");
-        teamsButton = GameObject.FindWithTag("teamcontainer").GetComponentsInChildren<Button>();
         musicSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-       
+
         Sprite sprite = Resources.Load<Sprite>("Images/" + DataModel.BackgroundName);
         GameObject.Find("Background").GetComponent<Image>().sprite = sprite;
 
-        for (int i = 0; i < teamsButton.Length; i++)
+        for (int i = 0; i < teamsButton.Count; i++)
         {
             if (i < DataModel.NumberOfTeams)
             {
@@ -83,19 +149,12 @@ public class ImageController : MonoBehaviour
                 teamsButton[i].gameObject.SetActive(false);
             }
         }
-        teamsButton = GameObject.FindWithTag("teamcontainer").GetComponentsInChildren<Button>();
-
 
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("team"))
         {
             teamlist.Add(go);
         }
         teamlist = teamlist.OrderBy(go => go.name).ToList();
-
-        foreach (GameObject go in teamlist)
-        {
-            teamsctrl.Add(go.GetComponent<PlayerModel>());
-        }
 
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("answer"))
         {
@@ -122,9 +181,6 @@ public class ImageController : MonoBehaviour
             }
         }
 
-        teams_can_buzz = new bool[teamsctrl.Count];
-        buzz_event = false;
-        buzz_answer_confirm = false;
         isBuzzActivate = DataModel.CurRound().IsBuzzRound;
 
         RunningQuestions();
@@ -132,44 +188,126 @@ public class ImageController : MonoBehaviour
 
     void Update()
     {
-        // Pause/Resume the game
-        if (Input.GetKeyUp(DataModel.Pause))
+
+        if (EveryoneAnswered() && Time.timeScale == 1f)
         {
-            if (!pauseActivated)
-            {
-                //game paused
-                Time.timeScale = 0f;
-                //disable every controller
-                foreach (PlayerModel e in teamsctrl)
-                {
-                    e.enabled = false;
-                }
-                //dispay "pause activated" message
-                pauseActivated = true;
-            }
-            else
-            {
-                //game already in pause i.e. resume game
-                Time.timeScale = 1f;
-                //enable every controller
-                foreach (PlayerModel e in teamsctrl)
-                {
-                    e.enabled = true;
-                }
-                //display "resume game" message
-                pauseActivated = false;
-            }
+            Time.timeScale = 2f;
         }
 
-        //go to next question
-        if (Input.GetKeyDown(DataModel.Next))
+        if (isBuzzActivate && buzz_event && !teamsCtrl[number_team_buzz - 1].buzzed)
         {
-            GoToNextQuestion();
+            DisableTeam();
+
+            if (!pauseActivated)
+            {
+                DisapearAllTeamsButOne(number_team_buzz);
+                Pause();
+                LaunchSoundBuzzer(number_team_buzz);
+            }
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Pause();
+                CancelInvoke();
+                sfx_buzzer_win.Play();
+                buzz_answer_confirm = true;
+                DataModel.Scores[number_team_buzz - 1] += 5;
+                if (DataModel.Jokers[number_team_buzz])
+                {
+                    DataModel.Scores[number_team_buzz - 1] += 2;
+                }
+                buzz_event = false;
+                isNextAvailable = true;
+                ReappearAllTeams();
+                arrow.GetComponent<CanvasGroup>().alpha = 1;
+                GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
+                UpdateScoreTeams(number_team_buzz);
+                DisplayGoodAnswer();
+                musicSource.Stop();
+
+            }
+            else if (Input.GetKeyDown(KeyCode.N))
+            {
+                sfx_buzzer_defeat.Play();
+                StartCoroutine(WaitForRealSeconds(1.57f));
+                ReappearAllTeams();
+                teamsCtrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+                buzz_answer_confirm = true;
+                teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
+                teamsCtrl[number_team_buzz - 1].buzzed = true;
+                buzz_event = false;
+                EnableTeam();
+            }
+        }
+        else
+        {
+            // Pause/Resume the game
+            if (Input.GetKeyUp(DataModel.Pause))
+            {
+                Pause();
+            }
+
+            //go to next question
+            if (Input.GetKeyDown(DataModel.Next))
+            {
+                GoToNextQuestion();
+            }
+
+            if (musicQuestionIsPlaying)
+            {
+                // Make the sound fade in
+                MusicQuestion musicQ = (MusicQuestion)DataModel.CurQuestion();
+                if (!resetvol && musicQ.Fade)
+                {
+                    musicSource.volume = 0;
+                    resetvol = true;
+                }
+
+                if (musicQ.Fade && musicQuestionIsPlaying)
+                {
+                    if (musicSource.volume < musicQ.Volume)
+                    {
+
+                        musicSource.volume = musicSource.volume + (Time.deltaTime / 8);
+                    }
+                }
+
+                if (timerctrl.GetCurrentTimeValue() < 2f)
+                {
+                    if (musicSource.volume > 0)
+                    {
+                        musicSource.volume -= musicQ.Volume * Time.deltaTime / 2f;
+                    }
+                }
+            }
         }
     }
 
+
+    public IEnumerator WaitForRealSeconds(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Pause();
+    }
+
+
     private void RunningQuestions()
     {
+        if (isBuzzActivate)
+        {
+            buzz_event = false;
+            EnableTeam();
+            EnableAllBuzzers();
+            ReappearAllTeams();
+            ResetTeamsAnswered();
+        }
+        else
+        {
+            buzz_event = false;
+            EnableTeam();
+            ReappearAllTeams();
+            ResetTeamsAnswered();
+            DisableAllBuzzers();
+        }
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
@@ -193,34 +331,81 @@ public class ImageController : MonoBehaviour
         var x = new WWW("file:///" + localpath + '/' + imageQ.ImagePath);
         sprite = Sprite.Create(x.texture, new Rect(0, 0, x.texture.width, x.texture.height), new Vector2(0, 0));
         GameObject.Find("Questionimage").GetComponent<Image>().sprite = sprite;
-        
-        music = (AudioClip)Resources.Load("Sounds/" + DataModel.QuestionMusicName);
-        musicSource.clip = music;
-        DisableTeam();
 
+        int music_index = Random.Range(1, 4);
+        music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName + music_index);
+        musicSource.clip = music;
         StartCoroutine(DisplayText());
 
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             ChangeTeamColor(0, e);
+            e.buzzed = false;
         }
 
+        if (DataModel.CurQuestion() is MusicQuestion)
+        {
+            musicQuestionIsPlaying = true;
+        }
         musicSource.Play();
 
-        // After 10 seconds, the timer and answers appears, 7 seconds after that a false answer disappears, again 4 seconds after and at 25 sec teams can't answer
+        // After 10 seconds, the timer and answers appears, 7 seconds after that a false answer disappears, again 4 seconds after and at 25 sec teams can'musicQ answer
         // anymore. Finally at 28 seconds, the true answer is revealed and points are given
-        Invoke("RevealAnswers", 10);
-        Invoke("EliminateFalseAnswer", 17);
-        Invoke("EliminateFalseAnswer", 21);
-        Invoke("DisableTeam", 25);
-        Invoke("FinalAnswerPhase", 28);
+        Invoke("RevealAnswers", 5);
+        Invoke("EliminateFalseAnswer", 12);
+        Invoke("EliminateFalseAnswer", 16);
+        Invoke("DisableTeam", 20);
+        Invoke("FinalAnswerPhase", 23);
     }
 
+    /**
+     * Launch the buzzer sound of the team in parameter 
+     */
+
+    private void LaunchSoundBuzzer(int number_team)
+    {
+        sfx_buzzers[number_team - 1].Play();
+    }
+
+    /**
+     * Disapear all teams in the scene but the one in parameter 
+     */
+    private void DisapearAllTeamsButOne(int number_team)
+    {
+        foreach (PlayerModel e in teamsCtrl)
+        {
+            if (!teamsCtrl[number_team - 1].Equals(e))
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            }
+        }
+    }
+
+    /**
+     * Reappear all teams in the scene
+     */
+    private void ReappearAllTeams()
+    {
+        foreach (PlayerModel e in teamsCtrl)
+        {
+            if (e.buzzed)
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+
+            }
+            else
+            {
+                e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            }
+
+        }
+    }
     /**
      * When this method is called, timer and answers appears and players are able to answer
      */
     private void RevealAnswers()
     {
+        DisableAllBuzzers();
         foreach (GameObject p in answerList)
         {
             p.GetComponent<CanvasGroup>().alpha = 1;
@@ -230,7 +415,7 @@ public class ImageController : MonoBehaviour
             e.GetComponent<CanvasGroup>().alpha = 1;
         }
         timerctrl.tickingDown = true;
-        EnableTeam();
+
     }
 
     /**
@@ -252,7 +437,7 @@ public class ImageController : MonoBehaviour
     private void FinalAnswerPhase()
     {
         EliminateFalseAnswer();
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             //change the team's answer button to the color of the one they chose
             ChangeTeamColor(e.GetNumberAnswer(), e);
@@ -263,12 +448,12 @@ public class ImageController : MonoBehaviour
                 //Check if PlayerControler answered and gave the good answer
                 if (e.GetAnswer().Equals(currAnswer.AnswerText) && currAnswer.IsTrue)
                 {
-                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsctrl.IndexOf(e));
+                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsCtrl.IndexOf(e));
                 }
             }
         }
 
-        for (int i = 0; i < teamsButton.Length; i++)
+        for (int i = 0; i < teamsButton.Count; i++)
         {
             teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
         }
@@ -278,67 +463,9 @@ public class ImageController : MonoBehaviour
         isNextAvailable = true;
     }
 
-    /**
-  * Update score in the data model of the team in parameter
-  */
-    private void UpdateScoreTeams(int number_team)
-    {
-        teamsctrl[number_team - 1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
-    }
-
-    public IEnumerator WaitForRealSeconds(float time)
-    {
-        yield return new WaitForSecondsRealtime(time);
-        Pause();
-    }
-
-    public void Pause()
-    {
-        if (!pauseActivated)
-        {
-            //game paused
-            musicSource.Pause();
-            Time.timeScale = 0f;
-            //disable every controller
-            //dispay "pause activated" message
-            pauseActivated = true;
-        }
-        else
-        {
-            //game already in pause i.e. resume game
-            Time.timeScale = 1f;
-            musicSource.Play();
-            //enable every controller
-            //display "resume game" message
-            pauseActivated = false;
-        }
-    }
-    /**
-   * Launch the buzzer sound of the team in parameter 
-   */
-
-    private void LaunchSoundBuzzer(int number_team)
-    {
-        sfx_buzzers[number_team - 1].Play();
-    }
-
-    /**
-     * Disapear all teams in the scene but the one in parameter 
-     */
-    private void DisapearAllTeamsButOne(int number_team)
-    {
-        foreach (PlayerModel e in teamsctrl)
-        {
-            if (!teamsctrl[number_team - 1].Equals(e))
-            {
-                e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
-            }
-        }
-    }
-
     private void DisableTeam()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.enabled = false;
         }
@@ -350,7 +477,7 @@ public class ImageController : MonoBehaviour
 
     private void EnableTeam()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.enabled = true;
         }
@@ -358,7 +485,7 @@ public class ImageController : MonoBehaviour
 
     private void ResetTeamsAnswered()
     {
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.SetHasAnswered(false);
             e.buzzed = false;
@@ -380,28 +507,35 @@ public class ImageController : MonoBehaviour
         {
             teams_can_buzz[i] = true;
         }
-        foreach (PlayerModel e in teamsctrl)
+        foreach (PlayerModel e in teamsCtrl)
         {
             e.buzzed = false;
         }
     }
+
     /**
-     * Reappear all teams in the scene
+     * Update score in the data model of the team in parameter
      */
-    private void ReappearAllTeams()
+    private void UpdateScoreTeams(int number_team)
     {
-        foreach (PlayerModel e in teamsctrl)
+        teamsCtrl[number_team - 1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
+    }
+    /**
+     * Display the good answer panel in the scene
+     */
+    private void DisplayGoodAnswer()
+    {
+        answers = questions.First().Answers;
+        GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
+        GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
+        GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
+        GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
+        for (int i = 0; i < answers.Length; i++)
         {
-            if (e.buzzed)
+            if (answers[i].IsTrue)
             {
-                e.gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
-
+                answerList[i].GetComponent<CanvasGroup>().alpha = 1;
             }
-            else
-            {
-                e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
-            }
-
         }
     }
 
@@ -438,6 +572,7 @@ public class ImageController : MonoBehaviour
      */
     private IEnumerator DisplayText()
     {
+        visibleCharacterCount = 0;
         while (!goingToNextQuestion)
         {
             answers = questions.First().Answers;
@@ -449,16 +584,85 @@ public class ImageController : MonoBehaviour
         }
     }
 
+    public bool EveryoneAnswered()
+    {
+        bool res = true;
+        foreach (PlayerModel p in teamsCtrl)
+        {
+            if (!p.GetHasAnswered())
+            {
+                res = false;
+            }
+        }
+        return res;
+    }
+
+    public void Pause()
+    {
+        if (!pauseActivated)
+        {
+            //game paused
+            musicSource.Pause();
+            Time.timeScale = 0f;
+            //disable every controller
+            //dispay "pause activated" message
+            pauseActivated = true;
+        }
+        else
+        {
+            //game already in pause i.e. resume game
+            Time.timeScale = 1f;
+            musicSource.Play();
+            //enable every controller
+            //display "resume game" message
+            pauseActivated = false;
+        }
+    }
+    private void TransitionCorrectBuzz()
+    {
+        EliminateFalseAnswer();
+        foreach (PlayerModel e in teamsCtrl)
+        {
+            //change the team's answer button to the color of the one they chose
+            ChangeTeamColor(e.GetNumberAnswer(), e);
+
+            for (int i = 0; i < questions.First().Answers.Length; i++)
+            {
+                currAnswer = questions.First().Answers[i];
+                //Check if PlayerControler answered and gave the good answer
+                if (e.GetAnswer().Equals(currAnswer.AnswerText) && currAnswer.IsTrue)
+                {
+                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsCtrl.IndexOf(e));
+                }
+            }
+        }
+
+        for (int i = 0; i < teamsButton.Count; i++)
+        {
+            teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
+        }
+        GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
+
+        arrow.GetComponent<CanvasGroup>().alpha = 1;
+        isNextAvailable = true;
+    }
+
     public void GoToNextQuestion()
     {
+        if (Time.timeScale == 2f)
+        {
+            Time.timeScale = 1f;
+        }
         goingToNextQuestion = true;
         if (isNextAvailable)
         {
+            musicSource.Stop();
+            musicQuestionIsPlaying = false;
             questions.Remove(DataModel.CurQuestion());
             actualQuestion++;
-
             if (!questions.Any())
             {
+                DataModel.CurTopic().IsAvailable = false;
                 isAnyThemeLeftInCurRound = false;
                 for (int i = 0; i < DataModel.CurRound().Topics.Count; i++)
                 {
@@ -475,11 +679,21 @@ public class ImageController : MonoBehaviour
                 }
                 if (!DataModel.Rounds.Any())
                 {
-                    SceneManager.LoadScene("Ending");
+                    if (!EqualityExist())
+                    {
+                        DataModel.Save(DataModel.CurrentRunningFilename);
+                        SceneManager.LoadScene("Ending");
+                    }
+                    else
+                    {
+                        DataModel.Save(DataModel.CurrentRunningFilename);
+                        SceneManager.LoadScene("EditScores");
+                    }
                 }
                 //if it is the last question, return to Topics
                 else
                 {
+                    DataModel.Save(DataModel.CurrentRunningFilename);
                     SceneManager.LoadScene("Topics");
                 }
             }
@@ -493,8 +707,32 @@ public class ImageController : MonoBehaviour
 
                 timerctrl.ResetTimer();
 
+                DataModel.Save(DataModel.CurrentRunningFilename);
                 RunningQuestions();
             }
+        }
+    }
+    /**
+     * 
+     */
+    public bool EqualityExist()
+    {
+        int count = 0;
+        foreach (PlayerModel p in teamsCtrl)
+        {
+            if (DataModel.BestScore() == DataModel.Scores[p.teamnumber - 1])
+            {
+                count++;
+            }
+        }
+
+        if (count >= 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

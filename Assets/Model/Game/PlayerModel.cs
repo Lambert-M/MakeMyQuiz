@@ -23,7 +23,8 @@ public class PlayerModel : MonoBehaviour
     public TextMeshProUGUI answer3;
     public TextMeshProUGUI answer4;
     public GameObject answerPanel;
-    public QuestionController questioncontoller;
+    public QuestionController questioncontroller;
+    public ImageController imagecontroller;
     public AudioSource sfx_answer;
 
     // Use this for initialization
@@ -33,13 +34,14 @@ public class PlayerModel : MonoBehaviour
         answer = "";
         hasAnswered = false;
         buzzed = false;
-        questioncontoller = GameObject.Find("Canvas").GetComponent<QuestionController>();
+        questioncontroller = GameObject.Find("Canvas").GetComponent<QuestionController>();
+        imagecontroller = GameObject.Find("Canvas").GetComponent<ImageController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ( SceneManager.GetActiveScene().name == "Questions" || SceneManager.GetActiveScene().name == "Images"  ) {
+        if ( SceneManager.GetActiveScene().name == "Questions") {
             
             t = GameObject.Find("Timer").GetComponent<Timer>();
             Image img = answerPanel.GetComponent<Image>();
@@ -107,8 +109,8 @@ public class PlayerModel : MonoBehaviour
                 else if (GameObject.Find("Canvas").GetComponent<QuestionController>().teams_can_buzz[teamnumber-1] && Input.GetButtonDown("team" + teamnumber + "buzz") )
                 {
                    
-                    questioncontoller.buzz_event = true;
-                    questioncontoller.number_team_buzz = teamnumber;
+                    questioncontroller.buzz_event = true;
+                    questioncontroller.number_team_buzz = teamnumber;
                     hasAnswered = true;
                 }
             }
@@ -133,6 +135,81 @@ public class PlayerModel : MonoBehaviour
                 answer = answer2.text;
                 hasAnswered = true;
                 sfx_answer.Play();
+            }
+        } else if (SceneManager.GetActiveScene().name == "Images")
+        {
+
+            t = GameObject.Find("Timer").GetComponent<Timer>();
+            Image img = answerPanel.GetComponent<Image>();
+            if (!hasAnswered)
+            {
+
+                ans = -1;
+
+                if (t.GetCurrentTimeValue() >= 12 && t.GetCurrentTimeValue() < 15)
+                {
+                    roundPoint = 4;
+                }
+
+                else if (t.GetCurrentTimeValue() >= 8 && t.GetCurrentTimeValue() < 12)
+                {
+                    roundPoint = 3;
+                }
+
+                else if (t.GetCurrentTimeValue() >= 4 && t.GetCurrentTimeValue() < 8)
+                {
+                    roundPoint = 2;
+                }
+
+                else if (t.GetCurrentTimeValue() >= 0 && t.GetCurrentTimeValue() < 4)
+                {
+                    roundPoint = 1;
+                }
+
+                if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
+                {
+
+                    ans = 1;
+                    img.color = new Color(0, 0, 0, 1);
+                    answer = answer1.text;
+                    hasAnswered = true;
+                    sfx_answer.Play();
+
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
+                {
+
+                    ans = 2;
+                    img.color = new Color(0, 0, 0, 1);
+                    answer = answer2.text;
+                    hasAnswered = true;
+                    sfx_answer.Play();
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "C") && GameObject.Find("Answer Panel 3").GetComponent<CanvasGroup>().alpha == 1)
+                {
+
+                    ans = 3;
+                    img.color = new Color(0, 0, 0, 1);
+                    hasAnswered = true;
+                    answer = answer3.text;
+                    sfx_answer.Play();
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "D") && GameObject.Find("Answer Panel 4").GetComponent<CanvasGroup>().alpha == 1)
+                {
+
+                    ans = 4;
+                    img.color = new Color(0, 0, 0, 1);
+                    hasAnswered = true;
+                    answer = answer4.text;
+                    sfx_answer.Play();
+                }
+                else if (GameObject.Find("Canvas").GetComponent<ImageController>().teams_can_buzz[teamnumber - 1] && Input.GetButtonDown("team" + teamnumber + "buzz"))
+                {
+
+                    imagecontroller.buzz_event = true;
+                    imagecontroller.number_team_buzz = teamnumber;
+                    hasAnswered = true;
+                }
             }
         }
     }
