@@ -10,6 +10,7 @@ public class QuestionController : MonoBehaviour
 {
 
     //Variables
+    public bool[] teams_can_buzz;
     public int number_team_buzz;
     public bool buzz_event;
     private bool buzz_answer_confirm;
@@ -124,6 +125,7 @@ public class QuestionController : MonoBehaviour
         }
         localpath = pathsrc + "/Sounds";
 
+        teams_can_buzz = new bool[teamsCtrl.Count];
         buzz_event = false;
         buzz_answer_confirm = false;
         goingToNextQuestion = false;
@@ -181,7 +183,9 @@ public class QuestionController : MonoBehaviour
                 GameObject.Find("Joker " + (i + 1)).GetComponent<CanvasGroup>().alpha = 1;
             }
         }
-        isBuzzActivate = DataModel.Rounds[DataModel.IroundCur - 1].IsBuzzRound;
+ 
+        isBuzzActivate = DataModel.CurRound().IsBuzzRound;
+    
         RunningQuestions();
     }
     
@@ -195,7 +199,8 @@ public class QuestionController : MonoBehaviour
         
         if (isBuzzActivate && buzz_event && !teamsCtrl[number_team_buzz - 1].buzzed)
         {
-  
+            DisableTeam();
+            
             if (!pauseActivated)
             {
                 DisapearAllTeamsButOne(number_team_buzz);
@@ -234,6 +239,7 @@ public class QuestionController : MonoBehaviour
                 teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
                 teamsCtrl[number_team_buzz - 1].buzzed = true;
                 buzz_event = false;
+                EnableTeam();
             }
         }
         else 
@@ -292,7 +298,7 @@ public class QuestionController : MonoBehaviour
     {
         if (isBuzzActivate)
         {
-           
+            Debug.Log("this is a buzz round");
             buzz_event = false;
             EnableTeam();
             EnableAllBuzzers();
@@ -301,6 +307,7 @@ public class QuestionController : MonoBehaviour
         }
         else
         {
+            Debug.Log("this is not a buzz round");
             buzz_event = false;
             EnableTeam();
             ReappearAllTeams();
@@ -417,6 +424,7 @@ public class QuestionController : MonoBehaviour
      */
     private void RevealAnswers()
     {
+        DisableAllBuzzers();
         foreach (GameObject p in answerList)
         {
             p.GetComponent<CanvasGroup>().alpha = 1;
@@ -505,18 +513,22 @@ public class QuestionController : MonoBehaviour
 
     private void DisableAllBuzzers()
     {
-        foreach (PlayerModel e in teamsCtrl)
+         for ( int i = 0; i < teams_can_buzz.Length; i++)
         {
-            e.SetCanBuzz(false);
-        
+            teams_can_buzz[i] = false;
         }
     }
 
     private void EnableAllBuzzers()
     {
+
+        for (int i = 0; i < teams_can_buzz.Length; i++)
+        {
+            Debug.Log("par ici");
+            teams_can_buzz[i] = true;
+        }
         foreach (PlayerModel e in teamsCtrl)
         {
-            e.SetCanBuzz(true);
             e.buzzed = false;
         }
     }

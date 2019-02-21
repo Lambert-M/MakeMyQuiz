@@ -301,7 +301,6 @@ public class DataModel : MonoBehaviour
             }
 
             RoundData rd = new RoundData(dataJson["Rounds"].AsArray[i]["Type"].Value, tdList, dataJson["Rounds"].AsArray[i]["IsBuzzActivate"].AsBool);
-          
 
             rdList.Add(rd);
         }

@@ -14,7 +14,6 @@ public class PlayerModel : MonoBehaviour
     protected string answer;
     public bool buzzed;
     private bool hasAnswered;
-    private bool canBuzz;
     private int ans = -1;
     public int teamnumber;
     private int roundPoint;
@@ -34,14 +33,12 @@ public class PlayerModel : MonoBehaviour
         answer = "";
         hasAnswered = false;
         buzzed = false;
-        canBuzz = true;
         questioncontoller = GameObject.Find("Canvas").GetComponent<QuestionController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("can buzz dans l'update  " +canBuzz);
         if ( SceneManager.GetActiveScene().name == "Questions" || SceneManager.GetActiveScene().name == "Images"  ) {
             
             t = GameObject.Find("Timer").GetComponent<Timer>();
@@ -107,10 +104,9 @@ public class PlayerModel : MonoBehaviour
                     answer = answer4.text;
                     sfx_answer.Play();
                 }
-                else if (canBuzz && Input.GetButtonDown("team" + teamnumber + "buzz") )
+                else if (GameObject.Find("Canvas").GetComponent<QuestionController>().teams_can_buzz[teamnumber-1] && Input.GetButtonDown("team" + teamnumber + "buzz") )
                 {
                    
-                    Debug.Log("canbuzz "+canBuzz);
                     questioncontoller.buzz_event = true;
                     questioncontoller.number_team_buzz = teamnumber;
                     hasAnswered = true;
@@ -150,17 +146,7 @@ public class PlayerModel : MonoBehaviour
         return "";
     }
 
-    public bool GetCanBuzz()
-    {
-        return canBuzz;
-    }
 
-    public void SetCanBuzz(bool b)
-    {
-        Debug.Log("canbuzz avant" + canBuzz);
-        canBuzz = b;
-        Debug.Log("canbuzz apres" + canBuzz);
-    }
 
     public void ActivateJoker()
     {

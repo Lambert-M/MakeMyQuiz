@@ -1,6 +1,6 @@
 {
 "Quizname":"Test",
-"CurTopicName":"",
+"CurTopicName":"Jeux",
 "RoundNumber":1,
 "IroundCur":2,
 "ItopicCur":0,
@@ -30,30 +30,6 @@
 "Name":"Jeux",
 "IsAvailable":true,
 "Questions":[
-{
-"MusicPath":"06. Vitriolic a stroke.wav",
-"StartTrack":0,
-"Volume":1,
-"Fade":true,
-"Answers":[
-{
-"AnswerText":"Baten Kaitos",
-"IsTrue":true
-},
-{
-"AnswerText":"Tales of Zestiria",
-"IsTrue":false
-},
-{
-"AnswerText":"Eternal Sonata",
-"IsTrue":false
-},
-{
-"AnswerText":"Tales of the Abyss",
-"IsTrue":false
-}
-]
-},
 {
 "MusicPath":"07 - Vamo' Alla Flamenco.wav",
 "StartTrack":0,
