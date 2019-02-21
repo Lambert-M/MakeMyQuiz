@@ -150,7 +150,8 @@ public class TopicController : MonoBehaviour {
          *  TopicMusic setup
          */
         topicSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-        topicMusic = (AudioClip)Resources.Load("Sounds/" + DataModel.TopicMusicName);
+        int music_index = Random.Range(1, 6);
+        topicMusic = (AudioClip)Resources.Load("Sounds/" + DataModel.TopicMusicName + music_index);
         topicSource.clip = topicMusic;
         topicSource.loop = true;
         topicSource.volume = 0.4f;

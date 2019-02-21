@@ -44,10 +44,10 @@ public class DataModel : MonoBehaviour
         QuizName = "Quiz du fun";
         CurTopicName = "";
         BackgroundName = "wallpaper1";
-        IntroMusicName = "intro1";
+        IntroMusicName = "intro";
         OutroMusicName = "outro1";
         QuestionMusicName = "question1";
-        TopicMusicName = "topic1";
+        TopicMusicName = "topic";
 
         RoundNumber = 1;
         IroundCur = 0;
@@ -313,10 +313,10 @@ public class DataModel : MonoBehaviour
         QuizName = "Quiz du fun";
         CurTopicName = "";
         BackgroundName = "wallpaper1";
-        IntroMusicName = "intro1";
+        IntroMusicName = "intro";
         OutroMusicName = "outro1";
-        QuestionMusicName = "question1";
-        TopicMusicName = "topic1";
+        QuestionMusicName = "question";
+        TopicMusicName = "topic";
 
         RoundNumber = 1;
         IroundCur = 0;

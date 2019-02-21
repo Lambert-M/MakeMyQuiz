@@ -75,8 +75,9 @@ public class IntroController : MonoBehaviour
         /*
          * IntroMusic setup
          */
+        int music_index = Random.Range(1, 5);
         introSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
-        introMusic = (AudioClip)Resources.Load("Sounds/"+DataModel.IntroMusicName);
+        introMusic = (AudioClip)Resources.Load("Sounds/"+DataModel.IntroMusicName+music_index);
         introSource.clip = introMusic;
         introSource.loop = true;
         introSource.volume = 0.4f;

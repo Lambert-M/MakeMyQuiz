@@ -298,7 +298,6 @@ public class QuestionController : MonoBehaviour
     {
         if (isBuzzActivate)
         {
-            Debug.Log("this is a buzz round");
             buzz_event = false;
             EnableTeam();
             EnableAllBuzzers();
@@ -307,7 +306,6 @@ public class QuestionController : MonoBehaviour
         }
         else
         {
-            Debug.Log("this is not a buzz round");
             buzz_event = false;
             EnableTeam();
             ReappearAllTeams();
@@ -351,7 +349,8 @@ public class QuestionController : MonoBehaviour
         }
         else
         {
-            music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName);
+            int music_index = Random.Range(1, 4);
+            music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName+music_index);
             musicSource.clip = music;
           
         }
@@ -524,7 +523,6 @@ public class QuestionController : MonoBehaviour
 
         for (int i = 0; i < teams_can_buzz.Length; i++)
         {
-            Debug.Log("par ici");
             teams_can_buzz[i] = true;
         }
         foreach (PlayerModel e in teamsCtrl)
