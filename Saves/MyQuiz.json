@@ -1,0 +1,64 @@
+{
+"Quizname":"MyQuiz",
+"CurTopicName":"",
+"RoundNumber":1,
+"IroundCur":0,
+"ItopicCur":0,
+"IquestionCur":0,
+"Score0":0,
+"Joker0":false,
+"Score1":0,
+"Joker1":false,
+"Score2":0,
+"Joker2":false,
+"Score3":0,
+"Joker3":false,
+"Score4":0,
+"Joker4":false,
+"Score5":0,
+"Joker5":false,
+"Score6":0,
+"Joker6":false,
+"Score7":0,
+"Joker7":false,
+"Rounds":[
+{
+"Type":"VraiFaux",
+"IsBuzzActivate":false,
+"Topics":[
+{
+"Name":"Thème",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"C'est une question",
+"Answers":[
+{
+"AnswerText":"Réponse 1",
+"IsTrue":true
+},
+{
+"AnswerText":"Réponse 2",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"C'est une question encore",
+"Answers":[
+{
+"AnswerText":"Réponse 3",
+"IsTrue":false
+},
+{
+"AnswerText":"Réponse 4",
+"IsTrue":true
+}
+]
+}
+]
+}
+]
+}
+]
+}

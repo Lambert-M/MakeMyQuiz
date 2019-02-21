@@ -42,6 +42,7 @@
 		{"key":"topic_name","value":"Nom du questionnaire - "},
 		{"key":"blindtest_name","value":"Musique"},
 		{"key":"MCQ_name","value":"QCM"},
+		{"key":"TF_name","value":"VraiFaux"},
 		{"key":"correct_answer","value":"Bonne réponse"},
 		{"key":"round_name","value":"Manche"},
 		{"key":"enter_topicname","value":"Entrez le nom du thème :"},

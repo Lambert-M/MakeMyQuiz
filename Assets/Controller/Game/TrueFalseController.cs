@@ -6,41 +6,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class QuestionController : MonoBehaviour
+public class TrueFalseController : MonoBehaviour
 {
-
     //Variables
-    public int number_team_buzz;
-    public bool buzz_event;
-    private bool buzz_answer_confirm;
     private bool isAnyThemeLeftInCurRound;
     private bool pauseActivated;
     private bool isNextAvailable;
-    private bool musicQuestionIsPlaying;
     private bool resetvol;
-    private bool isBuzzActivate;
     private bool goingToNextQuestion;
     private int visibleCharacterCount;
     private int numberOfCharacters;
     private int numberOfQuestions;
     private int actualQuestion;
     private string localpath;
-    private float question_length_to_time; // A AJOUTER DANS LE DATA MODEL POUR AJUSTER LES PLAYER MODEL ENSUITE
+    private float question_length_to_time; 
     //Objects
     private AnswerData currAnswer;
     private Timer timerctrl;
     private TextMeshProUGUI questionText;
     private AudioSource musicSource;
     private AudioClip music;
-    private GameObject ans1, ans2, ans3, ans4;
+    private GameObject ans1, ans2;
     private GameObject arrow;
     private GameObject team;
     private GameObject teamContainer1;
     private GameObject teamContainer2;
     private Color c;
-    public AudioSource[] sfx_buzzers;
-    public AudioSource sfx_buzzer_win;
-    public AudioSource sfx_buzzer_defeat;
     //Arrays
     private AnswerData[] answers;
     //Lists
@@ -58,8 +49,6 @@ public class QuestionController : MonoBehaviour
     {
         ans1 = GameObject.Find("Answer 1");
         ans2 = GameObject.Find("Answer 2");
-        ans3 = GameObject.Find("Answer 3");
-        ans4 = GameObject.Find("Answer 4");
         teamContainer1 = GameObject.Find("TeamContainer1");
         teamContainer2 = GameObject.Find("TeamContainer2");
         for (int i = 0; i < DataModel.NumberOfTeams; i++)
@@ -93,8 +82,6 @@ public class QuestionController : MonoBehaviour
             team.GetComponentInChildren<PlayerModel>().teamnumber = (i + 1);
             team.GetComponentInChildren<PlayerModel>().answer1 = ans1.GetComponent<TextMeshProUGUI>();
             team.GetComponentInChildren<PlayerModel>().answer2 = ans2.GetComponent<TextMeshProUGUI>();
-            team.GetComponentInChildren<PlayerModel>().answer3 = ans3.GetComponent<TextMeshProUGUI>();
-            team.GetComponentInChildren<PlayerModel>().answer4 = ans4.GetComponent<TextMeshProUGUI>();
             team.GetComponentInChildren<PlayerModel>().sfx_answer = GameObject.Find("answer_soundeffecr").GetComponent<AudioSource>();
             foreach (Image x in team.GetComponentsInChildren<Image>())
             {
@@ -112,7 +99,7 @@ public class QuestionController : MonoBehaviour
         {
             go.GetComponent<CanvasGroup>().alpha = 1;
         }
-        
+
         /*
          * Initialisation of gameobjects and variables
          */
@@ -123,9 +110,7 @@ public class QuestionController : MonoBehaviour
             pathsrc += '/' + datapath[i];
         }
         localpath = pathsrc + "/Sounds";
-
-        buzz_event = false;
-        buzz_answer_confirm = false;
+        
         goingToNextQuestion = false;
         pauseActivated = false;
         actualQuestion = 1;
@@ -156,15 +141,15 @@ public class QuestionController : MonoBehaviour
             teamlist.Add(go);
         }
         teamlist = teamlist.OrderBy(go => go.name).ToList();
-        
+
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("answer"))
         {
             answerList.Add(go);
         }
         answerList = answerList.OrderBy(go => go.name).ToList();
-        
+
         timerctrl = GameObject.Find("Timer").GetComponent<Timer>();
-        
+
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("realtimer"))
         {
             timerPanelList.Add(e);
@@ -181,10 +166,10 @@ public class QuestionController : MonoBehaviour
                 GameObject.Find("Joker " + (i + 1)).GetComponent<CanvasGroup>().alpha = 1;
             }
         }
-        isBuzzActivate = DataModel.Rounds[DataModel.IroundCur - 1].IsBuzzRound;
+        
         RunningQuestions();
     }
-    
+
     void Update()
     {
 
@@ -192,91 +177,16 @@ public class QuestionController : MonoBehaviour
         {
             Time.timeScale = 2f;
         }
-        
-        if (isBuzzActivate && buzz_event && !teamsCtrl[number_team_buzz - 1].buzzed)
+        // Pause/Resume the game
+        if (Input.GetKeyUp(DataModel.Pause))
         {
-  
-            if (!pauseActivated)
-            {
-                DisapearAllTeamsButOne(number_team_buzz);
-                Pause();
-                LaunchSoundBuzzer(number_team_buzz);
-            }
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Pause();
-                CancelInvoke();
-                sfx_buzzer_win.Play();
-                buzz_answer_confirm = true;
-                DataModel.Scores[number_team_buzz - 1] += 5;
-                if (DataModel.Jokers[number_team_buzz])
-                {
-                    DataModel.Scores[number_team_buzz - 1] += 2;
-                }
-                buzz_event = false;
-                isNextAvailable = true;
-                ReappearAllTeams();
-                arrow.GetComponent<CanvasGroup>().alpha = 1;
-                GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
-                UpdateScoreTeams(number_team_buzz);
-                DisplayQuestion();
-                DisplayGoodAnswer();
-                musicSource.Stop();
-
-            }
-            else if (Input.GetKeyDown(KeyCode.N))
-            {
-                sfx_buzzer_defeat.Play();
-                StartCoroutine(WaitForRealSeconds(1.57f));
-                ReappearAllTeams();
-                teamsCtrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
-                buzz_answer_confirm = true;
-                teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
-                teamsCtrl[number_team_buzz - 1].buzzed = true;
-                buzz_event = false;
-            }
+            Pause();
         }
-        else 
+
+        //go to next question
+        if (Input.GetKeyDown(DataModel.Next))
         {
-            // Pause/Resume the game
-            if (Input.GetKeyUp(DataModel.Pause))
-            {
-                Pause();
-            }
-
-            //go to next question
-            if (Input.GetKeyDown(DataModel.Next))
-            {
-                GoToNextQuestion();
-            }
-    
-            if (musicQuestionIsPlaying)
-            {
-                // Make the sound fade in
-                MusicQuestion musicQ = (MusicQuestion)DataModel.CurQuestion();
-                if (!resetvol && musicQ.Fade)
-                {
-                    musicSource.volume = 0;
-                    resetvol = true;
-                }
-
-                if (musicQ.Fade && musicQuestionIsPlaying)
-                {
-                    if (musicSource.volume < musicQ.Volume)
-                    {
-
-                        musicSource.volume = musicSource.volume + (Time.deltaTime / 8);
-                    }
-                }
-
-                if (timerctrl.GetCurrentTimeValue() < 2f)
-                {
-                    if (musicSource.volume > 0)
-                    {
-                        musicSource.volume -= musicQ.Volume * Time.deltaTime / 2f;
-                    }
-                }
-            }
+            GoToNextQuestion();
         }
     }
 
@@ -287,26 +197,13 @@ public class QuestionController : MonoBehaviour
         Pause();
     }
 
-  
+
     private void RunningQuestions()
     {
-        if (isBuzzActivate)
-        {
-           
-            buzz_event = false;
-            EnableTeam();
-            EnableAllBuzzers();
-            ReappearAllTeams();
-            ResetTeamsAnswered();
-        }
-        else
-        {
-            buzz_event = false;
-            EnableTeam();
-            ReappearAllTeams();
-            ResetTeamsAnswered();
-            DisableAllBuzzers();
-        }
+        EnableTeam();
+        ReappearAllTeams();
+        ResetTeamsAnswered();
+
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
@@ -324,73 +221,20 @@ public class QuestionController : MonoBehaviour
         isNextAvailable = false;
 
         GameObject.Find("QuestionCounter").GetComponent<TextMeshProUGUI>().text = "Question " + actualQuestion + " / " + numberOfQuestions;
-
-        // Either this is a MusicQuestion and we musicQuestionIsPlaying its music or we musicQuestionIsPlaying the basic question music
-        if (DataModel.CurQuestion() is MusicQuestion)
-        {
-            MusicQuestion musicQ = (MusicQuestion)DataModel.CurQuestion();
-            var x = new WWW("file:///"+ localpath +'/'+ musicQ.MusicPath);
-            while (!x.isDone)
-            {
-
-            }
-            musicSource.clip = x.GetAudioClip();
-            musicSource.time = musicQ.StartTrack;
-            if (!musicQ.Fade)
-            {
-                musicSource.volume = musicQ.Volume;
-            }
-            question_length_to_time += 0.5f;
-        }
-        else
-        {
-            music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName);
-            musicSource.clip = music;
-          
-        }
+        
+        music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName);
+        musicSource.clip = music;
         StartCoroutine(DisplayText());
 
         foreach (PlayerModel e in teamsCtrl)
         {
             ChangeTeamColor(0, e);
-            e.buzzed = false;
-        }
-
-        if (DataModel.CurQuestion() is MusicQuestion)
-        {
-            musicQuestionIsPlaying = true;
         }
         musicSource.Play();
 
-        // After 10 seconds, the timer and answers appears, 7 seconds after that a false answer disappears, again 4 seconds after and at 25 sec teams can'musicQ answer
-        // anymore. Finally at 28 seconds, the true answer is revealed and points are given
         Invoke("RevealAnswers", 5 + question_length_to_time);
-        Invoke("EliminateFalseAnswer", 12 + question_length_to_time);
-        Invoke("EliminateFalseAnswer", 16 + question_length_to_time);
         Invoke("DisableTeam", 20 + question_length_to_time);
         Invoke("FinalAnswerPhase", 23 + question_length_to_time);
-    }
-
-    /**
-     * Launch the buzzer sound of the team in parameter 
-     */
-     
-    private void LaunchSoundBuzzer(int number_team)
-    {
-        sfx_buzzers[number_team - 1].Play();
-    }
-
-    /**
-     * Disapear all teams in the scene but the one in parameter 
-     */
-    private void DisapearAllTeamsButOne(int number_team)
-    {
-        foreach (PlayerModel e in teamsCtrl)
-        {
-            if (!teamsCtrl[number_team - 1].Equals(e)) {
-                e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
-            }
-        }
     }
 
     /**
@@ -400,16 +244,7 @@ public class QuestionController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsCtrl)
         {
-            if (e.buzzed)
-            {
-                e.gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
-
-            }
-            else
-            {
-                e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
-            }
-            
+            e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
         }
     }
     /**
@@ -426,18 +261,18 @@ public class QuestionController : MonoBehaviour
             e.GetComponent<CanvasGroup>().alpha = 1;
         }
         timerctrl.tickingDown = true;
-     
+        EnableTeam();
     }
-    
+
     /**
      * Eliminate a random false answer of the scene
      */
     private void EliminateFalseAnswer()
     {
-        int randomIndex = UnityEngine.Random.Range(0, 4);
+        int randomIndex = UnityEngine.Random.Range(0, 2);
         while (answers[randomIndex].IsTrue || answerList[randomIndex].GetComponent<CanvasGroup>().alpha == 0)
         {
-            randomIndex = UnityEngine.Random.Range(0, 4);
+            randomIndex = UnityEngine.Random.Range(0, 2);
         }
         answerList[randomIndex].GetComponent<CanvasGroup>().alpha = 0;
     }
@@ -463,7 +298,7 @@ public class QuestionController : MonoBehaviour
                 }
             }
         }
-        
+
         for (int i = 0; i < teamsButton.Count; i++)
         {
             teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
@@ -480,10 +315,6 @@ public class QuestionController : MonoBehaviour
         {
             e.enabled = false;
         }
-        if (DataModel.CurQuestion() is MusicQuestion)
-        {
-            musicSource.Stop();
-        }
     }
 
     private void EnableTeam()
@@ -499,59 +330,15 @@ public class QuestionController : MonoBehaviour
         foreach (PlayerModel e in teamsCtrl)
         {
             e.SetHasAnswered(false);
-            e.buzzed = false;
-        }
-    }
-
-    private void DisableAllBuzzers()
-    {
-        foreach (PlayerModel e in teamsCtrl)
-        {
-            e.SetCanBuzz(false);
-        
-        }
-    }
-
-    private void EnableAllBuzzers()
-    {
-        foreach (PlayerModel e in teamsCtrl)
-        {
-            e.SetCanBuzz(true);
-            e.buzzed = false;
         }
     }
 
     /**
      * Update score in the data model of the team in parameter
      */
-   private void UpdateScoreTeams(int number_team)
+    private void UpdateScoreTeams(int number_team)
     {
-          teamsCtrl[number_team-1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
-    }
-    /**
-     * Display the question in the scene
-     */
-    private void DisplayQuestion()
-    {
-        questionText.maxVisibleCharacters = questionText.textInfo.characterCount;
-    }
-    /**
-     * Display the good answer panel in the scene
-     */ 
-    private void DisplayGoodAnswer()
-    {
-        answers = questions.First().Answers;
-        GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
-        GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
-        GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
-        GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
-        for(int i = 0; i< answers.Length; i++)
-        {
-            if (answers[i].IsTrue)
-            {
-                answerList[i].GetComponent<CanvasGroup>().alpha = 1;
-            }
-        }
+        teamsCtrl[number_team - 1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
     }
 
     /**
@@ -590,36 +377,25 @@ public class QuestionController : MonoBehaviour
         visibleCharacterCount = 0;
         while (!goingToNextQuestion)
         {
-           
-            if (DataModel.CurQuestion() is TextQuestion)
-            {
+            TrueFalseQuestion texteQ = (TrueFalseQuestion)DataModel.CurQuestion();
+            questionText.text = texteQ.Question;
                 
-                TextQuestion texteQ = (TextQuestion)DataModel.CurQuestion();
-                questionText.text = texteQ.Question;
+            question_length_to_time = questionText.text.Length * 0.035f;
 
-                //formule de merde a changer
-                question_length_to_time = questionText.text.Length * 0.035f;
-            }
-            else
-            {
-                questionText.text = DataModel.TextToUse["music_display"] + actualQuestion;
-            }
             questionText.maxVisibleCharacters = visibleCharacterCount;
             numberOfCharacters = questionText.textInfo.characterCount;
-            
+
             while (visibleCharacterCount <= numberOfCharacters)
             {
                 visibleCharacterCount++;
                 questionText.maxVisibleCharacters = visibleCharacterCount;
                 yield return new WaitForSeconds(0.07f);
             }
-           
+
 
             answers = questions.First().Answers;
             GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
             GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
-            GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
-            GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
             yield return null;
         }
     }
@@ -627,7 +403,7 @@ public class QuestionController : MonoBehaviour
     public bool EveryoneAnswered()
     {
         bool res = true;
-        foreach(PlayerModel p in teamsCtrl)
+        foreach (PlayerModel p in teamsCtrl)
         {
             if (!p.GetHasAnswered())
             {
@@ -658,34 +434,6 @@ public class QuestionController : MonoBehaviour
             pauseActivated = false;
         }
     }
-    private void TransitionCorrectBuzz()
-    {
-        EliminateFalseAnswer();
-        foreach (PlayerModel e in teamsCtrl)
-        {
-            //change the team's answer button to the color of the one they chose
-            ChangeTeamColor(e.GetNumberAnswer(), e);
-
-            for (int i = 0; i < questions.First().Answers.Length; i++)
-            {
-                currAnswer = questions.First().Answers[i];
-                //Check if PlayerControler answered and gave the good answer
-                if (e.GetAnswer().Equals(currAnswer.AnswerText) && currAnswer.IsTrue)
-                {
-                    DataModel.AddScoreToTeam(e.GetCurrentRoundPoints(), teamsCtrl.IndexOf(e));
-                }
-            }
-        }
-
-        for (int i = 0; i < teamsButton.Count; i++)
-        {
-            teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
-        }
-        GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
-
-        arrow.GetComponent<CanvasGroup>().alpha = 1;
-        isNextAvailable = true;
-    }
 
     public void GoToNextQuestion()
     {
@@ -697,7 +445,6 @@ public class QuestionController : MonoBehaviour
         if (isNextAvailable)
         {
             musicSource.Stop();
-            musicQuestionIsPlaying = false;
             questions.Remove(DataModel.CurQuestion());
             actualQuestion++;
             if (!questions.Any())
@@ -710,7 +457,7 @@ public class QuestionController : MonoBehaviour
                     {
                         isAnyThemeLeftInCurRound = true;
                     }
-                } 
+                }
                 // if there are no more questions or topics, go to next round
                 if (!isAnyThemeLeftInCurRound)
                 {

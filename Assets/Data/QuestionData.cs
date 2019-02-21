@@ -44,3 +44,14 @@ public class TextQuestion : QuestionData
         Answers = answers;
     }
 }
+
+public class TrueFalseQuestion : QuestionData
+{
+    public string Question { get; set; }
+
+    public TrueFalseQuestion(string question, AnswerData[] answers)
+    {
+        Question = question;
+        Answers = answers;
+    }
+}

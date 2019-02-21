@@ -102,6 +102,8 @@ public class EditTopicController : MonoBehaviour {
         DataModel.ItopicCur = topicnum-1; //update the index of current topic
         switch(DataModel.Rounds[DataModel.IroundCur].Type)
         {
+            case "TrueFalse": SceneManager.LoadScene("ETrueFalse"); break;
+            case "VraiFaux": SceneManager.LoadScene("ETrueFalse"); break;
             case "QCM": SceneManager.LoadScene("ETextQuestion"); break;
             case "MCQ": SceneManager.LoadScene("ETextQuestion"); break;
             case "Blind test": SceneManager.LoadScene("EBlindtest"); break;

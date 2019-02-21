@@ -309,13 +309,29 @@ public class TopicController : MonoBehaviour {
         selectedButtonName = selectedButton.GetComponentInChildren<TextMeshProUGUI>().text;
         DataModel.CurTopicName = selectedButtonName;
         topicSource.Stop();
-        if (DataModel.CurRound().Type.StartsWith("Image"))
+        switch (DataModel.CurRound().Type)
         {
-            SceneManager.LoadScene("Images");
-        }
-        else
-        {
-            SceneManager.LoadScene("Questions");
+            case "TrueFalse":
+                SceneManager.LoadScene("TrueFalse");
+                break;
+            case "VraiFaux":
+                SceneManager.LoadScene("TrueFalse");
+                break;
+            case "QCM":
+                SceneManager.LoadScene("Questions");
+                break;
+            case "MCQ":
+                SceneManager.LoadScene("Questions");
+                break;
+            case "Blind test":
+                SceneManager.LoadScene("Questions");
+                break;
+            case "Musique":
+                SceneManager.LoadScene("Questions");
+                break;
+            case "Image":
+                SceneManager.LoadScene("Images");
+                break;
         }
     }
 
@@ -349,6 +365,8 @@ public class TopicController : MonoBehaviour {
     {
         switch (DataModel.CurRound().Type)
         {
+            case "TrueFalse": return DataModel.TextToUse["TF_name"];
+            case "VraiFaux": return DataModel.TextToUse["TF_name"];
             case "QCM": return DataModel.TextToUse["MCQ_name"];
             case "MCQ": return DataModel.TextToUse["MCQ_name"];
             case "Blind test": return DataModel.TextToUse["blindtest_name"];

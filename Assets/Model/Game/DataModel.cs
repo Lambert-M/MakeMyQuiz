@@ -164,10 +164,15 @@ public class DataModel : MonoBehaviour
                             TextQuestion tq = (TextQuestion)qd;
                             questionJson.Add("Question", tq.Question);
                             break;
+                        case "TrueFalseQuestion":
+                            TrueFalseQuestion tfq = (TrueFalseQuestion)qd;
+                            questionJson.Add("Question", tfq.Question);
+                            break;
                         default: Debug.LogError("Type de question non-reconnu"); break;
                     }
 
                     JSONArray answersJsonArray = new JSONArray();
+
                     foreach (AnswerData ad in qd.Answers)
                     {
                         JSONObject answerJson = new JSONObject();
@@ -231,8 +236,8 @@ public class DataModel : MonoBehaviour
                 List<QuestionData> qdList = new List<QuestionData>();
                 for(int k = 0; k < dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray.Count; k++)
                 {
-                    AnswerData[] adTab = new AnswerData[4];
-                    for (int l = 0; l < 4; l++)
+                    AnswerData[] adTab = new AnswerData[dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray[k]["Answers"].AsArray.Count];
+                    for (int l = 0; l < adTab.Length; l++)
                     {
                         AnswerData ad = new AnswerData(dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray[k]["Answers"].AsArray[l]["AnswerText"].Value,
                             dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray[k]["Answers"].AsArray[l]["IsTrue"].AsBool);
@@ -272,6 +277,16 @@ public class DataModel : MonoBehaviour
                             TextQuestion tq2 = new TextQuestion(dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray[k]["Question"].Value,
                                 adTab);
                             qdList.Add((QuestionData)tq2);
+                            break;
+                        case "TrueFalse":
+                            TrueFalseQuestion tf = new TrueFalseQuestion(dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray[k]["Question"].Value,
+                                adTab);
+                            qdList.Add((QuestionData)tf);
+                            break;
+                        case "VraiFaux":
+                            TrueFalseQuestion tf2 = new TrueFalseQuestion(dataJson["Rounds"].AsArray[i]["Topics"].AsArray[j]["Questions"].AsArray[k]["Question"].Value,
+                                adTab);
+                            qdList.Add((QuestionData)tf2);
                             break;
                         default:
                             Debug.LogError("Type de question non-reconnu");

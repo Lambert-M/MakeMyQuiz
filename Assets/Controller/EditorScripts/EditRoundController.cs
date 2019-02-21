@@ -47,6 +47,7 @@ public class EditRoundController : MonoBehaviour
         round.Find("EditRound").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_edit"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[1].text = DataModel.TextToUse["blindtest_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[2].text = DataModel.TextToUse["MCQ_name"];
+        round.Find("Qtype").GetComponent<TMP_Dropdown>().options[3].text = DataModel.TextToUse["TF_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().interactable = false;
         //update texts
         GameObject.Find("NumberRound").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
@@ -76,6 +77,7 @@ public class EditRoundController : MonoBehaviour
         GameObject.Find("NumberRound").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[1].text = DataModel.TextToUse["blindtest_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[2].text = DataModel.TextToUse["MCQ_name"];
+        round.Find("Qtype").GetComponent<TMP_Dropdown>().options[3].text = DataModel.TextToUse["TF_name"];
         // add round in DataModel with one topic
         List<TopicData> topiccommon = new List<TopicData>();
         topiccommon.Add(new TopicData("", new List<QuestionData>()));
@@ -155,6 +157,12 @@ public class EditRoundController : MonoBehaviour
             AddRoundLoad();
             switch (r.Type)
             {
+                case "TrueFalse":
+                    round.GetComponentInChildren<TMP_Dropdown>().value = 3;
+                    break;
+                case "VraiFaux":
+                    round.GetComponentInChildren<TMP_Dropdown>().value = 3;
+                    break;
                 case "QCM":
                     round.GetComponentInChildren<TMP_Dropdown>().value = 2;
                     break;

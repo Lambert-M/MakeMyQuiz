@@ -42,6 +42,7 @@
 		{"key":"topic_name","value":"Topic name"},
 		{"key":"blindtest_name","value":"Blind test"},
 		{"key":"MCQ_name","value":"MCQ"},
+		{"key":"TF_name","value":"TrueFalse"},
 		{"key":"round_name","value":"Round"},
 		{"key":"correct_answer","value":"Correct Answer"},
 		{"key":"enter_topicname","value":"Write the topic name : "},
