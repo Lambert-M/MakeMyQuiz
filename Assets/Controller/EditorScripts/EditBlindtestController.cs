@@ -188,8 +188,9 @@ public class EditBlindtestController : MonoBehaviour
             btPrefab.Find("ValidateQuestion").Find("QField").Find("AnswerField").Find("A" + i + "Field").Find("TrueA" + i).GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["correct_answer"];
         }
         //add a neutral question when user press the AddQuestion button and add it to the DataModel
-        AnswerData[] ans = { new AnswerData("a", false), new AnswerData("b", false), new AnswerData("c", false), new AnswerData("d", false) };
+        AnswerData[] ans = { new AnswerData("a", true), new AnswerData("b", false), new AnswerData("c", false), new AnswerData("d", false) };
         MusicQuestion question = new MusicQuestion("new question", ans);
+        btPrefab.Find("ValidateQuestion").Find("QField").Find("AnswerField").Find("A1Field").Find("TrueA1").GetComponent<Toggle>().isOn = true;
         DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Add(question);
     }
 

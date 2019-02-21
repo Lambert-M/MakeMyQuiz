@@ -13,7 +13,7 @@ public class EditRoundController : MonoBehaviour
     public RectTransform round;
     private int nbPanel;
     private int nbTopics;
-
+    
     // Use this for initialization
     void Start()
     {
@@ -48,14 +48,33 @@ public class EditRoundController : MonoBehaviour
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[1].text = DataModel.TextToUse["blindtest_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[2].text = DataModel.TextToUse["MCQ_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[3].text = DataModel.TextToUse["TF_name"];
+        round.Find("Qtype").GetComponent<TMP_Dropdown>().onValueChanged.AddListener(delegate {
+            CheckDropdown(round); });
         round.Find("Qtype").GetComponent<TMP_Dropdown>().interactable = false;
         //update texts
         GameObject.Find("NumberRound").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
         nbTopics = DataModel.Rounds[round.GetComponent<PanelModel>().PanelNumber - 1].Topics.Count;
         round.Find("NumberofContainer").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["topic_number"] + nbTopics;
         round.Find("BuzzActivation").GetComponent<Toggle>().isOn = DataModel.Rounds[nbPanel-1].IsBuzzRound;
+        if (round.Find("Qtype").GetComponent<TMP_Dropdown>().value == 3)
+        {
+            round.Find("BuzzActivation").GetComponent<Toggle>().enabled = false;
+        }
     }
-
+    
+    public void CheckDropdown(RectTransform round)
+    {
+        if(round.Find("Qtype").GetComponent<TMP_Dropdown>().value == 3)
+        {
+            round.Find("BuzzActivation").GetComponent<Toggle>().targetGraphic.color = new Color(1, 0, 0);
+            round.Find("BuzzActivation").GetComponent<Toggle>().isOn = false;
+            round.Find("BuzzActivation").GetComponent<Toggle>().enabled = false;
+        }
+        else
+        {
+            round.Find("BuzzActivation").GetComponent<Toggle>().enabled = true;
+        }
+    }
     /**
      * @author : Léo ROUZIC, Christophe SAHID
      * Used by the AddRound button 
@@ -78,6 +97,9 @@ public class EditRoundController : MonoBehaviour
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[1].text = DataModel.TextToUse["blindtest_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[2].text = DataModel.TextToUse["MCQ_name"];
         round.Find("Qtype").GetComponent<TMP_Dropdown>().options[3].text = DataModel.TextToUse["TF_name"];
+        round.Find("Qtype").GetComponent<TMP_Dropdown>().onValueChanged.AddListener(delegate {
+            CheckDropdown(round);
+        });
         // add round in DataModel with one topic
         List<TopicData> topiccommon = new List<TopicData>();
         topiccommon.Add(new TopicData("", new List<QuestionData>()));

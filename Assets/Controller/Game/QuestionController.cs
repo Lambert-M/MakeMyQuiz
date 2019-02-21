@@ -729,8 +729,16 @@ public class QuestionController : MonoBehaviour
                 }
                 if (!DataModel.Rounds.Any())
                 {
-                    DataModel.Save(DataModel.CurrentRunningFilename);
-                    SceneManager.LoadScene("Ending");
+                    if (!EqualityExist())
+                    {
+                        DataModel.Save(DataModel.CurrentRunningFilename);
+                        SceneManager.LoadScene("Ending");
+                    }
+                    else
+                    {
+                        DataModel.Save(DataModel.CurrentRunningFilename);
+                        SceneManager.LoadScene("EditScores");
+                    }
                 }
                 //if it is the last question, return to Topics
                 else
@@ -752,6 +760,29 @@ public class QuestionController : MonoBehaviour
                 DataModel.Save(DataModel.CurrentRunningFilename);
                 RunningQuestions();
             }
+        }
+    }
+    /**
+     * 
+     */
+    public bool EqualityExist()
+    {
+        int count = 0;
+        foreach (PlayerModel p in teamsCtrl)
+        {
+            if (DataModel.BestScore() == DataModel.Scores[p.teamnumber - 1])
+            {
+                count++;
+            }
+        }
+
+        if (count >= 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
