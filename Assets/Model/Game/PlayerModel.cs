@@ -119,52 +119,26 @@ public class PlayerModel : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "TrueFalse")
         {
-            t = GameObject.Find("Timer").GetComponent<Timer>();
             Image img = answerPanel.GetComponent<Image>();
-            if (!hasAnswered)
+            roundPoint = 4;
+            if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
             {
-                ans = -1;
+                ans = 1;
+                img.color = new Color(0, 0, 0, 1);
+                answer = answer1.text;
+                hasAnswered = true;
+                sfx_answer.Play();
 
-                if (t.GetCurrentTimeValue() >= 12 && t.GetCurrentTimeValue() < 15)
-                {
-                    roundPoint = 4;
-                }
-
-                else if (t.GetCurrentTimeValue() >= 8 && t.GetCurrentTimeValue() < 12)
-                {
-                    roundPoint = 3;
-                }
-
-                else if (t.GetCurrentTimeValue() >= 4 && t.GetCurrentTimeValue() < 8)
-                {
-                    roundPoint = 2;
-                }
-
-                else if (t.GetCurrentTimeValue() >= 0 && t.GetCurrentTimeValue() < 4)
-                {
-                    roundPoint = 1;
-                }
-
-                if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
-                {
-                    ans = 1;
-                    img.color = new Color(0, 0, 0, 1);
-                    answer = answer1.text;
-                    hasAnswered = true;
-                    sfx_answer.Play();
-
-                }
-                else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
-                {
-                    ans = 2;
-                    img.color = new Color(0, 0, 0, 1);
-                    answer = answer2.text;
-                    hasAnswered = true;
-                    sfx_answer.Play();
-                }
+            }
+            else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
+            {
+                ans = 2;
+                img.color = new Color(0, 0, 0, 1);
+                answer = answer2.text;
+                hasAnswered = true;
+                sfx_answer.Play();
             }
         }
-
     }
 
     public string GetAnswer()

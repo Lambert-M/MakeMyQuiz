@@ -14,6 +14,7 @@ public class TrueFalseController : MonoBehaviour
     private bool isNextAvailable;
     private bool resetvol;
     private bool goingToNextQuestion;
+    private bool first;
     private int visibleCharacterCount;
     private int numberOfCharacters;
     private int numberOfQuestions;
@@ -22,7 +23,6 @@ public class TrueFalseController : MonoBehaviour
     private float question_length_to_time; 
     //Objects
     private AnswerData currAnswer;
-    private Timer timerctrl;
     private TextMeshProUGUI questionText;
     private AudioSource musicSource;
     private AudioClip music;
@@ -38,7 +38,6 @@ public class TrueFalseController : MonoBehaviour
     private List<Button> teamsButton = new List<Button>();
     private List<GameObject> teamlist = new List<GameObject>();
     private List<GameObject> answerList = new List<GameObject>();
-    private List<GameObject> timerPanelList = new List<GameObject>();
     private List<QuestionData> questions = new List<QuestionData>();
     private List<PlayerModel> teamsCtrl = new List<PlayerModel>();
 
@@ -148,14 +147,6 @@ public class TrueFalseController : MonoBehaviour
         }
         answerList = answerList.OrderBy(go => go.name).ToList();
 
-        timerctrl = GameObject.Find("Timer").GetComponent<Timer>();
-
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("realtimer"))
-        {
-            timerPanelList.Add(e);
-        }
-        timerPanelList = timerPanelList.OrderBy(go => go.name).ToList();
-
         /*
          * Afficher les Jokers qui ont ete actives lors de la scene Topics
          */
@@ -188,35 +179,23 @@ public class TrueFalseController : MonoBehaviour
         {
             GoToNextQuestion();
         }
+
+        if(!first && EveryoneAnswered())
+        {
+            first = true;
+            FinalAnswerPhase();
+        }
     }
-
-
-    public IEnumerator WaitForRealSeconds(float time)
-    {
-        yield return new WaitForSecondsRealtime(time);
-        Pause();
-    }
-
-
+   
     private void RunningQuestions()
     {
+        first = false;
         EnableTeam();
-        ReappearAllTeams();
         ResetTeamsAnswered();
 
         goingToNextQuestion = false;
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
-
-        arrow.GetComponent<CanvasGroup>().alpha = 0;
-        foreach (GameObject e in timerPanelList)
-        {
-            e.GetComponent<CanvasGroup>().alpha = 0;
-        }
-        foreach (GameObject p in answerList)
-        {
-            p.GetComponent<CanvasGroup>().alpha = 0;
-        }
 
         isNextAvailable = false;
 
@@ -231,37 +210,6 @@ public class TrueFalseController : MonoBehaviour
             ChangeTeamColor(0, e);
         }
         musicSource.Play();
-
-        Invoke("RevealAnswers", 5 + question_length_to_time);
-        Invoke("DisableTeam", 20 + question_length_to_time);
-        Invoke("FinalAnswerPhase", 23 + question_length_to_time);
-    }
-
-    /**
-     * Reappear all teams in the scene
-     */
-    private void ReappearAllTeams()
-    {
-        foreach (PlayerModel e in teamsCtrl)
-        {
-            e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
-        }
-    }
-    /**
-     * When this method is called, timer and answers appears and players are able to answer
-     */
-    private void RevealAnswers()
-    {
-        foreach (GameObject p in answerList)
-        {
-            p.GetComponent<CanvasGroup>().alpha = 1;
-        }
-        foreach (GameObject e in timerPanelList)
-        {
-            e.GetComponent<CanvasGroup>().alpha = 1;
-        }
-        timerctrl.tickingDown = true;
-        EnableTeam();
     }
 
     /**
@@ -334,14 +282,6 @@ public class TrueFalseController : MonoBehaviour
     }
 
     /**
-     * Update score in the data model of the team in parameter
-     */
-    private void UpdateScoreTeams(int number_team)
-    {
-        teamsCtrl[number_team - 1].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(number_team - 1);
-    }
-
-    /**
      * Change the color of a PlayerControler e based on the integer i which stands for
      * the answer the team chooses. Their color change to the corresponding answer's color.
      */
@@ -377,6 +317,10 @@ public class TrueFalseController : MonoBehaviour
         visibleCharacterCount = 0;
         while (!goingToNextQuestion)
         {
+            answers = questions.First().Answers;
+            GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
+            GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
+
             TrueFalseQuestion texteQ = (TrueFalseQuestion)DataModel.CurQuestion();
             questionText.text = texteQ.Question;
                 
@@ -392,10 +336,6 @@ public class TrueFalseController : MonoBehaviour
                 yield return new WaitForSeconds(0.07f);
             }
 
-
-            answers = questions.First().Answers;
-            GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
-            GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
             yield return null;
         }
     }
@@ -483,8 +423,6 @@ public class TrueFalseController : MonoBehaviour
                 {
                     go.GetComponent<CanvasGroup>().alpha = 0;
                 }
-
-                timerctrl.ResetTimer();
 
                 DataModel.Save(DataModel.CurrentRunningFilename);
                 RunningQuestions();
