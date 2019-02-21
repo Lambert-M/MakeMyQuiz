@@ -617,6 +617,16 @@ Prefab:
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114110843936109990, guid: 43fcade4e2d741443b9edf23d5ab9b37,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110843936109990, guid: 43fcade4e2d741443b9edf23d5ab9b37,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43fcade4e2d741443b9edf23d5ab9b37, type: 2}
   m_IsPrefabParent: 0
@@ -735,22 +745,37 @@ Prefab:
     - target: {fileID: 114994281111188136, guid: 762d5a287d186db46811bbdb9cfd9153,
         type: 2}
       propertyPath: m_text
-      value: De ouf
+      value: '?'
       objectReference: {fileID: 0}
     - target: {fileID: 114994281111188136, guid: 762d5a287d186db46811bbdb9cfd9153,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114994281111188136, guid: 762d5a287d186db46811bbdb9cfd9153,
-        type: 2}
-      propertyPath: m_textInfo.spaceCount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114994281111188136, guid: 762d5a287d186db46811bbdb9cfd9153,
         type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114994281111188136, guid: 762d5a287d186db46811bbdb9cfd9153,
+        type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114772051528669568, guid: 762d5a287d186db46811bbdb9cfd9153,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.113951206
+      objectReference: {fileID: 0}
+    - target: {fileID: 114772051528669568, guid: 762d5a287d186db46811bbdb9cfd9153,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114772051528669568, guid: 762d5a287d186db46811bbdb9cfd9153,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 762d5a287d186db46811bbdb9cfd9153, type: 2}
@@ -1464,7 +1489,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1114784317}
         m_MethodName: GoToNextQuestion
         m_Mode: 1
         m_Arguments:
@@ -1685,7 +1710,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24.55
+  m_fontSize: 25.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

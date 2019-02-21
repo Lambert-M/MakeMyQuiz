@@ -1455,6 +1455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e09ce721fbd414d9563020cc848916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teams_can_buzz: 
   number_team_buzz: 0
   buzz_event: 0
   sfx_buzzers:
@@ -2373,7 +2374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.024385044, y: 0.011850468}
   m_AnchorMax: {x: 0.48900002, y: 0.19370313}
-  m_AnchoredPosition: {x: -0.13760376, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.13763428, y: 0.000030517578}
   m_SizeDelta: {x: 8.841675, y: 2.491623}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031211776
@@ -4000,7 +4001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.51452124, y: 0.011850468}
   m_AnchorMax: {x: 0.9834364, y: 0.19370313}
-  m_AnchoredPosition: {x: -0.29188538, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.29190063, y: 0.000030517578}
   m_SizeDelta: {x: 7.6116333, y: 2.491623}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1755072017
@@ -4268,7 +4269,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 23.7
+  m_fontSize: 25.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -71,7 +71,7 @@ public class EditTopicController : MonoBehaviour {
             topicPrefab.Find("DeleteTopic").GetComponent<Button>().onClick.AddListener(() => DeleteTopic());
             topicPrefab.Find("DeleteTopic").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_remove"];
             DataModel.Rounds[DataModel.IroundCur].Topics.Add(new TopicData(DataModel.TextToUse["enter_topicname"], new List<QuestionData>()));
-            nbQuestions = DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Count;
+            nbQuestions = 0;
             topicPrefab.Find("NumberofContainer").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["question_number"] + nbQuestions;
         }
     }

@@ -183,6 +183,7 @@ public class TrueFalseController : MonoBehaviour
         if(!first && EveryoneAnswered())
         {
             first = true;
+            StartCoroutine(WaitForRealSeconds(1.0f));
             FinalAnswerPhase();
         }
     }
@@ -190,14 +191,17 @@ public class TrueFalseController : MonoBehaviour
     private void RunningQuestions()
     {
         first = false;
+        goingToNextQuestion = false;
+        isNextAvailable = false;
+
         EnableTeam();
         ResetTeamsAnswered();
-
-        goingToNextQuestion = false;
+        foreach(GameObject go in answerList)
+        {
+            go.GetComponent<CanvasGroup>().alpha = 1;
+        }
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
-
-        isNextAvailable = false;
 
         GameObject.Find("QuestionCounter").GetComponent<TextMeshProUGUI>().text = "Question " + actualQuestion + " / " + numberOfQuestions;
         
@@ -209,9 +213,14 @@ public class TrueFalseController : MonoBehaviour
         {
             ChangeTeamColor(0, e);
         }
+
         musicSource.Play();
     }
 
+    public IEnumerator WaitForRealSeconds(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+    }
     /**
      * Eliminate a random false answer of the scene
      */
@@ -252,7 +261,6 @@ public class TrueFalseController : MonoBehaviour
             teamsButton[i].GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(i);
         }
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = true;
-
         arrow.GetComponent<CanvasGroup>().alpha = 1;
         isNextAvailable = true;
     }
@@ -320,21 +328,10 @@ public class TrueFalseController : MonoBehaviour
             answers = questions.First().Answers;
             GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
             GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
-
             TrueFalseQuestion texteQ = (TrueFalseQuestion)DataModel.CurQuestion();
             questionText.text = texteQ.Question;
                 
-            question_length_to_time = questionText.text.Length * 0.035f;
-
-            questionText.maxVisibleCharacters = visibleCharacterCount;
-            numberOfCharacters = questionText.textInfo.characterCount;
-
-            while (visibleCharacterCount <= numberOfCharacters)
-            {
-                visibleCharacterCount++;
-                questionText.maxVisibleCharacters = visibleCharacterCount;
-                yield return new WaitForSeconds(0.07f);
-            }
+            question_length_to_time = questionText.text.Length * 0.035f; //salut lut comme le biscuit
 
             yield return null;
         }
@@ -418,12 +415,7 @@ public class TrueFalseController : MonoBehaviour
             }
             else
             {
-                //display next question without answers
-                foreach (GameObject go in answerList)
-                {
-                    go.GetComponent<CanvasGroup>().alpha = 0;
-                }
-
+                arrow.GetComponent<CanvasGroup>().alpha = 1;
                 DataModel.Save(DataModel.CurrentRunningFilename);
                 RunningQuestions();
             }
