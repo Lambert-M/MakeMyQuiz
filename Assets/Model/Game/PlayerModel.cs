@@ -117,24 +117,30 @@ public class PlayerModel : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "TrueFalse")
         {
-            Image img = answerPanel.GetComponent<Image>();
-            roundPoint = 4;
-            if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
-            {
-                ans = 1;
-                img.color = new Color(0, 0, 0, 1);
-                answer = answer1.text;
-                hasAnswered = true;
-                sfx_answer.Play();
 
-            }
-            else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
+            if (!hasAnswered)
             {
-                ans = 2;
-                img.color = new Color(0, 0, 0, 1);
-                answer = answer2.text;
-                hasAnswered = true;
-                sfx_answer.Play();
+
+                ans = -1;
+                Image img = answerPanel.GetComponent<Image>();
+                roundPoint = 4;
+                if (Input.GetButtonDown("team" + teamnumber + "A") && GameObject.Find("Answer Panel 1").GetComponent<CanvasGroup>().alpha == 1)
+                {
+                    ans = 1;
+                    img.color = new Color(0, 0, 0, 1);
+                    answer = answer1.text;
+                    hasAnswered = true;
+                    sfx_answer.Play();
+
+                }
+                else if (Input.GetButtonDown("team" + teamnumber + "B") && GameObject.Find("Answer Panel 2").GetComponent<CanvasGroup>().alpha == 1)
+                {
+                    ans = 2;
+                    img.color = new Color(0, 0, 0, 1);
+                    answer = answer2.text;
+                    hasAnswered = true;
+                    sfx_answer.Play();
+                }
             }
         } else if (SceneManager.GetActiveScene().name == "Images")
         {

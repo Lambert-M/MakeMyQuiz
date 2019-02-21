@@ -211,7 +211,7 @@ public class ImageController : MonoBehaviour
                 sfx_buzzer_win.Play();
                 buzz_answer_confirm = true;
                 DataModel.Scores[number_team_buzz - 1] += 5;
-                if (DataModel.Jokers[number_team_buzz])
+                if (DataModel.Jokers[number_team_buzz-1])
                 {
                     DataModel.Scores[number_team_buzz - 1] += 2;
                 }
@@ -376,6 +376,10 @@ public class ImageController : MonoBehaviour
         {
             if (!teamsCtrl[number_team - 1].Equals(e))
             {
+                if (DataModel.Jokers[e.teamnumber - 1])
+                {
+                    GameObject.Find("Joker " + (e.teamnumber)).GetComponent<CanvasGroup>().alpha = 0f;
+                }
                 e.gameObject.GetComponent<CanvasGroup>().alpha = 0;
             }
         }
@@ -388,13 +392,22 @@ public class ImageController : MonoBehaviour
     {
         foreach (PlayerModel e in teamsCtrl)
         {
+            
             if (e.buzzed)
             {
+                if (DataModel.Jokers[e.teamnumber - 1])
+                {
+                    GameObject.Find("Joker " + (e.teamnumber)).GetComponent<CanvasGroup>().alpha = 0.5f;
+                }
                 e.gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
 
             }
             else
             {
+                if (DataModel.Jokers[e.teamnumber - 1])
+                {
+                    GameObject.Find("Joker " + (e.teamnumber)).GetComponent<CanvasGroup>().alpha = 1f;
+                }
                 e.gameObject.GetComponent<CanvasGroup>().alpha = 1;
             }
 
@@ -497,6 +510,7 @@ public class ImageController : MonoBehaviour
         for (int i = 0; i < teams_can_buzz.Length; i++)
         {
             teams_can_buzz[i] = false;
+            
         }
     }
 

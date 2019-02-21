@@ -204,8 +204,8 @@ public class TrueFalseController : MonoBehaviour
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
 
         GameObject.Find("QuestionCounter").GetComponent<TextMeshProUGUI>().text = "Question " + actualQuestion + " / " + numberOfQuestions;
-        
-        music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName);
+        int music_index = Random.Range(1, 4);
+        music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName+music_index);
         musicSource.clip = music;
         StartCoroutine(DisplayText());
 

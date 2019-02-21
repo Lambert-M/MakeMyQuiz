@@ -30,6 +30,7 @@ public class EditTrueFalse : MonoBehaviour
         {
             LoadAllQuestionsPanel();
         }
+
     }
 
     // Update is called once per frame
