@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 206328960}
-  score: 50
+  score: 200
   best_score: 400
   team_number: 1
   rocket1: {fileID: 1205524043}
@@ -925,7 +925,7 @@ GameObject:
   - component: {fileID: 379084406}
   - component: {fileID: 379084405}
   m_Layer: 0
-  m_Name: final explosion_1
+  m_Name: final explosion_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1002,7 +1002,7 @@ Transform:
   m_GameObject: {fileID: 379084404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8933, y: 1126.5865, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 1782777070}
   m_RootOrder: 4
@@ -1032,7 +1032,7 @@ Transform:
   m_GameObject: {fileID: 387442692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 1408666262}
   m_RootOrder: 4
@@ -1509,7 +1509,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -1590,7 +1590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 578976080}
-  score: 134
+  score: 167
   best_score: 400
   team_number: 8
   rocket1: {fileID: 504064507}
@@ -1870,9 +1870,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 617417743}
-  score: 0
+  score: 134
   best_score: 400
-  team_number: 5
+  team_number: 6
   rocket1: {fileID: 1998925225}
   rocket2: {fileID: 841277117}
   final_explosion: {fileID: 966263415}
@@ -2040,7 +2040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 631021793}
-  score: 365
+  score: 50
   best_score: 400
   team_number: 3
   rocket1: {fileID: 1500501414}
@@ -2065,7 +2065,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -2925,7 +2925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 864580119}
-  score: 85
+  score: 400
   best_score: 400
   team_number: 5
   rocket1: {fileID: 640911360}
@@ -3224,7 +3224,7 @@ Transform:
   m_GameObject: {fileID: 966263413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -26, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 617417744}
   m_RootOrder: 4
@@ -3412,7 +3412,7 @@ Transform:
   m_GameObject: {fileID: 1061490195}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 22, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 631021794}
   m_RootOrder: 4
@@ -3600,7 +3600,7 @@ Transform:
   m_GameObject: {fileID: 1186408484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 21, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 206328961}
   m_RootOrder: 4
@@ -4037,7 +4037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 1408666261}
-  score: 254
+  score: 350
   best_score: 400
   team_number: 4
   rocket1: {fileID: 1826627451}
@@ -4610,7 +4610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 1492105857}
-  score: 399
+  score: 234
   best_score: 400
   team_number: 7
   rocket1: {fileID: 1690209114}
@@ -5594,7 +5594,7 @@ Transform:
   m_GameObject: {fileID: 1716110955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 1492105858}
   m_RootOrder: 4
@@ -5687,7 +5687,7 @@ Transform:
   m_GameObject: {fileID: 1717620683}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 578976081}
   m_RootOrder: 4
@@ -6026,7 +6026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {fileID: 1782777069}
-  score: 400
+  score: 100
   best_score: 400
   team_number: 2
   rocket1: {fileID: 1885121725}
@@ -6051,7 +6051,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -6665,7 +6665,7 @@ Transform:
   m_GameObject: {fileID: 2011791269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6, y: 45, z: 0}
-  m_LocalScale: {x: 1367.8931, y: 1126.5864, z: 6.579781}
+  m_LocalScale: {x: 750, y: 650, z: 6.579781}
   m_Children: []
   m_Father: {fileID: 864580120}
   m_RootOrder: 4

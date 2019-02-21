@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class test : MonoBehaviour {
+public class EndController : MonoBehaviour {
     public GameObject r;
     private Rigidbody2D rb;
     private Vector2 velocity;
@@ -25,16 +25,16 @@ public class test : MonoBehaviour {
     void Start ()
     {
         rb = r.GetComponent<Rigidbody2D>();
-        best_score = DataModel.BestScore();
-        score = DataModel.Scores[team_number - 1];
-        if (team_number <= DataModel.NumberOfTeams)
-        {
-            GetComponent<Image>().GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(team_number - 1);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+       // best_score = DataModel.BestScore();
+        //score = DataModel.Scores[team_number - 1];
+        //if (team_number <= DataModel.NumberOfTeams)
+        //{
+         //  GetComponent<Image>().GetComponentInChildren<TextMeshProUGUI>().text = DataModel.GetTextScoreFromTeam(team_number - 1);
+       // }
+       // else
+        //{
+          // Destroy(this.gameObject);
+       // }
         velocity = new Vector2(0f, 30f);
         rocket1.SetBool("isMoving", true);
         rocket2.SetBool("isMoving", true);

@@ -56,4 +56,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/View/Game/TrueFalse.unity
     guid: e258d1658141c1243b78bf58c412b34a
+  - enabled: 1
+    path: Assets/View/Game/EditScores.unity
+    guid: 0e32f96dd73a3f448802bc45f3b89d1d
   m_configObjects: {}
