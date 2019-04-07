@@ -1,0 +1,1526 @@
+{
+"Quizname":"TestJv",
+"CurTopicName":"",
+"RoundNumber":1,
+"IroundCur":0,
+"ItopicCur":3,
+"IquestionCur":0,
+"Score0":0,
+"Joker0":false,
+"Score1":0,
+"Joker1":false,
+"Score2":0,
+"Joker2":false,
+"Score3":0,
+"Joker3":false,
+"Score4":0,
+"Joker4":false,
+"Score5":0,
+"Joker5":false,
+"Score6":0,
+"Joker6":false,
+"Score7":0,
+"Joker7":false,
+"Rounds":[
+{
+"Type":"QCM",
+"IsBuzzActivate":false,
+"Topics":[
+{
+"Name":"Jeux Vidéos",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Dans quel jeu Mario explore-t-il pour la première fois une ville typique des Etats-Unis ?",
+"Answers":[
+{
+"AnswerText":"Super Mario Odyssey",
+"IsTrue":true
+},
+{
+"AnswerText":"Super Mario Land",
+"IsTrue":false
+},
+{
+"AnswerText":"Dr  Mario",
+"IsTrue":false
+},
+{
+"AnswerText":"Mario & Sonic, Aux Jeux Olympiques",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Avec quelle personnage débute t’on dans l’aventure de Super Smash Bros Ultimate ?",
+"Answers":[
+{
+"AnswerText":"Kirby",
+"IsTrue":true
+},
+{
+"AnswerText":"Mario",
+"IsTrue":false
+},
+{
+"AnswerText":"Ganondorf",
+"IsTrue":false
+},
+{
+"AnswerText":"Samus",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Comment s’appellent les créatures que l’on tue dans Left 4 Dead ?",
+"Answers":[
+{
+"AnswerText":"Les Revenants",
+"IsTrue":false
+},
+{
+"AnswerText":"Les hunters",
+"IsTrue":false
+},
+{
+"AnswerText":"Les infectés",
+"IsTrue":true
+},
+{
+"AnswerText":"Les Zombies",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"A quelle génération appartient la PS4 ?",
+"Answers":[
+{
+"AnswerText":"6eme",
+"IsTrue":false
+},
+{
+"AnswerText":"7eme",
+"IsTrue":false
+},
+{
+"AnswerText":"8eme",
+"IsTrue":true
+},
+{
+"AnswerText":"9eme",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Qui est le fils de Donkey Kong ?",
+"Answers":[
+{
+"AnswerText":"Donkey Kong Jr",
+"IsTrue":true
+},
+{
+"AnswerText":"Diddy Kong",
+"IsTrue":false
+},
+{
+"AnswerText":"Funky Kong",
+"IsTrue":false
+},
+{
+"AnswerText":"K. Rool",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Pokemon XD : Le Souffle des ténèbres, quelle nouveau type original apparaît uniquement dans cet opus ?",
+"Answers":[
+{
+"AnswerText":"Obscur",
+"IsTrue":true
+},
+{
+"AnswerText":"Divin",
+"IsTrue":false
+},
+{
+"AnswerText":"Lumière",
+"IsTrue":false
+},
+{
+"AnswerText":"Cosmique",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"A quelle race appartiennent les créatures mi-humanoIdes, mi-rochers dans Zelda ?",
+"Answers":[
+{
+"AnswerText":"Les Gerudos",
+"IsTrue":false
+},
+{
+"AnswerText":"Les Ikanas",
+"IsTrue":false
+},
+{
+"AnswerText":"Les Kayas",
+"IsTrue":false
+},
+{
+"AnswerText":"Les Gorons",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Qui est le compositeur de Castlevania I ?  ",
+"Answers":[
+{
+"AnswerText":"Yoko Shimomura",
+"IsTrue":false
+},
+{
+"AnswerText":"Shinya Okada",
+"IsTrue":false
+},
+{
+"AnswerText":"Nastumi Kameoka",
+"IsTrue":false
+},
+{
+"AnswerText":"Michiru Yamane",
+"IsTrue":true
+}
+]
+}
+]
+},
+{
+"Name":"Films",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Quel est le nom québécois du film Total Recall ?",
+"Answers":[
+{
+"AnswerText":"Mémoire profonde",
+"IsTrue":false
+},
+{
+"AnswerText":"Super Mémoire",
+"IsTrue":false
+},
+{
+"AnswerText":"Restauration mémorielle",
+"IsTrue":false
+},
+{
+"AnswerText":"Voyage au centre de la mémoire",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Comment s'appelle l'auberge où Gandalf donne rendez-vous aux Hobbits ? ",
+"Answers":[
+{
+"AnswerText":"Cul-de-sac",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Chien Noir",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Dragon Vert",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Poney Fringant",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Quelle jeu de rôle sur table a eu droit à une saga de 3 films ?",
+"Answers":[
+{
+"AnswerText":"Shadowrun",
+"IsTrue":false
+},
+{
+"AnswerText":"Donjons & Dragons",
+"IsTrue":true
+},
+{
+"AnswerText":"L’Appel de Cthulhu",
+"IsTrue":false
+},
+{
+"AnswerText":"Warhammer",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Que représentent les noms des personnages de Reservoir Dogs ?",
+"Answers":[
+{
+"AnswerText":"Des chiens",
+"IsTrue":false
+},
+{
+"AnswerText":"Des marques de montre",
+"IsTrue":false
+},
+{
+"AnswerText":"Des armes blanches",
+"IsTrue":false
+},
+{
+"AnswerText":"Des couleurs",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Dans Harry Potter et la Chambre des Secret,  quel est le nom du balais que reçoit Drago Malfoy ?",
+"Answers":[
+{
+"AnswerText":"Eclair de feu",
+"IsTrue":false
+},
+{
+"AnswerText":"Nimbus 2000",
+"IsTrue":false
+},
+{
+"AnswerText":"Nimbus 2001",
+"IsTrue":true
+},
+{
+"AnswerText":"Bross-dur",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Quelle est l’espèce de Chewbacca ?",
+"Answers":[
+{
+"AnswerText":"Hutt",
+"IsTrue":false
+},
+{
+"AnswerText":"Ewok",
+"IsTrue":false
+},
+{
+"AnswerText":"Jawa",
+"IsTrue":false
+},
+{
+"AnswerText":"Wookiee",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Quelle personnage joue Jim Carrey dans Batman Forever ?",
+"Answers":[
+{
+"AnswerText":"Double-Face",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Joker",
+"IsTrue":false
+},
+{
+"AnswerText":"Robin",
+"IsTrue":false
+},
+{
+"AnswerText":"L'Homme Mystère",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Quel jeu d’arcade Marty Mc Fly découvre dans Retour vers le Futur 2 ?  ",
+"Answers":[
+{
+"AnswerText":"Wild Gunman",
+"IsTrue":true
+},
+{
+"AnswerText":"House of the Dead",
+"IsTrue":false
+},
+{
+"AnswerText":"Dig Dug",
+"IsTrue":false
+},
+{
+"AnswerText":"Sunset Riders",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Naruto",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Quel est le numéro de l’équipe Kakashi - Sasuke - Naruto - Sakura ?",
+"Answers":[
+{
+"AnswerText":"6",
+"IsTrue":false
+},
+{
+"AnswerText":"7",
+"IsTrue":true
+},
+{
+"AnswerText":"8",
+"IsTrue":false
+},
+{
+"AnswerText":"9",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Quel examen est le point central du second arc narratif de Naruto ?",
+"Answers":[
+{
+"AnswerText":"Examen Chuunin",
+"IsTrue":true
+},
+{
+"AnswerText":"Examen Gennin\t",
+"IsTrue":false
+},
+{
+"AnswerText":"Les partiels de Rennes 1\t",
+"IsTrue":false
+},
+{
+"AnswerText":"Examen Juunin",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Qui a écrit Naruto ?",
+"Answers":[
+{
+"AnswerText":"Masashi Kishimoto",
+"IsTrue":true
+},
+{
+"AnswerText":"Tite Kubo",
+"IsTrue":false
+},
+{
+"AnswerText":"Eiichiro Oda",
+"IsTrue":false
+},
+{
+"AnswerText":"Seishi Kishimoto",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Qui possède un kekkai genkai qui lui permet de manipuler ses os ?",
+"Answers":[
+{
+"AnswerText":"Jirobo\t",
+"IsTrue":false
+},
+{
+"AnswerText":"Kidomaru",
+"IsTrue":false
+},
+{
+"AnswerText":"Kimimaro",
+"IsTrue":true
+},
+{
+"AnswerText":"Tayuya",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Quel est le message secret laissé à Naruto par Jiraya ?",
+"Answers":[
+{
+"AnswerText":"La volonté du feu ne s'épuisera jamais",
+"IsTrue":false
+},
+{
+"AnswerText":"Le vrai n'est pas l'un d'eux",
+"IsTrue":true
+},
+{
+"AnswerText":"Danzo est un traître à Konoha",
+"IsTrue":false
+},
+{
+"AnswerText":"La recette de la galette pétri au rasengan",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Qui est devenu célèbre par la maîtrise de la technique du vol du dieu de la foudre ?",
+"Answers":[
+{
+"AnswerText":"Killer Bee",
+"IsTrue":false
+},
+{
+"AnswerText":"A",
+"IsTrue":false
+},
+{
+"AnswerText":"Darui",
+"IsTrue":false
+},
+{
+"AnswerText":"Minato Namikaze",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Comment était surnommé le père de Kakashi Hatake ?",
+"Answers":[
+{
+"AnswerText":"L'éclair jaune de Konoha",
+"IsTrue":false
+},
+{
+"AnswerText":"Le croc blanc de Konoha",
+"IsTrue":true
+},
+{
+"AnswerText":"Le légendaire pigeon",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Bijû sans queue",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Comment se nommait le meilleur ami d'Itachi Uchiwa ?",
+"Answers":[
+{
+"AnswerText":"Shisui Uchiwa",
+"IsTrue":true
+},
+{
+"AnswerText":"Fugaku Uchiwa",
+"IsTrue":false
+},
+{
+"AnswerText":"Hikaku Uchiwa",
+"IsTrue":false
+},
+{
+"AnswerText":"Baru Uchiwa",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"En ce moment sur Netflix",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Dans quelle série entend-t-on le chant \"I said a bang, bang, bangity-bang, i said a bang bang bangity-bang ...\"",
+"Answers":[
+{
+"AnswerText":"Friends",
+"IsTrue":false
+},
+{
+"AnswerText":"How I Met Your Mother",
+"IsTrue":true
+},
+{
+"AnswerText":"The Good Place",
+"IsTrue":false
+},
+{
+"AnswerText":"Brooklyn 99",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Sex Education, quel est le métier de la mère du protagoniste ?",
+"Answers":[
+{
+"AnswerText":"Prostituée",
+"IsTrue":false
+},
+{
+"AnswerText":"Pédiatre",
+"IsTrue":false
+},
+{
+"AnswerText":"Sexologue",
+"IsTrue":true
+},
+{
+"AnswerText":"Escort",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"D'après le titre d'une série, combien de raisons Anna Baker avait-t-elle de se suicider ?",
+"Answers":[
+{
+"AnswerText":"4",
+"IsTrue":false
+},
+{
+"AnswerText":"7",
+"IsTrue":false
+},
+{
+"AnswerText":"10",
+"IsTrue":false
+},
+{
+"AnswerText":"13",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Dans the Blacklist, sous quelle condition Raymond Reddington accepte-t-il de coopérer avec la police ?",
+"Answers":[
+{
+"AnswerText":"Une immunité diplomatique",
+"IsTrue":false
+},
+{
+"AnswerText":"Il ne souhaite correspondre qu'avec une seule personne",
+"IsTrue":true
+},
+{
+"AnswerText":"Il veut accès à des fichiers privés de la police",
+"IsTrue":false
+},
+{
+"AnswerText":"Il a besoin d'un traitement médical particulier",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Quelle série sur l'univers de Holmes à choisi de faire de Watson une femme ?",
+"Answers":[
+{
+"AnswerText":"Elementary",
+"IsTrue":true
+},
+{
+"AnswerText":"Sherlock\t",
+"IsTrue":false
+},
+{
+"AnswerText":"Sherlock Holmes : Jeu d'ombres",
+"IsTrue":false
+},
+{
+"AnswerText":"Real Detective",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"En quelle année est sortie la première saison d'House of Cards",
+"Answers":[
+{
+"AnswerText":"2009",
+"IsTrue":false
+},
+{
+"AnswerText":"2011",
+"IsTrue":false
+},
+{
+"AnswerText":"2013",
+"IsTrue":true
+},
+{
+"AnswerText":"2015",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Quelle série suit le stalker d'une étudiante qui souhaite devenir auteur?",
+"Answers":[
+{
+"AnswerText":"Age Gap Love",
+"IsTrue":false
+},
+{
+"AnswerText":"Accidentally in Love",
+"IsTrue":false
+},
+{
+"AnswerText":"You",
+"IsTrue":true
+},
+{
+"AnswerText":"World at your feet",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"D'où vient le nom Bandersnatch de l'épisode intéractif de Black Mirror ?",
+"Answers":[
+{
+"AnswerText":"Les oeuvres de Lovecraft",
+"IsTrue":false
+},
+{
+"AnswerText":"Les oeuvres de Grimm",
+"IsTrue":false
+},
+{
+"AnswerText":"Les oeuvres de Frank Herbert ",
+"IsTrue":false
+},
+{
+"AnswerText":"Les oeuvres de Lewis Caroll",
+"IsTrue":true
+}
+]
+}
+]
+}
+]
+},
+{
+"Type":"Musique",
+"IsBuzzActivate":false,
+"Topics":[
+{
+"Name":"Jeux Vidéos",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"1-god-of-war-god-of-war-ost.wav",
+"StartTrack":0,
+"Volume":0.499268591403961,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"God Of War",
+"IsTrue":true
+},
+{
+"AnswerText":"The Witcher 3",
+"IsTrue":false
+},
+{
+"AnswerText":"Dragon's Dogma",
+"IsTrue":false
+},
+{
+"AnswerText":"Demon's Souls",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"3. Firelink Shrine.wav",
+"StartTrack":0,
+"Volume":0.376889258623123,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Dark Souls",
+"IsTrue":true
+},
+{
+"AnswerText":"Amnesia : The Dark Descent",
+"IsTrue":false
+},
+{
+"AnswerText":"Dead Island",
+"IsTrue":false
+},
+{
+"AnswerText":"Dark Souls 2",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"Earth.wav",
+"StartTrack":0,
+"Volume":0.417113840579987,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Journey",
+"IsTrue":false
+},
+{
+"AnswerText":"Hitman Blood Money",
+"IsTrue":false
+},
+{
+"AnswerText":"The Last of Us",
+"IsTrue":false
+},
+{
+"AnswerText":"Assassin’s Creed 2",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"The Toxic Avenger - My Only Chance.wav",
+"StartTrack":0,
+"Volume":0.584105312824249,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Furi",
+"IsTrue":true
+},
+{
+"AnswerText":"Rez",
+"IsTrue":false
+},
+{
+"AnswerText":"Thumper",
+"IsTrue":false
+},
+{
+"AnswerText":"Hotline Miami",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"45 Kotake & Koume's Theme.wav",
+"StartTrack":0,
+"Volume":0.840322017669678,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"The Legend of Zelda  : Majora's Mask",
+"IsTrue":false
+},
+{
+"AnswerText":"The Legend of Zelda : Ocarina of Time",
+"IsTrue":true
+},
+{
+"AnswerText":"The Legend of Zelda  : A Link to the Past",
+"IsTrue":false
+},
+{
+"AnswerText":"The Legend of Zelda : The Wind Waker",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"33 Latter Days.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"The Binding of Isaac",
+"IsTrue":true
+},
+{
+"AnswerText":"Rogue Legacy",
+"IsTrue":false
+},
+{
+"AnswerText":"Super Meat Boy",
+"IsTrue":false
+},
+{
+"AnswerText":"Slay the Spire",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"06 Harnessing the Wind (Howling Grotto).wav",
+"StartTrack":13.2895793914795,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Freedom Fighter",
+"IsTrue":false
+},
+{
+"AnswerText":"Cave Story+",
+"IsTrue":false
+},
+{
+"AnswerText":"The Messenger",
+"IsTrue":true
+},
+{
+"AnswerText":"La-Mulana 2",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"24 - The Decisive Battle.wav",
+"StartTrack":0,
+"Volume":0.767186939716339,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Final Fantasy III",
+"IsTrue":true
+},
+{
+"AnswerText":"Final Fantasy IV",
+"IsTrue":false
+},
+{
+"AnswerText":"Final Fantasy V",
+"IsTrue":false
+},
+{
+"AnswerText":"Final Fantasy VI",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Films",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"clubbed-to-death-hd-matrix-soundtrack.wav",
+"StartTrack":227.668609619141,
+"Volume":0.79644101858139,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Matrix",
+"IsTrue":true
+},
+{
+"AnswerText":"Max Payne 2",
+"IsTrue":false
+},
+{
+"AnswerText":"Requiem for a Dream",
+"IsTrue":false
+},
+{
+"AnswerText":"Fast & Furious 4",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"django-unchained-his-name-is-king-ost.wav",
+"StartTrack":0,
+"Volume":0.657484412193298,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Brimstone",
+"IsTrue":false
+},
+{
+"AnswerText":"The Lone Ranger",
+"IsTrue":false
+},
+{
+"AnswerText":"True Grit",
+"IsTrue":false
+},
+{
+"AnswerText":"Django Unchained",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"the-exorcist-soundtrack.wav",
+"StartTrack":0,
+"Volume":0.386884689331055,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Saw 4",
+"IsTrue":false
+},
+{
+"AnswerText":"Halloween",
+"IsTrue":false
+},
+{
+"AnswerText":"The Exorcist",
+"IsTrue":true
+},
+{
+"AnswerText":"Vendredi 13",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"charlie-and-the-chocolate-factory-soundtrack-suite.wav",
+"StartTrack":39.9757270812988,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Charlie et la chocolaterie",
+"IsTrue":true
+},
+{
+"AnswerText":"Alice au pays des merveilles",
+"IsTrue":false
+},
+{
+"AnswerText":"Mars Attacks!",
+"IsTrue":false
+},
+{
+"AnswerText":"L'étrange Noël de monsieur Jack",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"jaws-1975-main-title-theme-from-jaws-full-hd.wav",
+"StartTrack":18.9956378936768,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Les Dents de la mer",
+"IsTrue":true
+},
+{
+"AnswerText":"Psychose",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Cauchemar de Freddy",
+"IsTrue":false
+},
+{
+"AnswerText":"Godzilla",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"lord-of-war-soundtrack-warlord.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Silent Hill",
+"IsTrue":false
+},
+{
+"AnswerText":"Lord of War",
+"IsTrue":true
+},
+{
+"AnswerText":"Sin City",
+"IsTrue":false
+},
+{
+"AnswerText":"Constant Gardener",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"georg-friedrich-haendel-sarabande-main-title-barry-lyndon-soundtrack.wav",
+"StartTrack":0,
+"Volume":0.511214256286621,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Barry Lyndon",
+"IsTrue":true
+},
+{
+"AnswerText":"Les Duellistes",
+"IsTrue":false
+},
+{
+"AnswerText":"Elizabeth",
+"IsTrue":false
+},
+{
+"AnswerText":"La Comtesse",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"warcraft-warcraft-score-by-ramin-djawadi.wav",
+"StartTrack":0,
+"Volume":0.840322017669678,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Le Roi Arthur",
+"IsTrue":false
+},
+{
+"AnswerText":"Warcraft",
+"IsTrue":true
+},
+{
+"AnswerText":"Avengers 2",
+"IsTrue":false
+},
+{
+"AnswerText":"Avatar",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Corobizar",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"la-musique-dattente-du-stream-du-oui.wav",
+"StartTrack":31.3000354766846,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Cowboy Bebop",
+"IsTrue":false
+},
+{
+"AnswerText":"One Piece",
+"IsTrue":true
+},
+{
+"AnswerText":"Bleach",
+"IsTrue":false
+},
+{
+"AnswerText":"Re-Zero",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"fairy-tail-dragon-slayer-theme-chicken-edition.wav",
+"StartTrack":6.77462959289551,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Fairy Tail",
+"IsTrue":true
+},
+{
+"AnswerText":"Dragon Ball",
+"IsTrue":false
+},
+{
+"AnswerText":"Nanatsu no Taizai",
+"IsTrue":false
+},
+{
+"AnswerText":"Gurren Lagann",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"fragilite-lolienne-parodies-danimes.wav",
+"StartTrack":37.3468551635742,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Gurren Lagann",
+"IsTrue":false
+},
+{
+"AnswerText":"Magi",
+"IsTrue":false
+},
+{
+"AnswerText":"Tokyo Ghoul",
+"IsTrue":true
+},
+{
+"AnswerText":"Noragami",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"fragilite-lolienne-parodies-danimes.wav",
+"StartTrack":144.104232788086,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Boruto",
+"IsTrue":false
+},
+{
+"AnswerText":"Death Note",
+"IsTrue":true
+},
+{
+"AnswerText":"Black Butler",
+"IsTrue":false
+},
+{
+"AnswerText":"Akame ga-Kill",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"fragilite-lolienne-parodies-danimes.wav",
+"StartTrack":199.772476196289,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Parasyte",
+"IsTrue":true
+},
+{
+"AnswerText":"Overlord",
+"IsTrue":false
+},
+{
+"AnswerText":"Kenshin le Vagabond",
+"IsTrue":false
+},
+{
+"AnswerText":"Trigun",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"fragilite-lolienne-2-parodies-danimes.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Wolf's Rain",
+"IsTrue":false
+},
+{
+"AnswerText":"Arslan",
+"IsTrue":false
+},
+{
+"AnswerText":"Charlotte",
+"IsTrue":false
+},
+{
+"AnswerText":"Sakamoto, pour vous servir",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"fragilite-lolienne-2-parodies-danimes.wav",
+"StartTrack":89.3495635986328,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Soul Eater",
+"IsTrue":false
+},
+{
+"AnswerText":"Great Teacher Onizuka",
+"IsTrue":true
+},
+{
+"AnswerText":"Hikaru no Go",
+"IsTrue":false
+},
+{
+"AnswerText":"City Hunter",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"fragilite-lolienne-0-parodies-danimes.wav",
+"StartTrack":195.802612304688,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Digimon",
+"IsTrue":false
+},
+{
+"AnswerText":"Pokemon",
+"IsTrue":true
+},
+{
+"AnswerText":"Yokai Watch",
+"IsTrue":false
+},
+{
+"AnswerText":"Beyblade",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Séries du fun",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"all-the-community-opening-variants.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Community",
+"IsTrue":true
+},
+{
+"AnswerText":"The Office",
+"IsTrue":false
+},
+{
+"AnswerText":"Modern Family",
+"IsTrue":false
+},
+{
+"AnswerText":"Seinfeld",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"brooklyn-nine-nine-intro.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Cheers",
+"IsTrue":false
+},
+{
+"AnswerText":"Brooklyn 99",
+"IsTrue":true
+},
+{
+"AnswerText":"How I Met Your Mother",
+"IsTrue":false
+},
+{
+"AnswerText":"Les Griffin",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"the-office-theme.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"The Office",
+"IsTrue":true
+},
+{
+"AnswerText":"The Good Place",
+"IsTrue":false
+},
+{
+"AnswerText":"New Girl",
+"IsTrue":false
+},
+{
+"AnswerText":"Philadelphia",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"ma-famille-dabord-musique.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Ma Sorcière Bien Aimée",
+"IsTrue":false
+},
+{
+"AnswerText":"Ma Famille d'abord",
+"IsTrue":true
+},
+{
+"AnswerText":"Mariés, deux enfants",
+"IsTrue":false
+},
+{
+"AnswerText":"Les Goldberg",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"generique-desperate-housewives.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Sex and the City",
+"IsTrue":false
+},
+{
+"AnswerText":"Gossip Girl",
+"IsTrue":false
+},
+{
+"AnswerText":"Desperate Housewives",
+"IsTrue":true
+},
+{
+"AnswerText":"Silicon Valley",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"rick-and-morty-intro.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Red Dwarf",
+"IsTrue":false
+},
+{
+"AnswerText":"Futurama",
+"IsTrue":false
+},
+{
+"AnswerText":"Invader Zim",
+"IsTrue":false
+},
+{
+"AnswerText":"Rick & Morty",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"suits-intro.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Bull",
+"IsTrue":false
+},
+{
+"AnswerText":"Boston Justice",
+"IsTrue":false
+},
+{
+"AnswerText":"Better Call Saul",
+"IsTrue":false
+},
+{
+"AnswerText":"Suits: Avocats sur mesure",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"atypical-intro-song.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":true,
+"Answers":[
+{
+"AnswerText":"Frasier",
+"IsTrue":false
+},
+{
+"AnswerText":"Portlandia",
+"IsTrue":false
+},
+{
+"AnswerText":"Atypical",
+"IsTrue":true
+},
+{
+"AnswerText":"Roseanne",
+"IsTrue":false
+}
+]
+}
+]
+}
+]
+}
+]
+}

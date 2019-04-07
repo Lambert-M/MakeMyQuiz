@@ -185,7 +185,8 @@ public class QuestionController : MonoBehaviour
         }
  
         isBuzzActivate = DataModel.CurRound().IsBuzzRound;
-    
+        StartCoroutine(DisplayText());
+
         RunningQuestions();
     }
     
@@ -297,6 +298,9 @@ public class QuestionController : MonoBehaviour
   
     private void RunningQuestions()
     {
+
+        goingToNextQuestion = false;
+
         if (isBuzzActivate)
         {
             buzz_event = false;
@@ -313,7 +317,7 @@ public class QuestionController : MonoBehaviour
             ResetTeamsAnswered();
             DisableAllBuzzers();
         }
-        goingToNextQuestion = false;
+     
         // Make required objects to disappear at the start of question
         GameObject.Find("ArrowButton").GetComponent<Button>().interactable = false;
 
@@ -355,8 +359,7 @@ public class QuestionController : MonoBehaviour
             musicSource.clip = music;
           
         }
-        StartCoroutine(DisplayText());
-
+        
         foreach (PlayerModel e in teamsCtrl)
         {
             ChangeTeamColor(0, e);
@@ -371,11 +374,27 @@ public class QuestionController : MonoBehaviour
 
         // After 10 seconds, the timer and answers appears, 7 seconds after that a false answer disappears, again 4 seconds after and at 25 sec teams can'musicQ answer
         // anymore. Finally at 28 seconds, the true answer is revealed and points are given
-        Invoke("RevealAnswers", 5 + question_length_to_time);
-        Invoke("EliminateFalseAnswer", 12 + question_length_to_time);
-        Invoke("EliminateFalseAnswer", 16 + question_length_to_time);
-        Invoke("DisableTeam", 20 + question_length_to_time);
-        Invoke("FinalAnswerPhase", 23 + question_length_to_time);
+
+        if (DataModel.CurQuestion() is TextQuestion)
+        {
+
+            TextQuestion texteQ = (TextQuestion)DataModel.CurQuestion();
+            questionText.text = texteQ.Question;
+
+            //formule de merde a changer
+            question_length_to_time = questionText.text.Length * 0.07f;
+        }
+        else
+        {
+            questionText.text = DataModel.TextToUse["music_display"] + actualQuestion;
+        }
+
+        Debug.Log("avant invoke "+ question_length_to_time);
+        Invoke("RevealAnswers", 3.0f + question_length_to_time);
+        Invoke("EliminateFalseAnswer", 10.0f + question_length_to_time);
+        Invoke("EliminateFalseAnswer", 14.0f + question_length_to_time);
+        Invoke("DisableTeam", 18.0f + question_length_to_time);
+        Invoke("FinalAnswerPhase", 21.0f + question_length_to_time);
     }
 
     /**
@@ -615,7 +634,6 @@ public class QuestionController : MonoBehaviour
         visibleCharacterCount = 0;
         while (!goingToNextQuestion)
         {
-           
             if (DataModel.CurQuestion() is TextQuestion)
             {
                 
@@ -623,7 +641,8 @@ public class QuestionController : MonoBehaviour
                 questionText.text = texteQ.Question;
 
                 //formule de merde a changer
-                question_length_to_time = questionText.text.Length * 0.035f;
+                question_length_to_time = questionText.text.Length * 0.07f;
+                Debug.Log("nb chars "+ questionText.text.Length);
             }
             else
             {
@@ -714,11 +733,13 @@ public class QuestionController : MonoBehaviour
 
     public void GoToNextQuestion()
     {
+      
         if (Time.timeScale == 2f)
         {
             Time.timeScale = 1f;
         }
         goingToNextQuestion = true;
+        visibleCharacterCount = 0;
         if (isNextAvailable)
         {
             musicSource.Stop();
