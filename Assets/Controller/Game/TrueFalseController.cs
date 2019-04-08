@@ -180,7 +180,7 @@ public class TrueFalseController : MonoBehaviour
             GoToNextQuestion();
         }
 
-        if(!first && EveryoneAnswered())
+        if(!first && EveryoneAnswered() && Input.GetKeyDown(KeyCode.O))
         {
             first = true;
             StartCoroutine(WaitForRealSeconds(1.0f));

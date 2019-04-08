@@ -350,13 +350,14 @@ public class QuestionController : MonoBehaviour
             {
                 musicSource.volume = musicQ.Volume;
             }
-            question_length_to_time += 0.5f;
+            question_length_to_time += 2f;
         }
         else
         {
             int music_index = Random.Range(1, 4);
             music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName+music_index);
             musicSource.clip = music;
+            musicSource.volume = 0.75f;
           
         }
         
