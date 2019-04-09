@@ -111,7 +111,7 @@ public class TopicController : MonoBehaviour {
         }
         else
         {
-            grid.cellSize = new Vector2(grid.cellSize.x, Mathf.Min(height / (counter / 2) - grid.spacing.y, 270));
+            grid.cellSize = new Vector2(grid.cellSize.x, Mathf.Min(height / ((counter / 2)+1) - grid.spacing.y, 270));
         }
 
         /*
