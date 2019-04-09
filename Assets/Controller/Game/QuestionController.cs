@@ -349,7 +349,7 @@ public class QuestionController : MonoBehaviour
             {
                 musicSource.volume = musicQ.Volume;
             }
-            question_length_to_time += 2f;
+            question_length_to_time = 2.5f;
         }
         else
         {
@@ -523,7 +523,7 @@ public class QuestionController : MonoBehaviour
         }
         if (DataModel.CurQuestion() is MusicQuestion)
         {
-            musicSource.Stop();
+            musicSource.Pause();
         }
     }
 
