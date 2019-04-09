@@ -388,8 +388,12 @@ public class QuestionController : MonoBehaviour
         {
             questionText.text = DataModel.TextToUse["music_display"] + actualQuestion;
         }
+        answers = questions.First().Answers;
+        GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
+        GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
+        GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
+        GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
 
-        Debug.Log("avant invoke "+ question_length_to_time);
         Invoke("RevealAnswers", 3.0f + question_length_to_time);
         Invoke("EliminateFalseAnswer", 10.0f + question_length_to_time);
         Invoke("EliminateFalseAnswer", 14.0f + question_length_to_time);
@@ -657,13 +661,6 @@ public class QuestionController : MonoBehaviour
                 questionText.maxVisibleCharacters = visibleCharacterCount;
                 yield return new WaitForSeconds(0.07f);
             }
-           
-
-            answers = questions.First().Answers;
-            GameObject.Find("Answer 1").GetComponent<TextMeshProUGUI>().text = answers[0].AnswerText;
-            GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
-            GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
-            GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
             yield return null;
         }
     }

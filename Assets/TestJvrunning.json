@@ -31,69 +31,6 @@
 "IsAvailable":true,
 "Questions":[
 {
-"Question":"A quelle génération appartient la PS4 ?",
-"Answers":[
-{
-"AnswerText":"6eme",
-"IsTrue":false
-},
-{
-"AnswerText":"7eme",
-"IsTrue":false
-},
-{
-"AnswerText":"8eme",
-"IsTrue":true
-},
-{
-"AnswerText":"9eme",
-"IsTrue":false
-}
-]
-},
-{
-"Question":"Qui est le fils de Donkey Kong ?",
-"Answers":[
-{
-"AnswerText":"Donkey Kong Jr",
-"IsTrue":true
-},
-{
-"AnswerText":"Diddy Kong",
-"IsTrue":false
-},
-{
-"AnswerText":"Funky Kong",
-"IsTrue":false
-},
-{
-"AnswerText":"K. Rool",
-"IsTrue":false
-}
-]
-},
-{
-"Question":"Dans Pokemon XD : Le Souffle des ténèbres, quelle nouveau type original apparaît uniquement dans cet opus ?",
-"Answers":[
-{
-"AnswerText":"Obscur",
-"IsTrue":true
-},
-{
-"AnswerText":"Divin",
-"IsTrue":false
-},
-{
-"AnswerText":"Lumière",
-"IsTrue":false
-},
-{
-"AnswerText":"Cosmique",
-"IsTrue":false
-}
-]
-},
-{
 "Question":"A quelle race appartiennent les créatures mi-humanoIdes, mi-rochers dans Zelda ?",
 "Answers":[
 {
