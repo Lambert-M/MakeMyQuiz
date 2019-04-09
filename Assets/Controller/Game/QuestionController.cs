@@ -236,7 +236,6 @@ public class QuestionController : MonoBehaviour
                 StartCoroutine(WaitForRealSeconds(1.57f));
                 ReappearAllTeams();
                 teamsCtrl[number_team_buzz - 1].gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
-                GameObject.Find("Joker " + (number_team_buzz)).GetComponent<CanvasGroup>().alpha = 0.5f; 
                 buzz_answer_confirm = true;
                 teamsCtrl[number_team_buzz - 1].SetHasAnswered(true);
                 teamsCtrl[number_team_buzz - 1].buzzed = true;
