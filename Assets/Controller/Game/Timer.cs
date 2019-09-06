@@ -18,7 +18,8 @@ public class Timer : MonoBehaviour
 
     protected GameObject timer;
     public Image timer_image;
-    
+    public Image timer_bar;
+
     private List<GameObject> panellist = new List<GameObject>(15);
     
     void Start()
@@ -59,8 +60,10 @@ public class Timer : MonoBehaviour
             currTimerValue -= Time.deltaTime;
             // Updating timer fillAmount
             timer_image.fillAmount -= 1.0f / timerValue * Time.deltaTime;
+            timer_bar.fillAmount -= 1.0f / timerValue * Time.deltaTime;
+
             // erase the timer panel
-            if (SceneManager.GetActiveScene().name != "Introduction")
+            if (SceneManager.GetActiveScene().name != "Introduction" && SceneManager.GetActiveScene().name != "TrueFalse")
             {
                 if (currTimerValue < nextPanelErased)
                 {
@@ -78,6 +81,7 @@ public class Timer : MonoBehaviour
         currTimerValue = timerValue;
         // Set the timer fillAmount to the maximum
         timer_image.fillAmount = 1.0f;
+        timer_bar.fillAmount = 1.0f;
 
         nextPanelErased = 14.0f;
     }

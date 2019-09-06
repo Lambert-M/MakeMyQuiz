@@ -192,6 +192,10 @@ public class QuestionController : MonoBehaviour
     
     void Update()
     {
+        if (timerctrl.GetCurrentTimeValue() < 0.1f && Input.GetKeyDown(DataModel.Next))
+        {
+            GoToNextQuestion();
+        }
 
         if (EveryoneAnswered() && Time.timeScale == 1f)
         {

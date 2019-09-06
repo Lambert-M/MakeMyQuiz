@@ -32,6 +32,7 @@ public class TrueFalseController : MonoBehaviour
     private GameObject teamContainer1;
     private GameObject teamContainer2;
     private Color c;
+    private Timer timerctrl;
     //Arrays
     private AnswerData[] answers;
     //Lists
@@ -46,6 +47,8 @@ public class TrueFalseController : MonoBehaviour
      */
     void Start()
     {
+
+        timerctrl = GameObject.Find("Timer").GetComponent<Timer>();
         ans1 = GameObject.Find("Answer 1");
         ans2 = GameObject.Find("Answer 2");
         teamContainer1 = GameObject.Find("TeamContainer1");
@@ -166,7 +169,7 @@ public class TrueFalseController : MonoBehaviour
 
         if (EveryoneAnswered() && Time.timeScale == 1f)
         {
-            Time.timeScale = 2f;
+            Time.timeScale = 5f;
         }
         // Pause/Resume the game
         if (Input.GetKeyUp(DataModel.Pause))
@@ -175,16 +178,9 @@ public class TrueFalseController : MonoBehaviour
         }
 
         //go to next question
-        if (Input.GetKeyDown(DataModel.Next))
+        if (timerctrl.GetCurrentTimeValue() < 0.1f && Input.GetKeyDown(DataModel.Next))
         {
             GoToNextQuestion();
-        }
-
-        if(!first && EveryoneAnswered() && Input.GetKeyDown(KeyCode.O))
-        {
-            first = true;
-            StartCoroutine(WaitForRealSeconds(1.0f));
-            FinalAnswerPhase();
         }
     }
    
@@ -208,6 +204,7 @@ public class TrueFalseController : MonoBehaviour
         music = Resources.Load<AudioClip>("Sounds/" + DataModel.QuestionMusicName+music_index);
         musicSource.clip = music;
         StartCoroutine(DisplayText());
+        timerctrl.tickingDown = true;
 
         foreach (PlayerModel e in teamsCtrl)
         {
@@ -215,6 +212,8 @@ public class TrueFalseController : MonoBehaviour
         }
 
         musicSource.Play();
+
+        Invoke("FinalAnswerPhase", 40.0f);
     }
 
     public IEnumerator WaitForRealSeconds(float time)
@@ -374,7 +373,7 @@ public class TrueFalseController : MonoBehaviour
 
     public void GoToNextQuestion()
     {
-        if (Time.timeScale == 2f)
+        if (Time.timeScale > 2f)
         {
             Time.timeScale = 1f;
         }
@@ -417,6 +416,7 @@ public class TrueFalseController : MonoBehaviour
             {
                 arrow.GetComponent<CanvasGroup>().alpha = 1;
                 DataModel.Save(DataModel.CurrentRunningFilename);
+                timerctrl.ResetTimer();
                 RunningQuestions();
             }
         }
