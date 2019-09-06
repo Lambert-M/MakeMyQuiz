@@ -21,6 +21,7 @@ public class EndController : MonoBehaviour {
     public Animator aura;
     public Canvas c;
     public Camera ca;
+    public GameObject arrow;
     // Use this for initialization
     void Start ()
     {
@@ -63,16 +64,22 @@ public class EndController : MonoBehaviour {
 
     private IEnumerator LaunchFinalExplosion()
     {
-     
+
         yield return new WaitForSeconds(1f);
         sprite_final_explosion.enabled = true;
         final_explosion.SetBool("isBestTeam", true);
         yield return new WaitForSeconds(0.5f);
         Destroy(final_explosion.gameObject);
         sprite_aura.enabled = true;
+
+        arrow.GetComponent<CanvasGroup>().alpha = 1;
+        arrow.GetComponent<Button>().onClick.AddListener(() => BackToMainMenu());
     }
 
-
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("EMenus");
+    }
     void FixedUpdate()
     {
         Vector3 screenPos = ca.WorldToScreenPoint(rb.position);

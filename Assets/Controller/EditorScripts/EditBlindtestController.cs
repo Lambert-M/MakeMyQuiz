@@ -16,6 +16,12 @@ public class EditBlindtestController : MonoBehaviour
 {
     //VARIABLES
     public RectTransform btPrefab;
+    public GameObject confirmationBox;
+    public GameObject yesBox;
+    public GameObject noBox;
+    public CanvasGroup canvas;
+    public CanvasGroup canvasGroupConfirmationBox;
+
     private int nbQ;
 
     private bool play;
@@ -26,10 +32,13 @@ public class EditBlindtestController : MonoBehaviour
     private string filename;
     private string pathDestSound;
     private bool musicStop;
+    private string confirmation;
+    private int nbDelete;
 
     // Use this for initialization
     void Start()
     {
+        confirmation = "null";
         string[] datapath = Application.dataPath.Split('/');
         string pathsrc = datapath[0] + '/';
         for (int i = 1; i < datapath.Length - 1; i++)
@@ -46,11 +55,11 @@ public class EditBlindtestController : MonoBehaviour
         GameObject.Find("AddQuestion").GetComponent<Button>().onClick.AddListener(() => NewQuestionPanelData());
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["menu_blindtest"];
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text += "\n " + DataModel.TextToUse["topic_name"] + " " + DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Name;
+        yesBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickYes());
+        noBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickNo());
         nbQ = 0;
         musicStop = true;
         LoadAllQuestionsPanel();
-       
-
     }
 
     // Update is called once per frame
@@ -195,24 +204,82 @@ public class EditBlindtestController : MonoBehaviour
     }
 
     /**
+     * Set the confirmation string to yes or no depending of the button activated
+     **/
+
+    public void ClickYes()
+    {
+        confirmation = "yes";
+    }
+    public void ClickNo()
+    {
+        confirmation = "no";
+    }
+
+    /**
      * Remove the selected question from the DataModel and destroy the associated panel in the UI
      * Updating the number of question panel
      **/
+
+    IEnumerator LaunchBoxDialog ()
+    {
+        while (confirmation.Equals("null"))
+        {
+            yield return null;
+        }
+        if (confirmation.Equals("yes"))
+        {
+
+            DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions[nbDelete - 1]);
+            Destroy(GameObject.Find("BTSample" + nbDelete));
+            nbQ--;
+            // edit the number associated to each BTSample (avoid having two non-consecutive numbers)
+            foreach (GameObject e in GameObject.FindGameObjectsWithTag("BTSample"))
+            {
+                if (e.GetComponent<PanelModel>().PanelNumber > nbDelete)
+                {
+                    e.GetComponent<PanelModel>().PanelNumber--;
+                    e.name = "BTSample" + e.GetComponent<PanelModel>().PanelNumber;
+                }
+            }
+            confirmation = "null";
+            confirmationBox.SetActive(false);
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+        
+
+            StopCoroutine("LaunchBoxDialog");
+        }
+        else if (confirmation.Equals("no"))
+        {
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+         
+            confirmationBox.SetActive(false);
+            confirmation = "null";
+            StopCoroutine("LaunchBoxDialog");
+        }
+    }
+
     public void RemoveQuestion()
     {
-        int nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
-        DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions[nbDelete - 1]);
-        Destroy(GameObject.Find("BTSample" + nbDelete));
-        nbQ--;
-        // edit the number associated to each BTSample (avoid having two non-consecutive numbers)
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("BTSample"))
-        {
-            if (e.GetComponent<PanelModel>().PanelNumber > nbDelete)
-            {
-                e.GetComponent<PanelModel>().PanelNumber--;
-                e.name = "BTSample" + e.GetComponent<PanelModel>().PanelNumber;
-            }
-        }
+        nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
+        confirmationBox.SetActive(true);
+
+        //reduce the visibility of normal UI, and disable all interraction
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
+      
+
+        //enable interraction with confirmation gui and make visible
+        canvasGroupConfirmationBox.interactable = true;
+        canvasGroupConfirmationBox.blocksRaycasts = true;
+   
+
+        StartCoroutine("LaunchBoxDialog");
+        
     }
 
     public void ChangeTime(float x)

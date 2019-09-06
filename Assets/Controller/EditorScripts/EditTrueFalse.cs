@@ -11,11 +11,20 @@ public class EditTrueFalse : MonoBehaviour
 {
     //VARIABLES
     private RectTransform questionPrefab;
+    public GameObject confirmationBox;
+    public GameObject yesBox;
+    public GameObject noBox;
+    public CanvasGroup canvas;
+    public CanvasGroup canvasGroupConfirmationBox;
+
     private int nbQ;
+    private string confirmation;
+    private int nbDelete;
 
     // Use this for initialization
     void Start()
     {
+        confirmation = "null";
         GameObject.Find("MenuButton").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_backmain"];
         GameObject.Find("MenuButton").GetComponent<Button>().onClick.AddListener(() => BackToMainMenu());
         GameObject.Find("BackToTopics").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_backtopic"];
@@ -24,7 +33,8 @@ public class EditTrueFalse : MonoBehaviour
         GameObject.Find("AddQuestion").GetComponent<Button>().onClick.AddListener(() => NewQuestionPanelData());
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["menu_questions"];
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text += "\n " + DataModel.TextToUse["topic_name"] + " " + DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Name;
-
+        yesBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickYes());
+        noBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickNo());
         nbQ = 0;
         if (DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions != null)
         {
@@ -86,25 +96,79 @@ public class EditTrueFalse : MonoBehaviour
         DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Add(question);
     }
 
+
+    /**
+     * Set the confirmation string to yes or no depending of the button activated
+     **/
+
+    public void ClickYes()
+    {
+        confirmation = "yes";
+    }
+    public void ClickNo()
+    {
+        confirmation = "no";
+    }
+
     /**
      * Remove the selected question from the DataModel and destroy the associated panel in the UI
      * Updating the number of question panel
      **/
+
+    IEnumerator LaunchBoxDialog()
+    {
+        while (confirmation.Equals("null"))
+        {
+            yield return null;
+        }
+        if (confirmation.Equals("yes"))
+        {
+            DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions[nbDelete - 1]);
+            Destroy(GameObject.Find("TFSample" + nbDelete));
+            nbQ--;
+            foreach (GameObject e in GameObject.FindGameObjectsWithTag("QSample"))
+            {
+                if (e.GetComponent<PanelModel>().PanelNumber > nbDelete)
+                {
+                    e.GetComponent<PanelModel>().PanelNumber--;
+                    e.name = "TFSample" + e.GetComponent<PanelModel>().PanelNumber;
+                }
+            }
+            confirmation = "null";
+            confirmationBox.SetActive(false);
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+
+            StopCoroutine("LaunchBoxDialog");
+        }
+        else if (confirmation.Equals("no"))
+        {
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+            confirmationBox.SetActive(false);
+            confirmation = "null";
+            StopCoroutine("LaunchBoxDialog");
+        }
+    }
     public void RemoveQuestion()
     {
-        int nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
-        DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions[nbDelete - 1]);
-        Destroy(GameObject.Find("TFSample" + nbDelete));
-        nbQ--;
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("QSample"))
-        {
-            if (e.GetComponent<PanelModel>().PanelNumber > nbDelete)
-            {
-                e.GetComponent<PanelModel>().PanelNumber--;
-                e.name = "TFSample" + e.GetComponent<PanelModel>().PanelNumber;
-            }
-        }
+        nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
+        confirmationBox.SetActive(true);
 
+        //reduce the visibility of normal UI, and disable all interraction
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
+
+
+        //enable interraction with confirmation gui and make visible
+        canvasGroupConfirmationBox.interactable = true;
+        canvasGroupConfirmationBox.blocksRaycasts = true;
+
+        StartCoroutine("LaunchBoxDialog");
     }
 
     /**

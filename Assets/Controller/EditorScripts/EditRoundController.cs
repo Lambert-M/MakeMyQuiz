@@ -11,17 +11,28 @@ public class EditRoundController : MonoBehaviour
 {
     //VARIABLES
     public RectTransform round;
+    public GameObject confirmationBox;
+    public GameObject yesBox;
+    public GameObject noBox;
+    public CanvasGroup canvas;
+    public CanvasGroup canvasGroupConfirmationBox;
+
     private int nbPanel;
     private int nbTopics;
-    
+    private string confirmation;
+    private int nbDelete;
+
     // Use this for initialization
     void Start()
     {
+        confirmation = "null";
         GameObject.Find("MenuButton").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_backmain"];
         GameObject.Find("MenuButton").GetComponent<Button>().onClick.AddListener(() => BackToMainMenu());
         GameObject.Find("AddRound").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_addround"];
         GameObject.Find("AddRound").GetComponent<Button>().onClick.AddListener(() => AddRound());
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["menu_rounds"];
+        yesBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickYes());
+        noBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickNo());
 
         nbPanel = 0;
         GameObject.Find("NumberRound").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
@@ -109,28 +120,86 @@ public class EditRoundController : MonoBehaviour
         round.Find("NumberofContainer").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["topic_number"] + nbTopics;
     }
 
+
+    /**
+      * Set the confirmation string to yes or no depending of the button activated
+     **/
+
+    public void ClickYes()
+    {
+        confirmation = "yes";
+    }
+    public void ClickNo()
+    {
+        confirmation = "no";
+    }
+
     /**
      * @author : Christophe SAHID, Léo ROUZIC
      * Removes the selected round
      */
+
+    IEnumerator LaunchBoxDialog()
+    {
+        while (confirmation.Equals("null"))
+        {
+              yield return null;
+        }
+        if (confirmation.Equals("yes"))
+        {
+            DataModel.Rounds.Remove(DataModel.Rounds[nbDelete - 1]);
+
+            nbPanel--;
+            Destroy(GameObject.Find("RoundSample" + nbDelete));
+            GameObject.Find("NumberRound").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
+            // edit the number associated to each RoundSample (avoid having two non-consecutive numbers)
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("RoundPanels"))
+            {
+                if (g.GetComponent<PanelModel>().PanelNumber >= nbDelete)
+                {
+                    g.GetComponent<PanelModel>().PanelNumber--;
+                    g.name = "RoundSample" + g.GetComponent<PanelModel>().PanelNumber;
+                }
+            }
+            confirmation = "null";
+            confirmationBox.SetActive(false);
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+
+            StopCoroutine("LaunchBoxDialog");
+        }
+        else if (confirmation.Equals("no"))
+        {
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+            confirmationBox.SetActive(false);
+            confirmation = "null";
+            StopCoroutine("LaunchBoxDialog");
+        }
+    }
+
+
     public void DeleteRound()
     {
         //get the index of the round to delete
-        int nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
-        DataModel.Rounds.Remove(DataModel.Rounds[nbDelete - 1]);
+        nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
+        confirmationBox.SetActive(true);
 
-        nbPanel--;
-        Destroy(GameObject.Find("RoundSample" + nbDelete));
-        GameObject.Find("NumberRound").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["round_number"] + nbPanel;
-        // edit the number associated to each RoundSample (avoid having two non-consecutive numbers)
-        foreach (GameObject g in GameObject.FindGameObjectsWithTag("RoundPanels"))
-        {
-            if (g.GetComponent<PanelModel>().PanelNumber >= nbDelete)
-            {
-                g.GetComponent<PanelModel>().PanelNumber--;
-                g.name = "RoundSample" + g.GetComponent<PanelModel>().PanelNumber;
-            }
-        }
+        //reduce the visibility of normal UI, and disable all interraction
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
+
+
+        //enable interraction with confirmation gui and make visible
+        canvasGroupConfirmationBox.interactable = true;
+        canvasGroupConfirmationBox.blocksRaycasts = true;
+
+
+        StartCoroutine("LaunchBoxDialog");
     }
 
     /**

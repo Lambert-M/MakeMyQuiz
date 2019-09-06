@@ -393,6 +393,7 @@ MonoBehaviour:
   aura: {fileID: 1482407859}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!61 &206328965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -815,7 +816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.91800004, y: 0.19354902}
   m_AnchorMax: {x: 0.9782395, y: 0.2958684}
-  m_AnchoredPosition: {x: -0.18164062, y: -0.66101074}
+  m_AnchoredPosition: {x: -0.6575928, y: 0.5}
   m_SizeDelta: {x: -3.199997, y: -1}
   m_Pivot: {x: 0.20550461, y: 0.5}
 --- !u!225 &360630263
@@ -1599,6 +1600,7 @@ MonoBehaviour:
   aura: {fileID: 753035807}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!1 &590613046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1881,7 @@ MonoBehaviour:
   aura: {fileID: 43407985}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!50 &617417748
 Rigidbody2D:
   serializedVersion: 4
@@ -2049,6 +2052,7 @@ MonoBehaviour:
   aura: {fileID: 1493468432}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!50 &631021798
 Rigidbody2D:
   serializedVersion: 4
@@ -2934,6 +2938,7 @@ MonoBehaviour:
   aura: {fileID: 1612329022}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!61 &864580124
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4142,6 +4147,7 @@ MonoBehaviour:
   aura: {fileID: 1595350178}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!50 &1408666266
 Rigidbody2D:
   serializedVersion: 4
@@ -4715,6 +4721,7 @@ MonoBehaviour:
   aura: {fileID: 2087673677}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!50 &1492105862
 Rigidbody2D:
   serializedVersion: 4
@@ -6131,6 +6138,7 @@ MonoBehaviour:
   aura: {fileID: 1777465701}
   c: {fileID: 870469499}
   ca: {fileID: 1699632001}
+  arrow: {fileID: 360630261}
 --- !u!50 &1782777074
 Rigidbody2D:
   serializedVersion: 4

@@ -10,14 +10,22 @@ using TMPro;
 public class EditTopicController : MonoBehaviour {
 
     public RectTransform topicPrefab;
+    public GameObject confirmationBox;
+    public GameObject yesBox;
+    public GameObject noBox;
+    public CanvasGroup canvas;
+    public CanvasGroup canvasGroupConfirmationBox;
+
     private int nbPanel;
     private int nbQuestions;
+    private int nbDelete;
+    private string confirmation;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         nbPanel = 0;
-
+        confirmation = "null";
         GameObject.Find("MenuButton").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_backmain"];
         GameObject.Find("MenuButton").GetComponent<Button>().onClick.AddListener(() => BackToMainMenu());
         GameObject.Find("BackToRound").GetComponentInChildren<TextMeshProUGUI>().text = DataModel.TextToUse["menu_backround"];
@@ -26,7 +34,8 @@ public class EditTopicController : MonoBehaviour {
         GameObject.Find("AddTopic").GetComponent<Button>().onClick.AddListener(() => NewTopicPanelData());
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["menu_topics"];
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text += "\n " + DataModel.TextToUse["round_name"] + " " + (DataModel.IroundCur + 1);
-        
+        yesBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickYes());
+        noBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickNo());
         LoadAllPanels();
 	}
 	
@@ -128,15 +137,34 @@ public class EditTopicController : MonoBehaviour {
     }
 
     /**
+     * Set the confirmation string to yes or no depending of the button activated
+     **/
+
+    public void ClickYes()
+    {
+        confirmation = "yes";
+    }
+    public void ClickNo()
+    {
+        confirmation = "no";
+    }
+
+
+    /**
      * Remove the selected topic from the DataModel and destroy the associated panel in the UI
      * Updating the number of question panel
      **/
-    public void DeleteTopic()
+
+    IEnumerator LaunchBoxDialog()
     {
-        if (nbPanel > 1)
+        while (confirmation.Equals("null"))
         {
-            int nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
-            DataModel.Rounds[DataModel.IroundCur].Topics.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[nbDelete-1]);
+            yield return null;
+        }
+        if (confirmation.Equals("yes"))
+        {
+
+            DataModel.Rounds[DataModel.IroundCur].Topics.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[nbDelete - 1]);
 
             Destroy(GameObject.Find("TopicPanel" + nbDelete));
             nbPanel--;
@@ -148,6 +176,44 @@ public class EditTopicController : MonoBehaviour {
                     e.name = "TopicPanel" + e.GetComponent<PanelModel>().PanelNumber;
                 }
             }
+            confirmation = "null";
+            confirmationBox.SetActive(false);
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+
+            StopCoroutine("LaunchBoxDialog");
+        }
+        else if (confirmation.Equals("no"))
+        {
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+            confirmationBox.SetActive(false);
+            confirmation = "null";
+            StopCoroutine("LaunchBoxDialog");
+        }
+    }
+
+    public void DeleteTopic()
+    {
+        if (nbPanel > 1)
+        {
+            nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
+            confirmationBox.SetActive(true);
+
+            //reduce the visibility of normal UI, and disable all interraction
+            canvas.interactable = false;
+            canvas.blocksRaycasts = false;
+
+
+            //enable interraction with confirmation gui and make visible
+            canvasGroupConfirmationBox.interactable = true;
+            canvasGroupConfirmationBox.blocksRaycasts = true;
+
+            StartCoroutine("LaunchBoxDialog");
         }
     }
 

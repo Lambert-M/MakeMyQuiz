@@ -1,3 +1,4 @@
+
 # PROJET L3 INFORMATIQUE - RENNES 1 2017/2018
 
 ## Sujet
@@ -13,7 +14,7 @@ MakeMyQuiz, logiciel de création de quiz.
 ### But du projet
 
 MakeMyQuiz est un logiciel de conception de quiz principalement conçu à des fins de divertissement, notamment lors d'animations dans des bars, salles de jeu, etc... mais également pour le domaine de l'éducation.
-Le logiciel est conçu pour être joué avec des télécommandes mais toutes manettes compatibles avec votre ordinateur peuvent substituer ces télécomandes.
+Le logiciel est conçu pour être joué avec des télécommandes mais toutes manettes compatibles avec votre ordinateur peuvent substituer ces télécommandes.
 
 ### Prérequis 
 
@@ -21,7 +22,7 @@ Le logiciel est conçu pour être joué avec des télécommandes mais toutes man
 - Windows 7+ : 64 ou 32 bits
 
 ### Fonctionalités
-#### Principales
+
 - [x] Jusqu'à 8 équipes participantes
 - [x] Calcul de points et gestion de bonus
 - [x] Organisation en manches-sujet-questions
@@ -29,18 +30,18 @@ Le logiciel est conçu pour être joué avec des télécommandes mais toutes man
     - [x] Choix multiples
     - [x] Reconnaissance de musiques
     - [x] Reconnaissance d'images
+    - [x] Vrai - Faux
 - [x] Internationalisation
-#### Secondaires
-- [ ] La personnalisation des images et musiques d'arrière plan
-- [ ] Des sujets pré-configurés
-- [ ] Tutoriel de prise en main
-- [ ] Connectivité smartphone
+- [x] Mode rapidité
+- [x] Gestion des égalités
+- [x] Sauvegarde/backup automatique 
+
 
 ### Guide D'utilisation
 
 Lien : [Guide d'utilisation](Documents/Guide_d'utilisation.pdf)
 (disponible dans le dossier Documents)
-
+Nous contacter : makemyquiz.serviceapresfun@gmail.com
 NB : Telecharger le document pour avoir accès aux hyperliens et au plan. 
 
 ### Galerie

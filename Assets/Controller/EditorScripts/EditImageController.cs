@@ -16,16 +16,25 @@ public class EditImageController : MonoBehaviour
 {
     //VARIABLES
     public RectTransform imagePrefab;
+    public GameObject confirmationBox;
+    public GameObject yesBox;
+    public GameObject noBox;
+    public CanvasGroup canvas;
+    public CanvasGroup canvasGroupConfirmationBox;
+
     private int nbQ;
     private string[] fileExtensions = { "png", "jpg" };
     private GameObject currentObj;
     private Image image;
     private string filename;
     private string pathDestImage;
+    private string confirmation;
+    private int nbDelete;
 
     // Use this for initialization
     void Start()
     {
+        confirmation = "null";
         string[] datapath = Application.dataPath.Split('/');
         string pathsrc = datapath[0] + '/';
         for (int i = 1; i < datapath.Length - 1; i++)
@@ -42,6 +51,8 @@ public class EditImageController : MonoBehaviour
         GameObject.Find("AddQuestion").GetComponent<Button>().onClick.AddListener(() => NewQuestionPanelData());
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text = DataModel.TextToUse["menu_images"];
         GameObject.Find("Title").GetComponent<TextMeshProUGUI>().text += "\n " + DataModel.TextToUse["topic_name"] + " " + DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Name;
+        yesBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickYes());
+        noBox.gameObject.GetComponent<Button>().onClick.AddListener(() => ClickNo());
         nbQ = 0;
         LoadAllQuestionsPanel();
     }
@@ -137,25 +148,89 @@ public class EditImageController : MonoBehaviour
         DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Add(question);
     }
 
+
+
     /**
      * Remove the selected question from the DataModel and destroy the associated panel in the UI
      * Updating the number of question panel
      **/
+    IEnumerator LaunchBoxDialog()
+    {
+        Debug.Log(confirmation);
+        while (confirmation.Equals("null"))
+        {
+            Debug.Log(confirmation);
+            yield return null;
+        }
+        if (confirmation.Equals("yes"))
+        {
+            Debug.Log("yes");
+
+            DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions[nbDelete - 1]);
+            Destroy(GameObject.Find("ImgSample" + nbDelete));
+            nbQ--;
+            // edit the number associated to each ImgSample (avoid having two non-consecutive numbers)
+            foreach (GameObject e in GameObject.FindGameObjectsWithTag("ImgSample"))
+            {
+                if (e.GetComponent<PanelModel>().PanelNumber > nbDelete)
+                {
+                    e.GetComponent<PanelModel>().PanelNumber--;
+                    e.name = "ImgSample" + e.GetComponent<PanelModel>().PanelNumber;
+                }
+            }
+            confirmation = "null";
+            confirmationBox.SetActive(false);
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+
+            StopCoroutine("LaunchBoxDialog");
+        }
+        else if (confirmation.Equals("no"))
+        {
+
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+
+
+            Debug.Log("no");
+            confirmationBox.SetActive(false);
+            confirmation = "null";
+            StopCoroutine("LaunchBoxDialog");
+        }
+    }
+
+    /**
+    * Set the confirmation string to yes or no depending of the button activated
+    **/
+
+    public void ClickYes()
+    {
+        confirmation = "yes";
+    }
+    public void ClickNo()
+    {
+        confirmation = "no";
+    }
+
+
     public void RemoveQuestion()
     {
-        int nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
-        DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions.Remove(DataModel.Rounds[DataModel.IroundCur].Topics[DataModel.ItopicCur].Questions[nbDelete - 1]);
-        Destroy(GameObject.Find("ImgSample" + nbDelete));
-        nbQ--;
-        // edit the number associated to each ImgSample (avoid having two non-consecutive numbers)
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("ImgSample"))
-        {
-            if (e.GetComponent<PanelModel>().PanelNumber > nbDelete)
-            {
-                e.GetComponent<PanelModel>().PanelNumber--;
-                e.name = "ImgSample" + e.GetComponent<PanelModel>().PanelNumber;
-            }
-        }
+        nbDelete = EventSystem.current.currentSelectedGameObject.GetComponentInParent<PanelModel>().PanelNumber;
+        confirmationBox.SetActive(true);
+
+        //reduce the visibility of normal UI, and disable all interraction
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
+
+
+        //enable interraction with confirmation gui and make visible
+        canvasGroupConfirmationBox.interactable = true;
+        canvasGroupConfirmationBox.blocksRaycasts = true;
+
+
+        StartCoroutine("LaunchBoxDialog");
     }
 
     /**
