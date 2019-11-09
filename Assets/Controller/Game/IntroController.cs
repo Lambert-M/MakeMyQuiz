@@ -86,8 +86,23 @@ public class IntroController : MonoBehaviour
         /*
          * Initialisation of gameobjects and variables
          */
+
+        // background
+        /*
+        string[] datapath = Application.dataPath.Split('/');
+        string pathsrc = datapath[0] + '/';
+        for (int i = 1; i < datapath.Length - 1; i++)
+        {
+            pathsrc += '/' + datapath[i];
+        }
+        string localpath = pathsrc + "/Images";
+
+        var w = new WWW("file:///" + localpath + '/' + DataModel.BackgroundName);
+        Sprite sprite = Sprite.Create(w.texture, new Rect(0, 0, w.texture.width, w.texture.height), new Vector2(0, 0));*/
         Sprite sprite = Resources.Load<Sprite>("Images/" + DataModel.BackgroundName);
         GameObject.Find("Background").GetComponent<Image>().sprite = sprite;
+
+
         timeWritten = false;
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         TimeField = GameObject.Find("TimerInput").GetComponent<TMP_InputField>();

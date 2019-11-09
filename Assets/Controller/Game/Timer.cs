@@ -59,8 +59,13 @@ public class Timer : MonoBehaviour
             // Subtrack the time since the start of the frame to currTimerValue
             currTimerValue -= Time.deltaTime;
             // Updating timer fillAmount
-            timer_image.fillAmount -= 1.0f / timerValue * Time.deltaTime;
-            timer_bar.fillAmount -= 1.0f / timerValue * Time.deltaTime;
+            if(SceneManager.GetActiveScene().name == "TrueFalse")
+            {
+                timer_bar.fillAmount -= 1.0f / timerValue * Time.deltaTime;
+            } else
+            {
+                timer_image.fillAmount -= 1.0f / timerValue * Time.deltaTime;
+            }
 
             // erase the timer panel
             if (SceneManager.GetActiveScene().name != "Introduction" && SceneManager.GetActiveScene().name != "TrueFalse")
@@ -80,8 +85,13 @@ public class Timer : MonoBehaviour
 
         currTimerValue = timerValue;
         // Set the timer fillAmount to the maximum
-        timer_image.fillAmount = 1.0f;
-        timer_bar.fillAmount = 1.0f;
+        if (SceneManager.GetActiveScene().name == "TrueFalse")
+        {
+            timer_bar.fillAmount = 1.0f;
+        } else
+        {
+            timer_image.fillAmount = 1.0f;
+        }
 
         nextPanelErased = 14.0f;
     }

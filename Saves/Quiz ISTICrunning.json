@@ -1,0 +1,1730 @@
+{
+"Quizname":"Quiz ISTIC",
+"CurTopicName":"Les dinosaures",
+"RoundNumber":1,
+"IroundCur":0,
+"ItopicCur":4,
+"IquestionCur":0,
+"Score0":10,
+"Joker0":false,
+"Score1":10,
+"Joker1":false,
+"Score2":0,
+"Joker2":false,
+"Score3":0,
+"Joker3":false,
+"Score4":0,
+"Joker4":false,
+"Score5":0,
+"Joker5":false,
+"Score6":0,
+"Joker6":false,
+"Score7":0,
+"Joker7":false,
+"Rounds":[
+{
+"Type":"QCM",
+"IsBuzzActivate":false,
+"Topics":[
+{
+"Name":"Productions Madhouse",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Dans Rémi sans famille, pour quel montant se retrouve t-il vendu par son propre père au début de la série ?",
+"Answers":[
+{
+"AnswerText":"10 francs",
+"IsTrue":false
+},
+{
+"AnswerText":"40 francs",
+"IsTrue":true
+},
+{
+"AnswerText":"100 francs",
+"IsTrue":false
+},
+{
+"AnswerText":"400 francs",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Death Note, comment se nomme le Dieu de la mort de Misa ?",
+"Answers":[
+{
+"AnswerText":"Ryuk",
+"IsTrue":false
+},
+{
+"AnswerText":"Gukku",
+"IsTrue":false
+},
+{
+"AnswerText":"Rem",
+"IsTrue":true
+},
+{
+"AnswerText":"Crom",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Hunter x Hunter, quel principe du Nen consiste à créer sa propre technique ?",
+"Answers":[
+{
+"AnswerText":"Ken",
+"IsTrue":false
+},
+{
+"AnswerText":"Fuu",
+"IsTrue":false
+},
+{
+"AnswerText":"Ten",
+"IsTrue":false
+},
+{
+"AnswerText":"Hatsu",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Quel est métier de Kenzô Tenma de l'anime Monster ?",
+"Answers":[
+{
+"AnswerText":"Maire",
+"IsTrue":false
+},
+{
+"AnswerText":"Neuro-chirurgien",
+"IsTrue":true
+},
+{
+"AnswerText":"Tueur à gages",
+"IsTrue":false
+},
+{
+"AnswerText":"Avocat",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans l'animé Claymore, sous quel prétexte Raki propose à Claire de le garder ?\r",
+"Answers":[
+{
+"AnswerText":"Il transportera toutes ses affaires",
+"IsTrue":false
+},
+{
+"AnswerText":"Il pourra cuisiner",
+"IsTrue":true
+},
+{
+"AnswerText":"Il s'occupera du ménage",
+"IsTrue":false
+},
+{
+"AnswerText":"Il racontera toutes ses aventures",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans quel animé fait-on mention du Livre de Clow ?",
+"Answers":[
+{
+"AnswerText":"Death Parade",
+"IsTrue":false
+},
+{
+"AnswerText":"Overlord",
+"IsTrue":false
+},
+{
+"AnswerText":"Hellsing Ultimate",
+"IsTrue":false
+},
+{
+"AnswerText":"Sakura, chasseuse de cartes",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Dans l'animé Beyblade, comment s'appelle l'équipe du héros Tyson ?",
+"Answers":[
+{
+"AnswerText":"Les White Tigers",
+"IsTrue":false
+},
+{
+"AnswerText":"Les All starz",
+"IsTrue":false
+},
+{
+"AnswerText":"Les Blade Breakers",
+"IsTrue":true
+},
+{
+"AnswerText":"Les Demolition Boys",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Le dessinateur de One Punch Man a également dessiné ?",
+"Answers":[
+{
+"AnswerText":"No Game No Life",
+"IsTrue":false
+},
+{
+"AnswerText":"Eyeshield 21",
+"IsTrue":true
+},
+{
+"AnswerText":"Hikaru no Go",
+"IsTrue":false
+},
+{
+"AnswerText":"Trigun",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Gotta Catch'em all",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Dans Pokemon Sun et Moon, nous sommes opposés à la terrible team Skull. Mais quel est le nom du pokemon favori de leur leader Guzma ?",
+"Answers":[
+{
+"AnswerText":"Lucanon",
+"IsTrue":false
+},
+{
+"AnswerText":"Tarenbulle",
+"IsTrue":false
+},
+{
+"AnswerText":"Sarmuraï",
+"IsTrue":true
+},
+{
+"AnswerText":"Salamandre",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Pokemon Diamant Perle et Platine, de quoi sont gardien Dialga et Palkia ?",
+"Answers":[
+{
+"AnswerText":"Temps et Espace",
+"IsTrue":true
+},
+{
+"AnswerText":"Yin et Yang",
+"IsTrue":false
+},
+{
+"AnswerText":"Vie et Mort",
+"IsTrue":false
+},
+{
+"AnswerText":"Esprit et Matière",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Lors de la deuxième génération, deux types de Pokémon ont fait leur apparition, lesquels ?",
+"Answers":[
+{
+"AnswerText":"Sol / Spectre",
+"IsTrue":false
+},
+{
+"AnswerText":"Acier / Ténèbres",
+"IsTrue":true
+},
+{
+"AnswerText":"Roche / Ténèbres",
+"IsTrue":false
+},
+{
+"AnswerText":"Fée / Acier",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Pokemon XD : Le souffle des ténèbres, quel Pokémon a pour nom de code XD001",
+"Answers":[
+{
+"AnswerText":"Un Ho-oh",
+"IsTrue":false
+},
+{
+"AnswerText":"Un Lugia",
+"IsTrue":true
+},
+{
+"AnswerText":"Un Suicune",
+"IsTrue":false
+},
+{
+"AnswerText":"Un Mewtwo",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Pokemon Noir et Blanc, chaque pokemon starter est lourdement inspiré de véritables animaux. De quel animal est inspiré le starter plante ? ",
+"Answers":[
+{
+"AnswerText":"Hibou",
+"IsTrue":false
+},
+{
+"AnswerText":"Tortue",
+"IsTrue":false
+},
+{
+"AnswerText":"Serpent",
+"IsTrue":true
+},
+{
+"AnswerText":"Gecko",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Pokemon Rubis Saphir et Émeraude, comment s'appelle le Pokémon en forme de testicules qui change souvent de forme ?",
+"Answers":[
+{
+"AnswerText":"Balignon",
+"IsTrue":false
+},
+{
+"AnswerText":"Ramboum",
+"IsTrue":false
+},
+{
+"AnswerText":"Kraknoix",
+"IsTrue":false
+},
+{
+"AnswerText":"Morpheo",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Dans Pokemon Soleil & Lune qui est le Pokemon qui deviendra plus tard Solgaleo ou Lunala ?",
+"Answers":[
+{
+"AnswerText":"Marshadow",
+"IsTrue":false
+},
+{
+"AnswerText":"Nucléos",
+"IsTrue":false
+},
+{
+"AnswerText":"Cosmog",
+"IsTrue":true
+},
+{
+"AnswerText":"Eoko",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Pokemon Rouge Bleu et Jaune on peut capturer Sulfura au niveau 50 dans la route Victoire. Au niveau 51 il apprend une attaque, laquelle ?",
+"Answers":[
+{
+"AnswerText":"Lance-Flammes ",
+"IsTrue":false
+},
+{
+"AnswerText":"Groz’Yeux",
+"IsTrue":true
+},
+{
+"AnswerText":"Danseflamme",
+"IsTrue":false
+},
+{
+"AnswerText":"Pique",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Les dinosaures",
+"IsAvailable":false,
+"Questions":[
+]
+},
+{
+"Name":"Disney & Pixar",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Quelle animal veut brûler la maison du lapin blanc dans Alice au Pays des Merveilles ?",
+"Answers":[
+{
+"AnswerText":"Un lézard",
+"IsTrue":false
+},
+{
+"AnswerText":"Un dodo",
+"IsTrue":true
+},
+{
+"AnswerText":"Une souris",
+"IsTrue":false
+},
+{
+"AnswerText":"Un chat",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Toy Story 2, quelle jouet a pour but de tuer Buzz, qu’il prénomme le ranger de l’espace ?",
+"Answers":[
+{
+"AnswerText":"Rex",
+"IsTrue":false
+},
+{
+"AnswerText":"Zurg",
+"IsTrue":true
+},
+{
+"AnswerText":"Sid",
+"IsTrue":false
+},
+{
+"AnswerText":"Lotso",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Qui est l’amie robot de WALL-E ?",
+"Answers":[
+{
+"AnswerText":"EVE",
+"IsTrue":true
+},
+{
+"AnswerText":"M-O",
+"IsTrue":false
+},
+{
+"AnswerText":"PR-T",
+"IsTrue":false
+},
+{
+"AnswerText":"WALL-HA",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Combien d’émotions sont représentées chez Riley dans Vice Versa ?",
+"Answers":[
+{
+"AnswerText":"3",
+"IsTrue":false
+},
+{
+"AnswerText":"4",
+"IsTrue":false
+},
+{
+"AnswerText":"5",
+"IsTrue":true
+},
+{
+"AnswerText":"6",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"A quelle tribu indienne appartient  Pocahantas ?",
+"Answers":[
+{
+"AnswerText":"Pawnee",
+"IsTrue":false
+},
+{
+"AnswerText":"Wichita",
+"IsTrue":false
+},
+{
+"AnswerText":"Powhatan",
+"IsTrue":true
+},
+{
+"AnswerText":"Arapaho",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"A quelle heure les monstres commencent le travail dans Monstres et Cie?",
+"Answers":[
+{
+"AnswerText":"20h",
+"IsTrue":false
+},
+{
+"AnswerText":"21h",
+"IsTrue":true
+},
+{
+"AnswerText":"23h",
+"IsTrue":false
+},
+{
+"AnswerText":"00h",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Quelle est la race de l’oiseau qui accompagne Shan-Yu dans Mulan ?",
+"Answers":[
+{
+"AnswerText":"Un vautour",
+"IsTrue":false
+},
+{
+"AnswerText":"Un faucon",
+"IsTrue":true
+},
+{
+"AnswerText":"Un aigle",
+"IsTrue":false
+},
+{
+"AnswerText":"Un condor",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans la Planète au trésor, comment s'appelle le robot que Jim rencontre quand il s'échoue sur la planète pour fuir les pirates ? ",
+"Answers":[
+{
+"AnswerText":"Sam",
+"IsTrue":false
+},
+{
+"AnswerText":"Bob",
+"IsTrue":false
+},
+{
+"AnswerText":"Tim",
+"IsTrue":false
+},
+{
+"AnswerText":"Ben",
+"IsTrue":true
+}
+]
+}
+]
+},
+{
+"Name":"Séries Brittaniques",
+"IsAvailable":true,
+"Questions":[
+{
+"Question":"Qui est l’acteur qui incarne Sherlock Holmes dans Sherlock ?",
+"Answers":[
+{
+"AnswerText":"Benedict Cumberbatch",
+"IsTrue":true
+},
+{
+"AnswerText":"Robert Downey Jr",
+"IsTrue":false
+},
+{
+"AnswerText":"Paul Anderson",
+"IsTrue":false
+},
+{
+"AnswerText":"Dominic West",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Vikings, comment s’appelle le supplice qui consiste à ouvrir la cage thoracique dans le dos ?",
+"Answers":[
+{
+"AnswerText":"Le souffle éveillé",
+"IsTrue":false
+},
+{
+"AnswerText":"L'aigle de sang",
+"IsTrue":true
+},
+{
+"AnswerText":"L'étouffement macabre",
+"IsTrue":false
+},
+{
+"AnswerText":"L'ascension blanche",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans quelle ville se situe principalement Peaky Blinders ?",
+"Answers":[
+{
+"AnswerText":"Liverpool",
+"IsTrue":false
+},
+{
+"AnswerText":"Oxford",
+"IsTrue":false
+},
+{
+"AnswerText":"Portsmouth",
+"IsTrue":false
+},
+{
+"AnswerText":"Birmingham",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Dans la série The Crown, avec qui doit se marier la princesse Elisabeth dans la première saison ?",
+"Answers":[
+{
+"AnswerText":"Philip Mountbatten",
+"IsTrue":true
+},
+{
+"AnswerText":"Charles de Galles",
+"IsTrue":false
+},
+{
+"AnswerText":"Albert Edward",
+"IsTrue":false
+},
+{
+"AnswerText":"André de Grèce",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Comment s’appelle le dernier film intéractif de Black Mirror ?",
+"Answers":[
+{
+"AnswerText":"Bendersnatch",
+"IsTrue":false
+},
+{
+"AnswerText":"Bandersnotchs",
+"IsTrue":false
+},
+{
+"AnswerText":"Bandernatch",
+"IsTrue":false
+},
+{
+"AnswerText":"Bandersnatch",
+"IsTrue":true
+}
+]
+},
+{
+"Question":"Quelle est le pouvoir de Kelly dans les premières saisons de misfits ?",
+"Answers":[
+{
+"AnswerText":"Provoquer un désir sexuel incontrôlable chez les personnes qui la touchent",
+"IsTrue":false
+},
+{
+"AnswerText":"Provoquer la calvitie chez les gens",
+"IsTrue":false
+},
+{
+"AnswerText":"Lire dans les pensées",
+"IsTrue":true
+},
+{
+"AnswerText":"Cryokinésie",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Battlestar Galactica, de quelle planète proviennent les douzes colonies ?",
+"Answers":[
+{
+"AnswerText":"Kobol\t",
+"IsTrue":true
+},
+{
+"AnswerText":"Caprica",
+"IsTrue":false
+},
+{
+"AnswerText":"Tauron",
+"IsTrue":false
+},
+{
+"AnswerText":"Delphes",
+"IsTrue":false
+}
+]
+},
+{
+"Question":"Dans Black Books, avec quoi s’étouffe Manny Bianco avant de rencontrer Bernard ?",
+"Answers":[
+{
+"AnswerText":"Un briquet",
+"IsTrue":false
+},
+{
+"AnswerText":"Un livre",
+"IsTrue":true
+},
+{
+"AnswerText":"Une chaussure",
+"IsTrue":false
+},
+{
+"AnswerText":"Un porte-monnaie",
+"IsTrue":false
+}
+]
+}
+]
+}
+]
+},
+{
+"Type":"Musique",
+"IsBuzzActivate":false,
+"Topics":[
+{
+"Name":"Anges & Démons",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"judgement-devilman-crybaby-ost.wav",
+"StartTrack":35.2699165344238,
+"Volume":0.804729640483856,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"D. Gray-Man",
+"IsTrue":false
+},
+{
+"AnswerText":"Blood Lad",
+"IsTrue":false
+},
+{
+"AnswerText":"Devilman Crybaby",
+"IsTrue":true
+},
+{
+"AnswerText":"Archenemy and Hero",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"yu-yu-hakusho-opening-full-smile-bomb.wav",
+"StartTrack":18.6487445831299,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Dororo",
+"IsTrue":false
+},
+{
+"AnswerText":"Yu Yu Hakusho",
+"IsTrue":true
+},
+{
+"AnswerText":"Slayers",
+"IsTrue":false
+},
+{
+"AnswerText":"Cardfight! Vanguard!",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"beelzebub-opening-1-hd.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Beelzebub",
+"IsTrue":true
+},
+{
+"AnswerText":"Gabrield Dropout",
+"IsTrue":false
+},
+{
+"AnswerText":"Dance with Devils",
+"IsTrue":false
+},
+{
+"AnswerText":"Shingeki no Bahamut",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"blue-exorcist-opening-2.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"The eccentric Family",
+"IsTrue":false
+},
+{
+"AnswerText":"Blue Exorcist",
+"IsTrue":true
+},
+{
+"AnswerText":"Claymore",
+"IsTrue":false
+},
+{
+"AnswerText":"Demon Slayers",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"inuyasha-inuyashas-theme-hanyou.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Inuyasha",
+"IsTrue":true
+},
+{
+"AnswerText":"Natsume Yuujinchou",
+"IsTrue":false
+},
+{
+"AnswerText":"Devil May Cry",
+"IsTrue":false
+},
+{
+"AnswerText":"Chrno Crusade",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"kuroshitsuji-ii-kagayaku-sora-no-shijima-ni-wa-ending-2-w-english-subtitles.wav",
+"StartTrack":23.9365997314453,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Angel Beats!",
+"IsTrue":false
+},
+{
+"AnswerText":"Berserk",
+"IsTrue":false
+},
+{
+"AnswerText":"The Testament of Sister New Devil",
+"IsTrue":false
+},
+{
+"AnswerText":"Black Butler II",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"high-school-dxd-op-opening-hdtrip-innocent-of-d-by-larval-stage-planning-subs-cc.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Kamisama Kiss",
+"IsTrue":false
+},
+{
+"AnswerText":"Nura: Rise of the Yokai Clan",
+"IsTrue":false
+},
+{
+"AnswerText":"Ushio and Tora",
+"IsTrue":false
+},
+{
+"AnswerText":"Highshcool DxD",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"26-the-devil-regains-his-strength-hataraku-maou-sama-ost.wav",
+"StartTrack":3.44256138801575,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Devil Survivor 2 The Animation",
+"IsTrue":false
+},
+{
+"AnswerText":"The Devil is a Part-Timer!",
+"IsTrue":true
+},
+{
+"AnswerText":"Fairy gone",
+"IsTrue":false
+},
+{
+"AnswerText":"GARO: The animation",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Séries dans un futur relatif",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"futurama-opening-season-1.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Rick and Morty",
+"IsTrue":false
+},
+{
+"AnswerText":"Futurama",
+"IsTrue":true
+},
+{
+"AnswerText":"3%",
+"IsTrue":false
+},
+{
+"AnswerText":"Stranger Things",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"stargate-atlantis-season-1-opening-with-credits.wav",
+"StartTrack":17.7933292388916,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Star Trek",
+"IsTrue":false
+},
+{
+"AnswerText":"Stargate Atlantis",
+"IsTrue":true
+},
+{
+"AnswerText":"Stargate Universe",
+"IsTrue":false
+},
+{
+"AnswerText":"Les 100",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"westworld-intro-opening-credits-60-fps-1080p.wav",
+"StartTrack":33.2721252441406,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Westworld",
+"IsTrue":true
+},
+{
+"AnswerText":"Another Life",
+"IsTrue":false
+},
+{
+"AnswerText":"Perdus dans l'espace",
+"IsTrue":false
+},
+{
+"AnswerText":"Sense8",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"defiance-main-title-theme.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Le Maître du Haut Château",
+"IsTrue":false
+},
+{
+"AnswerText":"Continuum",
+"IsTrue":false
+},
+{
+"AnswerText":"Defiance",
+"IsTrue":true
+},
+{
+"AnswerText":"Fringe",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"the-walking-dead-season-1-opening-credits.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Falling Skies",
+"IsTrue":false
+},
+{
+"AnswerText":"Terra Nova",
+"IsTrue":false
+},
+{
+"AnswerText":"Babylon 5",
+"IsTrue":false
+},
+{
+"AnswerText":"The Walking Dead",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"fire-and-regeneration-heroes.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Battlestar Galactica",
+"IsTrue":false
+},
+{
+"AnswerText":"Torchwood",
+"IsTrue":false
+},
+{
+"AnswerText":"Heroes",
+"IsTrue":true
+},
+{
+"AnswerText":"V",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"quantum-leap-tv-intro.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Dollhouse",
+"IsTrue":false
+},
+{
+"AnswerText":"Stargate SG1",
+"IsTrue":false
+},
+{
+"AnswerText":"Caprica",
+"IsTrue":false
+},
+{
+"AnswerText":"Code Quantum",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"the-flash-cw-soundtrack-the-flash-theme.wav",
+"StartTrack":14.1873006820679,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Arrow",
+"IsTrue":false
+},
+{
+"AnswerText":"The Flash",
+"IsTrue":true
+},
+{
+"AnswerText":"The Handmaid's Tale",
+"IsTrue":false
+},
+{
+"AnswerText":"Doctor Who",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Featuring en Duo",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"calogero-face-a-la-mer-ft-passi.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Calogero & Faf La Rage",
+"IsTrue":false
+},
+{
+"AnswerText":"Calogero & Passi",
+"IsTrue":true
+},
+{
+"AnswerText":"Gérald De Palmas & Passi",
+"IsTrue":false
+},
+{
+"AnswerText":"Gérald de Palmas & Faf la Rage",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"gotye-somebody-that-i-used-to-know-feat-kimbra-official-music-video.wav",
+"StartTrack":78.3792343139648,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Gotye & Kimbra",
+"IsTrue":true
+},
+{
+"AnswerText":"Gotye & Tori Amos ",
+"IsTrue":false
+},
+{
+"AnswerText":"Gotye & Nancy Halloway",
+"IsTrue":false
+},
+{
+"AnswerText":"Gotye & Ashantie",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"jean-jacques-goldman-michael-jones-je-te-donne-clip-officiel.wav",
+"StartTrack":6.04713678359985,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Goldman & James Blake ",
+"IsTrue":false
+},
+{
+"AnswerText":"Goldman & Tom Baxter",
+"IsTrue":false
+},
+{
+"AnswerText":"Goldman & James Arthur",
+"IsTrue":false
+},
+{
+"AnswerText":"Goldman & Michael Jones",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"pnk-just-give-me-a-reason-ft-nate-ruess-official-music-video.wav",
+"StartTrack":8.7008056640625,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Pink & Craig David",
+"IsTrue":false
+},
+{
+"AnswerText":"Pink & Nate Ruess",
+"IsTrue":true
+},
+{
+"AnswerText":"Mariah Carey & Nate Ruess",
+"IsTrue":false
+},
+{
+"AnswerText":"Mariah Carey & Craig David",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"veronique-jannot-et-laurent-voulzy-desir-desir-archive-ina.wav",
+"StartTrack":27.7452564239502,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Veronique Jannot & Alain Souchon",
+"IsTrue":false
+},
+{
+"AnswerText":"France Gall & Laurent Voulzy",
+"IsTrue":false
+},
+{
+"AnswerText":"France Gall & Alain Souchon",
+"IsTrue":false
+},
+{
+"AnswerText":"Veronique Jannot & Laurent Voulzy",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"david-guetta-dangerous-lyric-video-ft-sam-martin.wav",
+"StartTrack":37.9945487976074,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"DJ Snake & Paul Day",
+"IsTrue":false
+},
+{
+"AnswerText":"DJ Snake & Sam Martin",
+"IsTrue":false
+},
+{
+"AnswerText":"David Guetta & Paul Day",
+"IsTrue":false
+},
+{
+"AnswerText":"David Guetta & Sam Martin",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"coldplay-princess-of-china-ft-rihanna.wav",
+"StartTrack":25.7567176818848,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Coldplay & Rihanna",
+"IsTrue":true
+},
+{
+"AnswerText":"Coldplay & Beyoncé",
+"IsTrue":false
+},
+{
+"AnswerText":"U2 & Rihanna",
+"IsTrue":false
+},
+{
+"AnswerText":"U2 & Beyoncé",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"jermaine-jackson-pia-zadora-when-the-rain-begins-to-fall-official-video.wav",
+"StartTrack":50.373291015625,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Diana Ross & Pia Zadora",
+"IsTrue":false
+},
+{
+"AnswerText":"Diana Ross & Eduard Romanyuta",
+"IsTrue":false
+},
+{
+"AnswerText":"Jermaine Jackson & Pia Zadora",
+"IsTrue":true
+},
+{
+"AnswerText":"Jermaine Jackson & Eduard Romanyuta",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"SuperNes & Megadrive",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"super-mario-all-stars-smb3-overworld.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Super mario all stars",
+"IsTrue":true
+},
+{
+"AnswerText":"Super mario World",
+"IsTrue":false
+},
+{
+"AnswerText":"Super mario Kart",
+"IsTrue":false
+},
+{
+"AnswerText":"Yoshi's island",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"super-metroid-upper-brinstar-the-jungle-floor.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Donkey Kong Country 3",
+"IsTrue":false
+},
+{
+"AnswerText":"Super Metroid",
+"IsTrue":true
+},
+{
+"AnswerText":"F-Zero",
+"IsTrue":false
+},
+{
+"AnswerText":"Super Castlevania",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"super-nintendo-f-zero-mute-city.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"F-Zero",
+"IsTrue":true
+},
+{
+"AnswerText":"Star Fox",
+"IsTrue":false
+},
+{
+"AnswerText":"Pilotwings",
+"IsTrue":false
+},
+{
+"AnswerText":"Kirby Super Star",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"altered-beast-genesis-music-round-01.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Comix Zone",
+"IsTrue":false
+},
+{
+"AnswerText":"Streets of rage 3",
+"IsTrue":false
+},
+{
+"AnswerText":"Golden Axe",
+"IsTrue":false
+},
+{
+"AnswerText":"Altered Beast",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"demons-crest-ost-beyond-the-colosseum.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Super Castlevania 4",
+"IsTrue":false
+},
+{
+"AnswerText":"Demon's Crest",
+"IsTrue":true
+},
+{
+"AnswerText":"Actraiser",
+"IsTrue":false
+},
+{
+"AnswerText":"Castlevania vampire's kiss",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"401 The end of millenium.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Phantasy star 1",
+"IsTrue":false
+},
+{
+"AnswerText":"Phantasy star 2",
+"IsTrue":false
+},
+{
+"AnswerText":"Phantasy star 3",
+"IsTrue":false
+},
+{
+"AnswerText":"Phantasy star 4",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"the-story-of-thor-beyond-oasis-genesis-soundtrack.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Shining Force",
+"IsTrue":false
+},
+{
+"AnswerText":"Soleil",
+"IsTrue":false
+},
+{
+"AnswerText":"Story of Thor",
+"IsTrue":true
+},
+{
+"AnswerText":"Landstalker",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"Stage 1-1.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Monster World 4",
+"IsTrue":false
+},
+{
+"AnswerText":"Alisia Dragoon",
+"IsTrue":true
+},
+{
+"AnswerText":"Light Crusader",
+"IsTrue":false
+},
+{
+"AnswerText":"Arcus Oddyssey",
+"IsTrue":false
+}
+]
+}
+]
+},
+{
+"Name":"Heroic Fantasy",
+"IsAvailable":true,
+"Questions":[
+{
+"MusicPath":"the-fellowship-of-the-ring-soundtrack-02-concerning-hobbits.wav",
+"StartTrack":5.78314447402954,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Warcraft",
+"IsTrue":false
+},
+{
+"AnswerText":"Le Seigneur des Anneaux",
+"IsTrue":true
+},
+{
+"AnswerText":"Braveheart",
+"IsTrue":false
+},
+{
+"AnswerText":"Le choc des titans",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"conan-the-barbarian-03-riddle-of-steelriders-of-doom.wav",
+"StartTrack":130.434677124023,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Donjons & Dragons",
+"IsTrue":false
+},
+{
+"AnswerText":"Le 13ème guerrier",
+"IsTrue":false
+},
+{
+"AnswerText":"Conan le Barbare",
+"IsTrue":true
+},
+{
+"AnswerText":"L'épée des barbares",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"the-chronicles-of-narnia-soundtrack-12-the-battle(1).wav",
+"StartTrack":96.3391799926758,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Le monde de Narnia",
+"IsTrue":true
+},
+{
+"AnswerText":"Warcraft",
+"IsTrue":false
+},
+{
+"AnswerText":"Eragon",
+"IsTrue":false
+},
+{
+"AnswerText":"Le roi Arthur",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"theme-coeur-de-dragon.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Coeur de Dragon",
+"IsTrue":true
+},
+{
+"AnswerText":"Hook",
+"IsTrue":false
+},
+{
+"AnswerText":"Le règne du Feu",
+"IsTrue":false
+},
+{
+"AnswerText":"L'histoire sans fin",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"highlander-ost-michael-kamen-training-macleod.wav",
+"StartTrack":148.309555053711,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Excalibur",
+"IsTrue":false
+},
+{
+"AnswerText":"L'histoire sans fin",
+"IsTrue":false
+},
+{
+"AnswerText":"Highlander",
+"IsTrue":true
+},
+{
+"AnswerText":"Merlin",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"the-princess-bride-01-once-upon-a-timestorybook-love.wav",
+"StartTrack":118.549179077148,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Lancelot, le premier chevalier",
+"IsTrue":false
+},
+{
+"AnswerText":"Dark Crystal",
+"IsTrue":false
+},
+{
+"AnswerText":"Les 3 mousquetaires",
+"IsTrue":false
+},
+{
+"AnswerText":"Princess Bride",
+"IsTrue":true
+}
+]
+},
+{
+"MusicPath":"beowulf-track-01-main-theme-alan-silvestri.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"La légende de Beowulf",
+"IsTrue":true
+},
+{
+"AnswerText":"Le 13ème guerrier",
+"IsTrue":false
+},
+{
+"AnswerText":"47 Ronin",
+"IsTrue":false
+},
+{
+"AnswerText":"Grendel",
+"IsTrue":false
+}
+]
+},
+{
+"MusicPath":"masters-of-the-universe-ost-the-battle-begins-the-final-battle.wav",
+"StartTrack":0,
+"Volume":1,
+"Fade":false,
+"Answers":[
+{
+"AnswerText":"Willow",
+"IsTrue":false
+},
+{
+"AnswerText":"Les maîtres de l'univers",
+"IsTrue":true
+},
+{
+"AnswerText":"Deathstalker",
+"IsTrue":false
+},
+{
+"AnswerText":"Le choix des seigneurs",
+"IsTrue":false
+}
+]
+}
+]
+}
+]
+}
+]
+}

@@ -20,7 +20,6 @@ public class QuestionController : MonoBehaviour
     private bool musicQuestionIsPlaying;
     private bool resetvol;
     private bool isBuzzActivate;
-    private bool goingToNextQuestion;
     private int visibleCharacterCount;
     private int numberOfCharacters;
     private int numberOfQuestions;
@@ -128,7 +127,6 @@ public class QuestionController : MonoBehaviour
         teams_can_buzz = new bool[teamsCtrl.Count];
         buzz_event = false;
         buzz_answer_confirm = false;
-        goingToNextQuestion = false;
         pauseActivated = false;
         actualQuestion = 1;
         questions = DataModel.CurTopic().Questions;
@@ -185,8 +183,6 @@ public class QuestionController : MonoBehaviour
         }
  
         isBuzzActivate = DataModel.CurRound().IsBuzzRound;
-        StartCoroutine(DisplayText());
-
         RunningQuestions();
     }
     
@@ -302,8 +298,6 @@ public class QuestionController : MonoBehaviour
     private void RunningQuestions()
     {
 
-        goingToNextQuestion = false;
-
         if (isBuzzActivate)
         {
             buzz_event = false;
@@ -397,6 +391,7 @@ public class QuestionController : MonoBehaviour
         GameObject.Find("Answer 2").GetComponent<TextMeshProUGUI>().text = answers[1].AnswerText;
         GameObject.Find("Answer 3").GetComponent<TextMeshProUGUI>().text = answers[2].AnswerText;
         GameObject.Find("Answer 4").GetComponent<TextMeshProUGUI>().text = answers[3].AnswerText;
+        StartCoroutine(DisplayText());
 
         Invoke("RevealAnswers", 3.0f + question_length_to_time);
         Invoke("EliminateFalseAnswer", 10.0f + question_length_to_time);
@@ -465,6 +460,7 @@ public class QuestionController : MonoBehaviour
      */
     private void RevealAnswers()
     {
+        StopCoroutine(DisplayText());
         DisableAllBuzzers();
         foreach (GameObject p in answerList)
         {
@@ -639,34 +635,30 @@ public class QuestionController : MonoBehaviour
      */
     private IEnumerator DisplayText()
     {
+        Debug.Log("là je repart normalement");
         visibleCharacterCount = 0;
-        while (!goingToNextQuestion)
+        if (DataModel.CurQuestion() is TextQuestion)
         {
-            if (DataModel.CurQuestion() is TextQuestion)
-            {
                 
-                TextQuestion texteQ = (TextQuestion)DataModel.CurQuestion();
-                questionText.text = texteQ.Question;
+            TextQuestion texteQ = (TextQuestion)DataModel.CurQuestion();
+            questionText.text = texteQ.Question;
 
-                //formule de merde a changer
-                question_length_to_time = questionText.text.Length * 0.07f;
-                Debug.Log("nb chars "+ questionText.text.Length);
-            }
-            else
-            {
-                questionText.text = DataModel.TextToUse["music_display"] + actualQuestion;
-            }
-            questionText.maxVisibleCharacters = visibleCharacterCount;
-            numberOfCharacters = questionText.textInfo.characterCount;
-            
-            while (visibleCharacterCount <= numberOfCharacters)
-            {
-                visibleCharacterCount++;
-                questionText.maxVisibleCharacters = visibleCharacterCount;
-                yield return new WaitForSeconds(0.07f);
-            }
-            yield return null;
+            //formule de merde a changer
+            question_length_to_time = questionText.text.Length * 0.07f;
         }
+        else
+        {
+            questionText.text = DataModel.TextToUse["music_display"] + actualQuestion;
+        }
+        questionText.maxVisibleCharacters = visibleCharacterCount;
+        numberOfCharacters = questionText.text.Length;
+        while (visibleCharacterCount <= numberOfCharacters)
+        {
+            visibleCharacterCount++;
+            questionText.maxVisibleCharacters = visibleCharacterCount;
+            yield return new WaitForSeconds(0.07f);
+        }
+        yield return null;
     }
 
     public bool EveryoneAnswered()
@@ -739,8 +731,6 @@ public class QuestionController : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-        goingToNextQuestion = true;
-        visibleCharacterCount = 0;
         if (isNextAvailable)
         {
             musicSource.Stop();
